@@ -1,11 +1,18 @@
 import React from 'react';
-import './App.css';
+import './common.scss';
+import ContentTap from './component/ContentTap';
 
 function App() {
 
   return (
     <div className="App">
-      <div>야호!</div>
+      <div id="wrap">
+        {/* 백그라운드 도형 */}
+        <div className="back-figure"></div>
+
+        {/* 전체 */}
+        <ContentTap/>
+      </div>
     </div>
   );
 }
