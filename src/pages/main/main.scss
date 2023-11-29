@@ -1,0 +1,61 @@
+@charset "utf-8";
+
+.my-page{display: none;}
+
+.main{position: relative;
+
+    .main-content{
+        width: calc(100% - 310px);
+        height: 100%;
+        padding-right: 40px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: space-between;
+
+        .search{
+            width: 100%;
+            height: 240px;
+            background: #fff;
+            @include var.r-m;
+            @include var.shadow;
+            padding: 30px;
+
+            h2{
+                color: var.$blue;
+                @include var.title-l;
+                padding-bottom: 10px
+            }
+
+            &>p{
+                @include var.content-l;
+            }
+        }
+
+
+        .main--bottom{
+            width: 100%;
+            height: calc(100% - 310px);
+            display: flex;
+            justify-content: space-between;
+            
+            .main--bottom--left{
+                width: 290px;
+                height: 100%;
+                
+                .vaccination{
+                    width: 100%;
+                    height: 110px;
+                    background: #fff;
+                    @include var.r-m;
+                    @include var.shadow;
+                }
+            }
+    
+    
+            .main--bottom--right{            
+                width: 305px;
+                height: 100%; 
+            }
+        }
+    }
+}
