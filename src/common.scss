@@ -26,8 +26,6 @@ $bgColor: #F2F6F9;
     font-weight: 700;
 }
 
-;
-
 @mixin title-s {
     font-size: 1rem;
     font-weight: 400;
@@ -36,7 +34,7 @@ $bgColor: #F2F6F9;
 //content
 @mixin content-l {
     font-size: 0.95rem;
-    font-weight: 400;
+    font-weight: 700;
 }
 
 @mixin content-m {
@@ -101,45 +99,4 @@ ol {
 a {
     text-decoration: none;
     color: #333333;
-}
-
-#wrap {
-    width: 100%;
-    height: 100vh;
-    background: linear-gradient(#CADAFD, #D4E6FE);
-    position: relative;
-
-    .back-figure {
-        width: 60%;
-        height: 100%;
-        background: linear-gradient(#FBFCFF, #E5ECFF);
-        opacity: 0.6;
-        position: absolute;
-        top: 0;
-        right: 0;
-        border-radius: 0 0 0 200px;
-    }
-
-
-    .content-back {
-        width: 1300px;
-        height: 800px;
-        background: $blue;
-        @include transform-center();
-        border-radius: 40px;
-        box-shadow: 9px 0 68px rgba(157, 177, 219,55%);
-        display: flex;
-        justify-content: space-between;
-        
-
-        .content{
-            width: 1080px;
-            height: 100%;
-            background: #F2F6F9;
-            border-radius: 40px;
-            padding: 50px 40px;
-
-            .main,.my-page{width: 100%; height: 100%;}
-        }
-    }
 }
