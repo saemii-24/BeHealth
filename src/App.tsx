@@ -3,15 +3,13 @@ import './common.scss';
 import ContentTap from './component/ContentTap';
 
 function App() {
-
   return (
-    <div className="App">
-      <div id="wrap">
+    <div className='App'>
+      <div id='wrap'>
         {/* 백그라운드 도형 */}
-        <div className="back-figure"></div>
-
+        <div className='back-figure'></div>
         {/* 전체 */}
-        <ContentTap/>
+        <ContentTap />
       </div>
     </div>
   );

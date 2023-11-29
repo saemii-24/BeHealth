@@ -13,7 +13,6 @@ $bgColor: #F2F6F9;
     box-shadow: 0 0 17px#DEE6F5, 0 0 30px #EEF2F4;
 }
 
-
 //font 변수
 //Title
 @mixin title-l {
@@ -25,8 +24,6 @@ $bgColor: #F2F6F9;
     font-size: 1.2rem;
     font-weight: 700;
 }
-
-;
 
 @mixin title-s {
     font-size: 1rem;
@@ -127,19 +124,23 @@ a {
         background: $blue;
         @include transform-center();
         border-radius: 40px;
-        box-shadow: 9px 0 68px rgba(157, 177, 219,55%);
+        box-shadow: 9px 0 68px rgba(157, 177, 219, 55%);
         display: flex;
         justify-content: space-between;
-        
 
-        .content{
+
+        .content {
             width: 1080px;
             height: 100%;
             background: #F2F6F9;
             border-radius: 40px;
             padding: 50px 40px;
 
-            .main,.my-page{width: 100%; height: 100%;}
+            .main,
+            .my-page {
+                width: 100%;
+                height: 100%;
+            }
         }
     }
 }
