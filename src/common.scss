@@ -27,13 +27,13 @@ $bgColor: #F2F6F9;
 
 @mixin title-s {
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 700;
 }
 
 //content
 @mixin content-l {
     font-size: 0.95rem;
-    font-weight: 700;
+    font-weight: 400;
 }
 
 @mixin content-m {
@@ -53,6 +53,7 @@ $bgColor: #F2F6F9;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 @mixin transform-center {

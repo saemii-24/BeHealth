@@ -1,4 +1,5 @@
 import React from 'react'
+import Main from '../pages/main/Main'
 import MyPage from '../pages/mypage/MyPage'
 import SideMenu from './SideMenu'
 
@@ -9,8 +10,8 @@ const ContentTap = () => {
 
       
       <div className="content">
-        {/* <Main/> */}
-        <MyPage/>
+        <Main/>
+        {/* <MyPage/> */}
       </div>
     </div>
   )

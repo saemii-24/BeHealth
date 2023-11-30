@@ -57,6 +57,19 @@ const Search = () => {
     <div className='search'>
       <h2>국가 검진 기관 찾기</h2>
       <p>{string}</p>
+
+      <div className="select-institution">
+        <select name="select-institution" id="selectInstitution">
+          <option value="성모 병원">서울특별시</option>
+          
+          <optgroup label='경기도'>
+            <option value="성모 병원">성모 병원</option>
+            <option value="성모 병원">성모 병원</option>
+            <option value="성모 병원">성모 병원</option>
+            <option value="성모 병원">성모 병원</option>
+          </optgroup>
+        </select>
+      </div>
     </div>
   )
 }

@@ -1,60 +1,210 @@
 @charset "utf-8";
 
-.my-page{display: none;}
+.main {
+    position: relative;     
 
-.main{position: relative;
+    .icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        @include var.center;
 
-    .main-content{
+        .fontawesome {
+            color: #fff;
+            @include var.title-l;
+        }
+    }
+
+    .main-content {
         width: calc(100% - 310px);
         height: 100%;
         padding-right: 40px;
         display: flex;
         flex-wrap: wrap;
-        align-items: space-between;
 
-        .search{
+        .search {
             width: 100%;
             height: 240px;
             background: #fff;
             @include var.r-m;
             @include var.shadow;
             padding: 30px;
+            margin-bottom: 40px;
 
-            h2{
+            h2 {
                 color: var.$blue;
                 @include var.title-l;
                 padding-bottom: 10px
             }
 
-            &>p{
-                @include var.content-l;
+            &>p {
+                @include var.title-s;
             }
         }
 
 
-        .main--bottom{
+        .main--bottom {
             width: 100%;
-            height: calc(100% - 310px);
+            height: calc(100% - 280px);
             display: flex;
             justify-content: space-between;
-            
-            .main--bottom--left{
+
+            .main--bottom--left {
                 width: 290px;
                 height: 100%;
-                
-                .vaccination{
+
+                .vaccination {
                     width: 100%;
                     height: 110px;
                     background: #fff;
                     @include var.r-m;
                     @include var.shadow;
+                    padding: 0 30px;
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 40px;
+
+                    .icon {
+                        background: var.$green;
+                    }
+
+                    .vaccination__txt {
+                        width: calc(100% - 50px);
+                        padding-left: 30px;
+
+                        h3 {
+                            padding-bottom: 10px
+                        }
+
+                        p {
+                            @include var.title-s;
+                        }
+                    }
+                }
+
+
+                .momentum {
+                    width: 100%;
+                    height: calc(100% - 150px);
+                    background: #fff;
+                    @include var.r-m;
+                    @include var.shadow;
+                    padding: 30px;
+
+                    h3 {
+                        padding-bottom: 20px;
+                        text-indent: 10px;
+                    }
+
+                    .graph-box {
+                        width: 100%;
+                        height: calc(100% - 45px);
+                        display: flex;
+                        justify-content: space-between;
+                        padding-top: 30px;
+
+                        .graph {
+                            width: 14.3%;
+                            height: 100%;
+                            position: relative;
+
+                            div {
+                                width: 30%;
+                                position: absolute;
+                                bottom: 30px;
+                                left: 10px;
+                                @include var.r-s;
+                            }
+
+                            p {
+                                position: absolute;
+                                bottom: 0;
+                                left: 0;
+                                text-align: center;
+                                width: 100%;
+                                @include var.content-s;
+                            }
+                        }
+                    }
                 }
             }
-    
-    
-            .main--bottom--right{            
+
+
+            .main--bottom--right {
                 width: 305px;
-                height: 100%; 
+                height: 100%;
+
+                h3 {
+                    padding-bottom: 20px;
+                    text-indent: 10px;
+                }
+
+                .main__date {
+
+                    width: 100%;
+                    height: 70px;
+                    display: flex;
+
+                    .main__calendar {
+                        width: 14.3%;
+                        height: 100%;
+                        border-radius: 25px;
+                        @include var.center;
+
+                        p {
+                            width: 100%;
+                            text-align: center;
+
+                            &:first-of-type {
+                                @include var.content-s;
+                                padding-top: 10px;
+                            }
+
+                            &:last-of-type {
+                                @include var.content-m;
+                                font-weight: 700;
+                            }
+                        }
+                    }
+                }
+
+                h4 {
+                    padding: 30px 10px 20px;
+                }
+
+                .today-list {
+                    width: 100%;
+                    height: calc(100% - 170px);
+                    overflow-y: scroll;
+                    padding: 0 20px 0 10px;
+                    
+                    &::-webkit-scrollbar{
+                        width: 7px;
+                        background: #DEE9FE;  
+                        @include var.r-s;                      
+                    }
+                    &::-webkit-scrollbar-thumb{
+                        background: var.$blue;
+                        @include var.r-s;    
+                    }
+
+                    div{
+                        width: 100%;
+                        height: 70px;
+                        background: #fff;
+                        @include var.r-m;
+                        @include var.shadow;
+                        @include var.center;
+                        margin-bottom: 20px;
+
+                        p{
+                            @include var.content-l;
+                            line-height: 20px;
+                            &:first-of-type{width: 25%;}
+                            &:last-of-type{width: 55%;}
+                        }
+                    }
+                }
             }
         }
     }
