@@ -5,8 +5,10 @@ $yellow: #FFD749;
 $green: #ABDB98;
 $blue: #306DE5;
 $lightGray: #F8F8F8;
+$middleGray: #8F8F8F;
 $blueGray: #F5F6F8;
 $bgColor: #F2F6F9;
+
 
 //shadow
 @mixin shadow {
@@ -99,4 +101,13 @@ ol {
 a {
     text-decoration: none;
     color: #333333;
+}
+
+.a11y-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: polygon(0 0, 0 0, 0 0);
 }

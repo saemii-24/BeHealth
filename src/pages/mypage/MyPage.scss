@@ -1,6 +1,24 @@
 @charset "UTF-8";
 @use "../../common" as var;
 
+/*MyPage*/
+.my-page {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .my-page__top {
+        display: flex;
+        justify-content: space-between;
+
+        .my-page__top__middle {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    }
+}
 
 /*Calendar*/
 .calendar {
@@ -87,4 +105,282 @@
             @include var.center;
         }
     }
+}
+
+/*MyStatus*/
+
+.my-status {
+    width: 300px;
+    height: 300px;
+    background-color: #fff;
+    @include var.r-s;
+    @include var.shadow;
+    @include var.center;
+    flex-direction: column;
+    position: relative;
+
+    .my-status__modify {
+        position: absolute;
+        cursor: pointer;
+        color: var.$middleGray;
+        top: 26px;
+        right: 26px;
+        @include var.content-s;
+        transition: color 200ms;
+
+        &:hover {
+            color: var.$black;
+        }
+    }
+
+    .my-status__middle {
+        margin-top: 20px;
+        @include var.center;
+        flex-wrap: wrap;
+
+        .my-status__name {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        .my-status__birth {
+            @include var.content-s;
+            font-weight: 700;
+
+            &::after {
+                content: "|";
+                margin: 0 5px;
+                color: #C8D8FB;
+                font-size: 0.6rem;
+                line-height: 0.7rem;
+            }
+        }
+
+        .my-status__age,
+        .my-status__sex {
+            @include var.content-s;
+            font-weight: 700;
+        }
+
+        .my-status__sex {
+            svg {
+                font-size: 1rem;
+                margin-top: 2px;
+                margin-left: 5px;
+
+                &.my-status__sex--male {
+                    color: var.$blue;
+                }
+
+                &.my-status__sex--female {
+                    color: var.$red;
+                }
+            }
+        }
+    }
+
+    .my-status__mood {
+        width: 80px;
+        height: 80px;
+        background-color: #fff;
+        @include var.shadow;
+        @include var.center;
+        border-radius: 50%;
+        position: relative;
+        cursor: pointer;
+
+        h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2px;
+        }
+
+        .my-status__mood__select-box {
+            position: absolute;
+            background-color: var.$black;
+            display: flex;
+            gap: 4px;
+            padding: 4px 8px;
+            @include var.r-s;
+            top: -40px;
+            left: 30%;
+
+            &::before {
+                content: "";
+                position: absolute;
+                width: 0px;
+                height: 0px;
+                border-style: solid;
+                border-width: 17.3px 10px 0 10px;
+                border-color: var.$black transparent transparent transparent;
+                bottom: -7px;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .my-status__name {
+        @include var.title-m;
+        color: var.$black;
+    }
+
+    .my-status__bottom {
+        display: flex;
+        margin-top: 16px;
+
+        &>div {
+            width: 80px;
+            @include var.center;
+            flex-direction: column;
+            justify-content: flex-end;
+
+            svg {
+                height: 20px;
+                color: var.$blue;
+            }
+
+            h5 {
+                margin-top: 4px;
+                font-size: 0.75rem;
+                color: var.$middleGray;
+            }
+
+            h3 {
+                line-height: 1.2;
+                margin-top: 8px;
+            }
+        }
+
+        .my-status__blood {
+            svg {
+                height: 20px;
+                font-size: 20px;
+                color: var.$red;
+            }
+        }
+    }
+}
+
+/*Bmi*/
+.bmi {
+    width: 305px;
+    height: 160px;
+    background-color: #fff;
+    @include var.r-s;
+    @include var.shadow;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px;
+
+    .bmi__summary {
+        display: flex;
+        align-items: center;
+        height: fit-content;
+
+        .bmi__number {
+            @include var.content-l;
+            color: var.$black;
+
+            &::after {
+                content: "|";
+                font-size: 0.8rem;
+                margin: 0 4px;
+                font-weight: 700;
+                color: #C8D8FB;
+            }
+        }
+
+        .bmi__text {
+            @include var.content-l;
+            color: var.$black;
+        }
+    }
+
+    .bmi__icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: var.$blue;
+        @include var.center;
+
+        svg {
+            color: #fff;
+            font-size: 1.2rem;
+        }
+    }
+
+    .bmi__title {
+        @include var.title-l;
+        font-weight: 700;
+        margin: 0 8px;
+    }
+
+    .bmi__graph {
+        width: 100%;
+        display: flex;
+        position: relative;
+        margin-top: auto;
+        margin-bottom: 4px;
+
+        .bmi__graph--bar {
+            height: 4px;
+
+            .bmi__graph--num {
+                @include var.content-s;
+                text-align: right;
+                margin-top: 8px;
+                transform: translateX(9px);
+            }
+        }
+
+        .bmi__graph--bar--underweight {
+            width: 25%;
+            background-color: var.$blue;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .bmi__graph--bar--normal {
+            width: 20%;
+            background-color: var.$green;
+        }
+
+        .bmi__graph--bar--overweight {
+            width: 18%;
+            background-color: var.$yellow;
+        }
+
+        .bmi__graph--bar--obese {
+            width: 37%;
+            background-color: var.$red;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .bmi__graph__point {
+            position: absolute;
+            bottom: 6px;
+            transform: scale(0.8);
+        }
+    }
+}
+
+/*Exercise*/
+.exercise {
+    width: 305px;
+    height: 110px;
+    background-color: #fff;
+    @include var.r-s;
+    @include var.shadow;
+}
+
+/*Medicine*/
+.medicine {
+    width: 340px;
+    height: 300px;
+    background-color: var.$blue;
+    @include var.r-s;
+    @include var.shadow;
 }
