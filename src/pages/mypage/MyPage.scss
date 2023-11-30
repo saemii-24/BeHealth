@@ -1,0 +1,90 @@
+@charset "UTF-8";
+@use "../../common" as var;
+
+
+/*Calendar*/
+.calendar {
+    width: 490px;
+    height: 360px;
+    background-color: #fff;
+    @include var.r-s;
+    @include var.shadow;
+    padding: 40px 40px;
+
+    .calendar__this-date {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        margin-left: 15px;
+
+        .calendar__this-date--back {
+            margin-right: 10px;
+            cursor: pointer;
+            height: 1.5rem;
+            @include var.center;
+            background: transparent;
+            border: none;
+        }
+
+        .calendar__this-date--forward {
+            margin-left: 10px;
+            cursor: pointer;
+            height: 1.5rem;
+            @include var.center;
+            background: transparent;
+            border: none;
+        }
+
+        svg {
+            font-size: 1.2rem;
+        }
+
+        h1 {
+            @include var.title-m;
+            color: var.$black;
+
+            &:first-of-type {
+                margin-right: 8px;
+            }
+        }
+    }
+
+    .calendar__seven-day {
+        width: 100%;
+        margin-top: auto;
+        height: calc(100% - 30px);
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+
+        .calendar__seven-day--day {
+            @include var.title-m;
+            @include var.center;
+            color: var.$black;
+        }
+
+        .calendar__seven-day--date {
+            color: #8F8F8F;
+            @include var.center;
+
+            &.calendar__seven-day--date--today {
+                position: relative;
+
+                &::before {
+                    content: "";
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    position: absolute;
+                    z-index: 1;
+                    background-color: var.$blue;
+                }
+            }
+        }
+
+        .calendar__seven-day--date--next,
+        .calendar__seven-day--date--last {
+            color: #C9C9C9;
+            @include var.center;
+        }
+    }
+}

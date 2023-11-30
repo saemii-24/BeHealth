@@ -1,11 +1,15 @@
-import React from 'react'
+import React from 'react';
+import firebase from '../../firebase/firebase';
+import Calendar from './Calendar';
 
 const MyPage = () => {
-  return (
-    <div className='my-page'>
-      
-    </div>
-  )
-}
+  console.log(firebase);
 
-export default MyPage
+  return (
+    <>
+      <Calendar />
+    </>
+  );
+};
+
+export default MyPage;
