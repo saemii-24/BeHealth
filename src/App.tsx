@@ -1,6 +1,7 @@
-import React from 'react';
-import './common.scss';
+import React, { useEffect, useState } from 'react';
+import './App.scss';
 import ContentTap from './component/ContentTap';
+import './API.js';
 
 function App() {
   return (
