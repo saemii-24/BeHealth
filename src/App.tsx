@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.scss';
+import './common.scss';
+
 import ContentTap from './component/ContentTap';
 import './API.js';
 
