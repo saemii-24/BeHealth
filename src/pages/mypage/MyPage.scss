@@ -5,12 +5,12 @@
 .my-page {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     justify-content: space-between;
 
     .my-page__top {
         display: flex;
         justify-content: space-between;
+        width: 100%;
 
         .my-page__top__middle {
             display: flex;
@@ -21,6 +21,11 @@
 }
 
 /*Calendar*/
+.calendar-box {
+    display: flex;
+    justify-content: space-between;
+}
+
 .calendar {
     width: 490px;
     height: 360px;
@@ -86,15 +91,17 @@
 
             &.calendar__seven-day--date--today {
                 position: relative;
+                z-index: 1;
+                color: #fff;
 
                 &::before {
                     content: "";
                     width: 30px;
                     height: 30px;
                     border-radius: 50%;
-                    position: absolute;
-                    z-index: 1;
+                    z-index: -1;
                     background-color: var.$blue;
+                    @include var.transform-center;
                 }
             }
         }
@@ -107,8 +114,104 @@
     }
 }
 
-/*MyStatus*/
+/*AddSchedule*/
+.add-schedule {
+    width: 500px;
+    height: 360px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 
+
+    .add-schedule__scroll-box {
+        width: 100%;
+        height: 100%;
+        overflow-x: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        padding: 20px;
+
+
+
+        &::-webkit-scrollbar {
+            width: 7px;
+            @include var.r-s;
+            margin-top: 20px;
+            background-color: #DEE9FE;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: var.$blue;
+            @include var.r-s;
+        }
+
+        .add-schedule__box {
+            width: 100%;
+            background-color: #fff;
+            @include var.r-s;
+            @include var.shadow;
+            display: flex;
+            align-items: center;
+
+            &>div {
+                height: 120px;
+            }
+
+            .add-schedule__icon {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                @include var.center;
+                margin-right: 20px;
+                margin-left: 30px;
+
+                svg {
+                    font-size: 1.1rem;
+
+                }
+
+                path {
+                    color: #fff;
+                }
+
+            }
+
+
+
+            .add-schedule__icon--add {
+                width: 2rem;
+                height: 2rem;
+                font-size: 2rem;
+                margin-left: auto;
+                @include var.center;
+                align-items: center;
+                margin-right: 30px;
+                cursor: pointer;
+                color: var.$middleGray;
+            }
+        }
+
+        .add-schedule__box__content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .add-schedule__title {
+                font-size: 1.4rem;
+                font-weight: 700;
+            }
+
+            .add-schedule__summay {
+                @include var.content-l;
+                font-weight: 700;
+                margin-top: 4px;
+            }
+        }
+    }
+}
+
+/*MyStatus*/
 .my-status {
     width: 300px;
     height: 300px;
@@ -241,6 +344,10 @@
             svg {
                 height: 20px;
                 color: var.$blue;
+
+                path {
+                    color: var.$blue;
+                }
             }
 
             h5 {
@@ -260,6 +367,10 @@
                 height: 20px;
                 font-size: 20px;
                 color: var.$red;
+
+                path {
+                    color: var.$red;
+                }
             }
         }
     }
@@ -282,7 +393,7 @@
         height: fit-content;
 
         .bmi__number {
-            @include var.content-l;
+            @include var.content-m;
             color: var.$black;
 
             &::after {
@@ -295,7 +406,7 @@
         }
 
         .bmi__text {
-            @include var.content-l;
+            @include var.content-m;
             color: var.$black;
         }
     }
@@ -310,12 +421,15 @@
         svg {
             color: #fff;
             font-size: 1.2rem;
+
+            path {
+                color: #fff;
+            }
         }
     }
 
     .bmi__title {
-        @include var.title-l;
-        font-weight: 700;
+        @include var.title-m;
         margin: 0 8px;
     }
 
@@ -325,6 +439,17 @@
         position: relative;
         margin-top: auto;
         margin-bottom: 4px;
+
+        .bmi__graph__point-box {
+            width: 100%;
+            position: absolute;
+
+            .bmi__graph__point {
+                position: absolute;
+                bottom: 6px;
+                transform: translateX(-50%) scale(0.8);
+            }
+        }
 
         .bmi__graph--bar {
             height: 4px;
@@ -359,11 +484,6 @@
             border-radius: 0 4px 4px 0;
         }
 
-        .bmi__graph__point {
-            position: absolute;
-            bottom: 6px;
-            transform: scale(0.8);
-        }
     }
 }
 
@@ -374,6 +494,82 @@
     background-color: #fff;
     @include var.r-s;
     @include var.shadow;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px 30px;
+    position: relative;
+
+    .exercise__modify {
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 16px;
+        right: 16px;
+        width: 16px;
+        height: 16px;
+    }
+
+    .exercise__summary {
+        width: 100%;
+        display: flex;
+        align-items: center;
+
+        .exercise__icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #306DE5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+
+            svg {
+                color: #fff;
+                font-size: 1.2rem;
+
+                path {
+                    color: #fff;
+                }
+            }
+        }
+
+        .exercise__title {
+            @include var.title-m;
+            margin: 0 8px;
+            line-height: 180%;
+        }
+
+        .exercise__type {
+            @include var.content-m;
+        }
+
+    }
+
+    .exercise__detail {
+        width: 100%;
+        padding-left: 44px;
+        display: flex;
+
+        .exercise__time {
+            @include var.content-m;
+            position: relative;
+
+            &::after {
+                position: absolute;
+                content: "|";
+                margin: 0 10px;
+                font-weight: 700;
+                color: #C8D8FB;
+            }
+        }
+
+        .exercise__calorie {
+            @include var.content-m;
+            text-indent: 24px;
+        }
+    }
 }
 
 /*Medicine*/
@@ -383,4 +579,46 @@
     background-color: var.$blue;
     @include var.r-s;
     @include var.shadow;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+
+    .medicine__title {
+        @include var.title-m;
+        color: #fff;
+    }
+
+    .medicine__summary {
+        margin-bottom: 8px;
+
+        span {
+            @include var.content-l;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        @include var.content-l;
+        color: #fff;
+    }
+
+    .medicine__box {
+        background-color: #fff;
+        @include var.r-s;
+        flex-grow: 1;
+        padding: 10px 16px;
+
+        .medicine__box--recommend {
+            color: var.$blue;
+            @include var.content-m;
+            font-weight: 700;
+        }
+
+        .medicine__box--avoid {
+            color: var.$red;
+            @include var.content-m;
+            font-weight: 700;
+        }
+    }
 }

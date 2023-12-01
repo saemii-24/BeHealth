@@ -58,21 +58,22 @@ const Bmi = () => {
       </div>
 
       <div className='bmi__graph'>
-        <svg
-          className='bmi__graph__point'
-          width='24'
-          height='34'
-          viewBox='0 0 25 35'
-          fill='none'
-          xmlns='http://www.w3.org/2000/svg'>
-          <path
-            fill-rule='evenodd'
-            clip-rule='evenodd'
-            d='M12 34C12 34 24 18.5185 24 11.9298C24 5.34116 18.6274 0 12 0C5.37256 0 0 5.34116 0 11.9298C0 18.5185 12 34 12 34ZM12 17C15.3137 17 18 14.3137 18 11C18 7.68628 15.3137 5 12 5C8.68628 5 6 7.68628 6 11C6 14.3137 8.68628 17 12 17Z'
-            fill={bmi.color}
-          />
-        </svg>
-
+        <div className='bmi__graph__point-box'>
+          <svg
+            className='bmi__graph__point'
+            width='24'
+            height='34'
+            viewBox='0 0 25 35'
+            fill='none'
+            xmlns='http://www.w3.org/2000/svg'>
+            <path
+              fillRule='evenodd'
+              clipRule='evenodd'
+              d='M12 34C12 34 24 18.5185 24 11.9298C24 5.34116 18.6274 0 12 0C5.37256 0 0 5.34116 0 11.9298C0 18.5185 12 34 12 34ZM12 17C15.3137 17 18 14.3137 18 11C18 7.68628 15.3137 5 12 5C8.68628 5 6 7.68628 6 11C6 14.3137 8.68628 17 12 17Z'
+              fill={bmi.color}
+            />
+          </svg>
+        </div>
         <div className='bmi__graph--bar bmi__graph--bar--underweight'>
           <span className='a11y-hidden'>저체중</span>
           <div className='bmi__graph--num'>18.5</div>

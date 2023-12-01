@@ -14,7 +14,7 @@ const MyStatus = () => {
 
   return (
     <div className='my-status'>
-      <p className='my-status__modify'>수정</p>
+      <p className='my-status__modify modify'>수정</p>
       <div
         className='my-status__mood'
         onClick={() => {
@@ -24,7 +24,7 @@ const MyStatus = () => {
           <div className='my-status__mood__select-box'>
             {moodArr.map((mood, index) => {
               return (
-                <>
+                <div key={mood.moodText}>
                   <p className='a11y-hidden'>{mood.moodText}</p>
                   <h3
                     onClick={() => {
@@ -32,7 +32,7 @@ const MyStatus = () => {
                     }}>
                     {mood.emoji}
                   </h3>
-                </>
+                </div>
               );
             })}
           </div>

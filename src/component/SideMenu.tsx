@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './SideMenu.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaHome, FaLaugh, FaSignal, FaEnvelope } from 'react-icons/fa';
 import cn from 'classnames';
 
@@ -9,7 +9,7 @@ type SelectTabType = 'home' | 'myPage' | 'analyzes' | 'memo';
 const Menu = () => {
   const [isSignIn, setIsSignIn] = useState<boolean>(false);
   const [selectTab, setSelectTab] = useState<SelectTabType>('home');
-  console.log(selectTab);
+  const navigate = useNavigate();
 
   return (
     <div className='side-menu'>
@@ -38,6 +38,7 @@ const Menu = () => {
           })}
           onClick={() => {
             setSelectTab('home');
+            navigate('/');
           }}>
           <FaHome />
           <span>Home</span>
@@ -48,6 +49,7 @@ const Menu = () => {
           })}
           onClick={() => {
             setSelectTab('myPage');
+            navigate('/mypage');
           }}>
           <FaLaugh />
           <span>My Page</span>

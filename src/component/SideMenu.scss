@@ -73,6 +73,10 @@
                 color: #fff;
                 margin-left: 20px;
                 font-size: 18px;
+
+                path {
+                    color: #fff;
+                }
             }
 
             &.select {
@@ -81,6 +85,10 @@
                 span,
                 svg {
                     color: var.$blue;
+
+                    path {
+                        color: var.$blue;
+                    }
                 }
             }
 
