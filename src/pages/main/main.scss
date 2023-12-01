@@ -40,6 +40,52 @@
             &>p {
                 @include var.title-s;
             }
+
+            .select-institution{
+                width: 43%;
+                padding-top: 50px;
+                display: flex;
+                justify-content: space-between;
+
+                #institution{
+                    padding: 12px 40px 12px 20px;
+                    @include var.r-s;
+                    border: none;
+                    outline: none;
+                    font-weight: 700;
+                    -moz-appearance: none;
+                    -webkit-appearance: none;
+                    appearance: none;
+                    width: 200px;
+
+                    // 출처 <a href="https://www.flaticon.com/free-icons/down-arrow" title="down arrow icons">Down arrow icons created by Freepik - Flaticon</a>
+                    background: {
+                        color: #F2F6F9;
+                        image: url('../../../public/images/arrow.png');
+                        repeat: no-repeat;
+                        size: 10px;
+                        position: 90% 50%;
+                    };
+                }
+
+
+                .search-icon{
+                    width: 40px;
+                    height: 40px;
+                    background: var.$blue;
+                    border-radius: 7px;
+                    @include var.center;
+                    cursor: pointer;
+                    border: none;
+                    outline: none;
+            
+                    .fontawesome {
+                        color: #fff;
+                        @include var.title-s;
+                    }
+
+                }
+            }
         }
 
 
@@ -169,24 +215,36 @@
                 }
 
                 h4 {
-                    padding: 30px 10px 20px;
+                    padding: 20px 10px 0px;
                 }
 
                 .today-list {
                     width: 100%;
-                    height: calc(100% - 170px);
+                    height: calc(100% - 159px);
                     overflow-y: scroll;
-                    padding: 0 20px 0 10px;
+                    padding: 20px 20px 0 10px;
+                    position: relative;
                     
                     &::-webkit-scrollbar{
                         width: 7px;
                         background: #DEE9FE;  
-                        @include var.r-s;                      
+                        @include var.r-s;   
+                        margin-top: 20px;       
                     }
                     &::-webkit-scrollbar-thumb{
                         background: var.$blue;
                         @include var.r-s;    
                     }
+
+                    // &::after{
+                    //     position: fixed;
+                    //     content: '';
+                    //     bottom: 16.5rem;
+                    //     left: 47.3%;
+                    //     width: 21%;
+                    //     height: 5%;
+                    //     background: rgba(241, 245, 249,0.9);
+                    // }
 
                     div{
                         width: 100%;

@@ -29,6 +29,7 @@ const HealthNews = () => {
       </div>
 
       <div className="health-common">
+        {/* 출처 <a href="https://www.flaticon.com/free-icons/exercise" title="exercise icons">Exercise icons created by mangsaabguru - Flaticon</a> */}
         <img src="/images/exercise.png" alt="건강 상식" />
         <h3>알아두면 좋은 <br></br> 건강 상식</h3>
       </div>

@@ -29,8 +29,8 @@ const MainContent = () => {
                   </div>
 
                   <div className="vaccination__txt">
-                    <h3>예방접종</h3>
-                    <p>백신</p>
+                    <h3></h3>
+                    <p></p>
                   </div>
               </div>
 
@@ -84,7 +84,11 @@ const MainContent = () => {
                 {
                   todayListData.map((v,i)=>{
                     return(
-                      <div key={i}>
+                      <div key={i} style={{background : `${
+                        v.today === true? '#306DE5' : '#fff'
+                      }`, color: `${
+                        v.today === true? '#fff' : '#333333'
+                      }`}}>
                         <p>{v.time}</p>
                         <p>{v.todo}</p>
                       </div>
