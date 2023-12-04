@@ -24,6 +24,8 @@ import ulsan from './ulsan'
 import sejong from './sejong'
 import institution from './institution'
 
+import SearchPop from './SearchPop';
+
 const Search = () => {
   const dispatch = useDispatch();
   let thisYear = new Date().getFullYear();
@@ -45,45 +47,9 @@ const Search = () => {
     console.log(selected)
   },[selected])
 
+
+  let [searchPop, setSearchPop] = useState(false);
   
-  // const [data, setData] = useState(null);
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(null);
-
-  // const fetchData = async () => {
-  //   try {
-  //     setError(null);
-  //     setData(null);
-  //     setLoading(true);
-
-  //     const URL = "openapi/service/rest/HmcSearchService/getRegnHmcList?hmcNm=%EC%83%88%ED%95%98%EB%8A%98";
-
-  //     const response = axios.get(URL, {
-  //         params: {
-  //           serviceKey: process.env.REACT_APP_API_KEY,
-  //           numOfRows: 1,
-  //           pageNo: 10
-  //         }
-  //     });
-
-  //     setData(response.data);
-
-  //   }catch(error) {
-  //     setError(error);
-  //   }
-
-  //   setLoading(false);
-  // }
-
-  // useEffect(() => {
-  //   fetchData()
-  // },[]);
-
-  // if(loading) return console.log('loading');
-  // if(error) return console.log(error);
-  // if(!data) return console.log('data is null');
-
-  // console.log(data);
   
   return (
     <div className='search'>
@@ -91,20 +57,21 @@ const Search = () => {
       <p>{string}</p>
 
       <div className="select-institution">
-        <select name="institution" id="institution" onChange={(e)=>{handleSelect(e)}}>
+        <select name="institution" id="institution"  onChange={(e)=>{handleSelect(e)}}>
           <option defaultValue="시군구">행정구역을 선택하세요.</option>
           {
             institution.map((v,i)=>{
               return(
-                <option key={i} value={v}>{v} </option>
+                <option key={i} value={v.id}>{v.city} </option>
               )
             })
           }        
         </select>
 
-        <button className="search-icon">
+        <button className="search-icon" onClick={()=>{setSearchPop(true)}}>
           <FontAwesomeIcon icon={faMagnifyingGlass} className='fontawesome'/>
         </button>
+        {searchPop ? <SearchPop institution={institution} selected={selected} /> : null}
       </div>
     </div>
   )

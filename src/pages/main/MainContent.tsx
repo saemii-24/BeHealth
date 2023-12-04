@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
-import Search from './Search'
+import axios from 'axios';
+import convert from 'xml-js';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSyringe } from '@fortawesome/free-solid-svg-icons'
+import { faHouseChimneyMedical } from '@fortawesome/free-solid-svg-icons'
+import Search from './Search'
 
 import momentum from './momentum'
 import { MomentumType } from './momentum'
@@ -16,6 +19,29 @@ const MainContent = () => {
   const [momentumData, setMomentumData] = useState<MomentumType[]>(momentum);
   const [mainCalendarData, setMainCalendarData] = useState<MainCalendarType[]>(mainCalendar);
   const [todayListData, setTodayListData] = useState<TodayListType[]>(todayList);
+
+
+    const fetchData = async () => {
+      try {
+        const URL = '';
+        const response = await axios.get(URL, {
+          // params: {
+          //   serviceKey: process.env.REACT_APP_API_KEY,
+          //   numOfRows: 1,
+          //   pageNo: 10,
+          // },
+        });
+        const result = convert.xml2json(response.data, { compact: true, spaces: 4});
+        console.log(response);
+      } catch (err) {
+        console.log(err);
+      }
+   
+    };
+    fetchData();
+  
+
+
   
   return (
     <div className='main-content'>
@@ -23,13 +49,14 @@ const MainContent = () => {
         
         <div className='main--bottom'>
             <div className='main--bottom--left'>
-              <div className="vaccination">
+              <div className="pharmacy">
                   <div className="icon">
-                    <FontAwesomeIcon icon={faSyringe} className='fontawesome'/>
+                    {/* <FontAwesomeIcon icon={faSyringe} className='fontawesome'/> faPrescriptionBottleMedical */}
+                    <FontAwesomeIcon icon={faHouseChimneyMedical} className='fontawesome' />
                   </div>
 
-                  <div className="vaccination__txt">
-                    <h3></h3>
+                  <div className="pharmacy-txt">
+                    <h3>가까운 약국 찾기</h3>
                     <p></p>
                   </div>
               </div>

@@ -22,72 +22,6 @@
         display: flex;
         flex-wrap: wrap;
 
-        .search {
-            width: 100%;
-            height: 240px;
-            background: #fff;
-            @include var.r-m;
-            @include var.shadow;
-            padding: 30px;
-            margin-bottom: 40px;
-
-            h2 {
-                color: var.$blue;
-                @include var.title-l;
-                padding-bottom: 10px
-            }
-
-            &>p {
-                @include var.title-s;
-            }
-
-            .select-institution{
-                width: 43%;
-                padding-top: 50px;
-                display: flex;
-                justify-content: space-between;
-
-                #institution{
-                    padding: 12px 40px 12px 20px;
-                    @include var.r-s;
-                    border: none;
-                    outline: none;
-                    font-weight: 700;
-                    -moz-appearance: none;
-                    -webkit-appearance: none;
-                    appearance: none;
-                    width: 200px;
-
-                    // 출처 <a href="https://www.flaticon.com/free-icons/down-arrow" title="down arrow icons">Down arrow icons created by Freepik - Flaticon</a>
-                    background: {
-                        color: #F2F6F9;
-                        image: url('../../../public/images/arrow.png');
-                        repeat: no-repeat;
-                        size: 10px;
-                        position: 90% 50%;
-                    };
-                }
-
-
-                .search-icon{
-                    width: 40px;
-                    height: 40px;
-                    background: var.$blue;
-                    border-radius: 7px;
-                    @include var.center;
-                    cursor: pointer;
-                    border: none;
-                    outline: none;
-            
-                    .fontawesome {
-                        color: #fff;
-                        @include var.title-s;
-                    }
-
-                }
-            }
-        }
-
 
         .main--bottom {
             width: 100%;
@@ -99,7 +33,7 @@
                 width: 290px;
                 height: 100%;
 
-                .vaccination {
+                .pharmacy {
                     width: 100%;
                     height: 110px;
                     background: #fff;
@@ -112,9 +46,10 @@
 
                     .icon {
                         background: var.$green;
+                        padding-left: 1px;
                     }
 
-                    .vaccination__txt {
+                    .pharmacy-txt {
                         width: calc(100% - 50px);
                         padding-left: 30px;
 
