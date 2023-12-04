@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import './MyPage.scss';
+import AddSchedule from './AddSchedule';
 
 const Calendar = () => {
   const year = new Date().getFullYear();
@@ -62,28 +63,31 @@ const Calendar = () => {
   }
 
   return (
-    <div className='calendar'>
-      <div className='calendar__this-date'>
-        <button className='calendar__this-date--back'>
-          <IoIosArrowBack />
-        </button>
-        <h1>{year}년</h1>
-        <h1>{month}월</h1>
-        <button className='calendar__this-date--forward'>
-          <IoIosArrowForward />
-        </button>
+    <div className='calendar-box'>
+      <div className='calendar'>
+        <div className='calendar__this-date'>
+          <button className='calendar__this-date--back'>
+            <IoIosArrowBack />
+          </button>
+          <h1>{year}년</h1>
+          <h1>{month}월</h1>
+          <button className='calendar__this-date--forward'>
+            <IoIosArrowForward />
+          </button>
+        </div>
+        <div className='calendar__seven-day'>
+          <div className='calendar__seven-day--day'>Su</div>
+          <div className='calendar__seven-day--day'>Mo</div>
+          <div className='calendar__seven-day--day'>Tu</div>
+          <div className='calendar__seven-day--day'>We</div>
+          <div className='calendar__seven-day--day'>Th</div>
+          <div className='calendar__seven-day--day'>Fr</div>
+          <div className='calendar__seven-day--day'>Sa</div>
+          {/* 지난 달 + 이번 달 + 다음 달 날짜 */}
+          {thisDateArr}
+        </div>
       </div>
-      <div className='calendar__seven-day'>
-        <div className='calendar__seven-day--day'>Su</div>
-        <div className='calendar__seven-day--day'>Mo</div>
-        <div className='calendar__seven-day--day'>Tu</div>
-        <div className='calendar__seven-day--day'>We</div>
-        <div className='calendar__seven-day--day'>Th</div>
-        <div className='calendar__seven-day--day'>Fr</div>
-        <div className='calendar__seven-day--day'>Sa</div>
-        {/* 지난 달 + 이번 달 + 다음 달 날짜 */}
-        {thisDateArr}
-      </div>
+      <AddSchedule />
     </div>
   );
 };

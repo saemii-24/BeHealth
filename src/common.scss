@@ -88,7 +88,8 @@ $bgColor: #F2F6F9;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'NanumSquareAc', sans-serif
+    font-family: 'NanumSquareAc', sans-serif;
+    color: $black;
 }
 
 ul.li,
@@ -110,4 +111,24 @@ a {
     margin: -1px;
     overflow: hidden;
     clip-path: polygon(0 0, 0 0, 0 0);
+}
+
+.modify {
+    position: absolute;
+    cursor: pointer;
+    color: $middleGray;
+    top: 26px;
+    right: 26px;
+    @include content-s;
+    transition: color 200ms;
+
+    &:hover {
+        color: $black;
+    }
+}
+
+svg {
+    path {
+        color: inherit;
+    }
 }
