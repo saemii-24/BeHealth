@@ -1,624 +1,768 @@
 @charset "UTF-8";
-@use "../../common" as var;
+@use '../../common' as var;
 
 /*MyPage*/
 .my-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .my-page__top {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
+    width: 100%;
 
-    .my-page__top {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-
-        .my-page__top__middle {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+    .my-page__top__middle {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
+  }
 }
 
 /*Calendar*/
 .calendar-box {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .calendar {
-    width: 490px;
-    height: 360px;
-    background-color: #fff;
-    @include var.r-s;
-    @include var.shadow;
-    padding: 40px 40px;
+  width: 490px;
+  height: 360px;
+  background-color: #fff;
+  @include var.r-s;
+  @include var.shadow;
+  padding: 40px 40px;
 
-    .calendar__this-date {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        margin-left: 15px;
+  .calendar__this-date {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-left: 15px;
 
-        .calendar__this-date--back {
-            margin-right: 10px;
-            cursor: pointer;
-            height: 1.5rem;
-            @include var.center;
-            background: transparent;
-            border: none;
-        }
-
-        .calendar__this-date--forward {
-            margin-left: 10px;
-            cursor: pointer;
-            height: 1.5rem;
-            @include var.center;
-            background: transparent;
-            border: none;
-        }
-
-        svg {
-            font-size: 1.2rem;
-        }
-
-        h1 {
-            @include var.title-m;
-            color: var.$black;
-
-            &:first-of-type {
-                margin-right: 8px;
-            }
-        }
+    .calendar__this-date--back {
+      margin-right: 10px;
+      cursor: pointer;
+      height: 1.5rem;
+      @include var.center;
+      background: transparent;
+      border: none;
     }
 
-    .calendar__seven-day {
-        width: 100%;
-        margin-top: auto;
-        height: calc(100% - 30px);
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-
-        .calendar__seven-day--day {
-            @include var.title-m;
-            @include var.center;
-            color: var.$black;
-        }
-
-        .calendar__seven-day--date {
-            color: #8F8F8F;
-            @include var.center;
-
-            &.calendar__seven-day--date--today {
-                position: relative;
-                z-index: 1;
-                color: #fff;
-
-                &::before {
-                    content: "";
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 50%;
-                    z-index: -1;
-                    background-color: var.$blue;
-                    @include var.transform-center;
-                }
-            }
-        }
-
-        .calendar__seven-day--date--next,
-        .calendar__seven-day--date--last {
-            color: #C9C9C9;
-            @include var.center;
-        }
+    .calendar__this-date--forward {
+      margin-left: 10px;
+      cursor: pointer;
+      height: 1.5rem;
+      @include var.center;
+      background: transparent;
+      border: none;
     }
+
+    svg {
+      font-size: 1.2rem;
+    }
+
+    h1 {
+      @include var.title-m;
+      color: var.$black;
+
+      &:first-of-type {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .calendar__seven-day {
+    width: 100%;
+    margin-top: auto;
+    height: calc(100% - 30px);
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    .calendar__seven-day--day {
+      @include var.title-m;
+      @include var.center;
+      color: var.$black;
+    }
+
+    .calendar__seven-day--date {
+      color: #8f8f8f;
+      @include var.center;
+
+      &.calendar__seven-day--date--today {
+        position: relative;
+        z-index: 1;
+        color: #fff;
+
+        &::before {
+          content: '';
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          z-index: -1;
+          background-color: var.$blue;
+          @include var.transform-center;
+        }
+      }
+    }
+
+    .calendar__seven-day--date--next,
+    .calendar__seven-day--date--last {
+      color: #c9c9c9;
+      @include var.center;
+    }
+  }
 }
 
 /*AddSchedule*/
 .add-schedule {
-    width: 500px;
-    height: 360px;
+  width: 500px;
+  height: 360px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  .add-schedule__scroll-box {
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
     display: flex;
     flex-direction: column;
-    position: relative;
+    gap: 18px;
+    padding: 20px;
 
-
-    .add-schedule__scroll-box {
-        width: 100%;
-        height: 100%;
-        overflow-x: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-        padding: 20px;
-
-
-
-        &::-webkit-scrollbar {
-            width: 7px;
-            @include var.r-s;
-            margin-top: 20px;
-            background-color: #DEE9FE;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background-color: var.$blue;
-            @include var.r-s;
-        }
-
-        .add-schedule__box {
-            width: 100%;
-            background-color: #fff;
-            @include var.r-s;
-            @include var.shadow;
-            display: flex;
-            align-items: center;
-
-            &>div {
-                height: 120px;
-            }
-
-            .add-schedule__icon {
-                width: 36px;
-                height: 36px;
-                border-radius: 50%;
-                @include var.center;
-                margin-right: 20px;
-                margin-left: 30px;
-
-                svg {
-                    font-size: 1.1rem;
-
-                }
-
-                path {
-                    color: #fff;
-                }
-
-            }
-
-
-
-            .add-schedule__icon--add {
-                width: 2rem;
-                height: 2rem;
-                font-size: 2rem;
-                margin-left: auto;
-                @include var.center;
-                align-items: center;
-                margin-right: 30px;
-                cursor: pointer;
-                color: var.$middleGray;
-            }
-        }
-
-        .add-schedule__box__content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-
-            .add-schedule__title {
-                font-size: 1.4rem;
-                font-weight: 700;
-            }
-
-            .add-schedule__summay {
-                @include var.content-l;
-                font-weight: 700;
-                margin-top: 4px;
-            }
-        }
+    &::-webkit-scrollbar {
+      width: 7px;
+      @include var.r-s;
+      margin-top: 20px;
+      background-color: #dee9fe;
     }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var.$blue;
+      @include var.r-s;
+    }
+
+    .add-schedule__box {
+      width: 100%;
+      background-color: #fff;
+      @include var.r-s;
+      @include var.shadow;
+      display: flex;
+      align-items: center;
+
+      & > div {
+        height: 120px;
+      }
+
+      .add-schedule__icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        @include var.center;
+        margin-right: 20px;
+        margin-left: 30px;
+
+        svg {
+          font-size: 1.1rem;
+        }
+
+        path {
+          color: #fff;
+        }
+      }
+
+      .add-schedule__icon--add {
+        width: 2rem;
+        height: 2rem;
+        font-size: 2rem;
+        margin-left: auto;
+        @include var.center;
+        align-items: center;
+        margin-right: 30px;
+        cursor: pointer;
+        color: var.$middleGray;
+      }
+    }
+
+    .add-schedule__box__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .add-schedule__title {
+        font-size: 1.4rem;
+        font-weight: 700;
+      }
+
+      .add-schedule__summay {
+        @include var.content-l;
+        font-weight: 700;
+        margin-top: 4px;
+      }
+    }
+  }
 }
 
 /*MyStatus*/
 .my-status {
-    width: 300px;
-    height: 300px;
-    background-color: #fff;
-    @include var.r-s;
-    @include var.shadow;
+  width: 300px;
+  height: 300px;
+  background-color: #fff;
+  @include var.r-s;
+  @include var.shadow;
+  @include var.center;
+  flex-direction: column;
+  position: relative;
+
+  .my-status__modify {
+    position: absolute;
+    cursor: pointer;
+    color: var.$middleGray;
+    top: 26px;
+    right: 26px;
+    @include var.content-s;
+    transition: color 200ms;
+
+    &:hover {
+      color: var.$black;
+    }
+  }
+
+  .my-status__middle {
+    margin-top: 20px;
     @include var.center;
-    flex-direction: column;
-    position: relative;
-
-    .my-status__modify {
-        position: absolute;
-        cursor: pointer;
-        color: var.$middleGray;
-        top: 26px;
-        right: 26px;
-        @include var.content-s;
-        transition: color 200ms;
-
-        &:hover {
-            color: var.$black;
-        }
-    }
-
-    .my-status__middle {
-        margin-top: 20px;
-        @include var.center;
-        flex-wrap: wrap;
-
-        .my-status__name {
-            width: 100%;
-            text-align: center;
-            margin-bottom: 4px;
-        }
-
-        .my-status__birth {
-            @include var.content-s;
-            font-weight: 700;
-
-            &::after {
-                content: "|";
-                margin: 0 5px;
-                color: #C8D8FB;
-                font-size: 0.6rem;
-                line-height: 0.7rem;
-            }
-        }
-
-        .my-status__age,
-        .my-status__sex {
-            @include var.content-s;
-            font-weight: 700;
-        }
-
-        .my-status__sex {
-            svg {
-                font-size: 1rem;
-                margin-top: 2px;
-                margin-left: 5px;
-
-                &.my-status__sex--male {
-                    color: var.$blue;
-                }
-
-                &.my-status__sex--female {
-                    color: var.$red;
-                }
-            }
-        }
-    }
-
-    .my-status__mood {
-        width: 80px;
-        height: 80px;
-        background-color: #fff;
-        @include var.shadow;
-        @include var.center;
-        border-radius: 50%;
-        position: relative;
-        cursor: pointer;
-
-        h3 {
-            font-size: 2.5rem;
-            margin-bottom: 2px;
-        }
-
-        .my-status__mood__select-box {
-            position: absolute;
-            background-color: var.$black;
-            display: flex;
-            gap: 4px;
-            padding: 4px 8px;
-            @include var.r-s;
-            top: -40px;
-            left: 30%;
-
-            &::before {
-                content: "";
-                position: absolute;
-                width: 0px;
-                height: 0px;
-                border-style: solid;
-                border-width: 17.3px 10px 0 10px;
-                border-color: var.$black transparent transparent transparent;
-                bottom: -7px;
-            }
-
-            h3 {
-                font-size: 1.5rem;
-                cursor: pointer;
-            }
-        }
-    }
+    flex-wrap: wrap;
 
     .my-status__name {
-        @include var.title-m;
-        color: var.$black;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 4px;
     }
 
-    .my-status__bottom {
-        display: flex;
-        margin-top: 16px;
+    .my-status__birth {
+      @include var.content-s;
+      font-weight: 700;
 
-        &>div {
-            width: 80px;
-            @include var.center;
-            flex-direction: column;
-            justify-content: flex-end;
-
-            svg {
-                height: 20px;
-                color: var.$blue;
-
-                path {
-                    color: var.$blue;
-                }
-            }
-
-            h5 {
-                margin-top: 4px;
-                font-size: 0.75rem;
-                color: var.$middleGray;
-            }
-
-            h3 {
-                line-height: 1.2;
-                margin-top: 8px;
-            }
-        }
-
-        .my-status__blood {
-            svg {
-                height: 20px;
-                font-size: 20px;
-                color: var.$red;
-
-                path {
-                    color: var.$red;
-                }
-            }
-        }
+      &::after {
+        content: '|';
+        margin: 0 5px;
+        color: #c8d8fb;
+        font-size: 0.6rem;
+        line-height: 0.7rem;
+      }
     }
+
+    .my-status__age,
+    .my-status__sex {
+      @include var.content-s;
+      font-weight: 700;
+    }
+
+    .my-status__sex {
+      svg {
+        font-size: 1rem;
+        margin-top: 2px;
+        margin-left: 5px;
+
+        &.my-status__sex--male {
+          color: var.$blue;
+        }
+
+        &.my-status__sex--female {
+          color: var.$red;
+        }
+      }
+    }
+  }
+
+  .my-status__mood {
+    width: 80px;
+    height: 80px;
+    background-color: #fff;
+    @include var.shadow;
+    @include var.center;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+
+    h3 {
+      font-size: 2.5rem;
+      margin-bottom: 2px;
+    }
+
+    .my-status__mood__select-box {
+      position: absolute;
+      background-color: var.$black;
+      display: flex;
+      gap: 4px;
+      padding: 4px 8px;
+      @include var.r-s;
+      top: -40px;
+      left: 30%;
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: 0px;
+        height: 0px;
+        border-style: solid;
+        border-width: 17.3px 10px 0 10px;
+        border-color: var.$black transparent transparent transparent;
+        bottom: -7px;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .my-status__name {
+    @include var.title-m;
+    color: var.$black;
+  }
+
+  .my-status__bottom {
+    display: flex;
+    margin-top: 16px;
+
+    & > div {
+      width: 80px;
+      @include var.center;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      svg {
+        height: 20px;
+        color: var.$blue;
+
+        path {
+          color: var.$blue;
+        }
+      }
+
+      h5 {
+        margin-top: 4px;
+        font-size: 0.75rem;
+        color: var.$middleGray;
+      }
+
+      h3 {
+        line-height: 1.2;
+        margin-top: 8px;
+      }
+    }
+
+    .my-status__blood {
+      svg {
+        height: 20px;
+        font-size: 20px;
+        color: var.$red;
+
+        path {
+          color: var.$red;
+        }
+      }
+    }
+  }
 }
 
 /*Bmi*/
 .bmi {
-    width: 305px;
-    height: 160px;
-    background-color: #fff;
-    @include var.r-s;
-    @include var.shadow;
+  width: 305px;
+  height: 160px;
+  background-color: #fff;
+  @include var.r-s;
+  @include var.shadow;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30px;
+
+  .bmi__summary {
     display: flex;
-    flex-wrap: wrap;
-    padding: 30px;
+    align-items: center;
+    height: fit-content;
 
-    .bmi__summary {
-        display: flex;
-        align-items: center;
-        height: fit-content;
+    .bmi__number {
+      @include var.content-m;
+      color: var.$black;
 
-        .bmi__number {
-            @include var.content-m;
-            color: var.$black;
-
-            &::after {
-                content: "|";
-                font-size: 0.8rem;
-                margin: 0 4px;
-                font-weight: 700;
-                color: #C8D8FB;
-            }
-        }
-
-        .bmi__text {
-            @include var.content-m;
-            color: var.$black;
-        }
+      &::after {
+        content: '|';
+        font-size: 0.8rem;
+        margin: 0 4px;
+        font-weight: 700;
+        color: #c8d8fb;
+      }
     }
 
-    .bmi__icon {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background-color: var.$blue;
-        @include var.center;
+    .bmi__text {
+      @include var.content-m;
+      color: var.$black;
+    }
+  }
 
-        svg {
-            color: #fff;
-            font-size: 1.2rem;
+  .bmi__icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var.$blue;
+    @include var.center;
 
-            path {
-                color: #fff;
-            }
-        }
+    svg {
+      color: #fff;
+      font-size: 1.2rem;
+
+      path {
+        color: #fff;
+      }
+    }
+  }
+
+  .bmi__title {
+    @include var.title-m;
+    margin: 0 8px;
+  }
+
+  .bmi__graph {
+    width: 100%;
+    display: flex;
+    position: relative;
+    margin-top: auto;
+    margin-bottom: 4px;
+
+    .bmi__graph__point-box {
+      width: 100%;
+      position: absolute;
+
+      .bmi__graph__point {
+        position: absolute;
+        bottom: 6px;
+        transform: translateX(-50%) scale(0.8);
+      }
     }
 
-    .bmi__title {
-        @include var.title-m;
-        margin: 0 8px;
+    .bmi__graph--bar {
+      height: 4px;
+
+      .bmi__graph--num {
+        @include var.content-s;
+        text-align: right;
+        margin-top: 8px;
+        transform: translateX(9px);
+      }
     }
 
-    .bmi__graph {
-        width: 100%;
-        display: flex;
-        position: relative;
-        margin-top: auto;
-        margin-bottom: 4px;
-
-        .bmi__graph__point-box {
-            width: 100%;
-            position: absolute;
-
-            .bmi__graph__point {
-                position: absolute;
-                bottom: 6px;
-                transform: translateX(-50%) scale(0.8);
-            }
-        }
-
-        .bmi__graph--bar {
-            height: 4px;
-
-            .bmi__graph--num {
-                @include var.content-s;
-                text-align: right;
-                margin-top: 8px;
-                transform: translateX(9px);
-            }
-        }
-
-        .bmi__graph--bar--underweight {
-            width: 25%;
-            background-color: var.$blue;
-            border-radius: 4px 0 0 4px;
-        }
-
-        .bmi__graph--bar--normal {
-            width: 20%;
-            background-color: var.$green;
-        }
-
-        .bmi__graph--bar--overweight {
-            width: 18%;
-            background-color: var.$yellow;
-        }
-
-        .bmi__graph--bar--obese {
-            width: 37%;
-            background-color: var.$red;
-            border-radius: 0 4px 4px 0;
-        }
-
+    .bmi__graph--bar--underweight {
+      width: 25%;
+      background-color: var.$blue;
+      border-radius: 4px 0 0 4px;
     }
+
+    .bmi__graph--bar--normal {
+      width: 20%;
+      background-color: var.$green;
+    }
+
+    .bmi__graph--bar--overweight {
+      width: 18%;
+      background-color: var.$yellow;
+    }
+
+    .bmi__graph--bar--obese {
+      width: 37%;
+      background-color: var.$red;
+      border-radius: 0 4px 4px 0;
+    }
+  }
 }
 
 /*Exercise*/
 .exercise {
-    width: 305px;
-    height: 110px;
-    background-color: #fff;
-    @include var.r-s;
-    @include var.shadow;
+  width: 305px;
+  height: 110px;
+  background-color: #fff;
+  @include var.r-s;
+  @include var.shadow;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px 30px;
+  position: relative;
+
+  .exercise__modify {
+    font-size: 1.2rem;
     display: flex;
-    flex-wrap: wrap;
-    padding: 20px 30px;
-    position: relative;
+    align-items: center;
+    justify-content: center;
+    top: 16px;
+    right: 16px;
+    width: 16px;
+    height: 16px;
+  }
 
-    .exercise__modify {
+  .exercise__summary {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    .exercise__icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #306de5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      svg {
+        color: #fff;
         font-size: 1.2rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        top: 16px;
-        right: 16px;
-        width: 16px;
-        height: 16px;
+
+        path {
+          color: #fff;
+        }
+      }
     }
 
-    .exercise__summary {
-        width: 100%;
-        display: flex;
-        align-items: center;
-
-        .exercise__icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background-color: #306DE5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-
-            svg {
-                color: #fff;
-                font-size: 1.2rem;
-
-                path {
-                    color: #fff;
-                }
-            }
-        }
-
-        .exercise__title {
-            @include var.title-m;
-            margin: 0 8px;
-            line-height: 180%;
-        }
-
-        .exercise__type {
-            @include var.content-m;
-        }
-
+    .exercise__title {
+      @include var.title-m;
+      margin: 0 8px;
+      line-height: 180%;
     }
 
-    .exercise__detail {
-        width: 100%;
-        padding-left: 44px;
-        display: flex;
-
-        .exercise__time {
-            @include var.content-m;
-            position: relative;
-
-            &::after {
-                position: absolute;
-                content: "|";
-                margin: 0 10px;
-                font-weight: 700;
-                color: #C8D8FB;
-            }
-        }
-
-        .exercise__calorie {
-            @include var.content-m;
-            text-indent: 24px;
-        }
+    .exercise__type {
+      @include var.content-m;
     }
+  }
+
+  .exercise__detail {
+    width: 100%;
+    padding-left: 44px;
+    display: flex;
+
+    .exercise__time {
+      @include var.content-m;
+      position: relative;
+
+      &::after {
+        position: absolute;
+        content: '|';
+        margin: 0 10px;
+        font-weight: 700;
+        color: #c8d8fb;
+      }
+    }
+
+    .exercise__calorie {
+      @include var.content-m;
+      text-indent: 24px;
+    }
+  }
 }
 
 /*Medicine*/
-.medicine {
-    width: 340px;
-    height: 300px;
-    background-color: var.$blue;
-    @include var.r-s;
-    @include var.shadow;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 10px;
+@keyframes popupOpen {
+  0% {
+    width: 0;
+    height: 0;
+  }
+  50% {
+    width: 100%;
+  }
+  100% {
+    height: 100%;
+  }
+}
+@keyframes popupClose {
+  0% {
+    height: 100%;
+  }
+  50% {
+    width: 100%;
+  }
+  100% {
+    height: 0;
+    width: 0;
+  }
+}
 
-    .medicine__title {
+.medicine {
+  width: 340px;
+  height: 300px;
+  background-color: var.$blue;
+  @include var.r-s;
+  @include var.shadow;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+
+  .medicine__title {
+    @include var.title-m;
+    color: #fff;
+  }
+
+  .medicine__summary {
+    margin-bottom: 8px;
+
+    span {
+      @include var.content-l;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    @include var.content-l;
+    color: #fff;
+  }
+
+  .medicine__caution {
+    background-color: #fff;
+    @include var.r-s;
+    flex-grow: 1;
+    padding: 10px 16px;
+
+    .medicine__caution--title {
+      color: var.$blue;
+      @include var.content-m;
+      font-weight: 700;
+    }
+  }
+}
+
+.medicine__box {
+  position: relative;
+  width: 340px;
+  height: 300px;
+
+  .medicine__popup {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    padding: 0;
+    background-color: #306de5;
+    position: absolute;
+    top: 0;
+    left: -430px;
+    z-index: 10;
+    &.active {
+      width: 400px;
+      height: 500px;
+      padding: 30px;
+    }
+
+    .medicine__popup__close {
+      svg {
+        font-size: 1.5rem;
+        color: #fff;
+      }
+      cursor: pointer;
+      position: absolute;
+      right: 30px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+      label {
         @include var.title-m;
         color: #fff;
-    }
-
-    .medicine__summary {
-        margin-bottom: 8px;
-
-        span {
-            @include var.content-l;
-            font-weight: 800;
-            color: #fff;
-        }
-
-        @include var.content-l;
-        color: #fff;
-    }
-
-    .medicine__box {
+        text-indent: 4px;
+      }
+      & > div {
+        width: calc(100% - 20px);
+        display: flex;
+        margin-top: 10px;
         background-color: #fff;
         @include var.r-s;
-        flex-grow: 1;
-        padding: 10px 16px;
-
-        .medicine__box--recommend {
+        input {
+          outline: none;
+          border: none;
+          height: 40px;
+          font-weight: 700;
+          border-radius: 9px 0 0 9px;
+          padding: 0 10px 0 20px;
+          width: calc(100% - 40px);
+        }
+        .submit {
+          height: 40px;
+          width: 40px;
+          font-weight: 700;
+          outline: none;
+          border: none;
+          border-radius: 0 9px 9px 0;
+          cursor: pointer;
+          background-color: #fff;
+          svg {
             color: var.$blue;
-            @include var.content-m;
-            font-weight: 700;
+            font-size: 1.2rem;
+            margin-top: 2px;
+            margin-right: 5px;
+          }
         }
-
-        .medicine__box--avoid {
-            color: var.$red;
-            @include var.content-m;
-            font-weight: 700;
-        }
+      }
     }
+    .search__result {
+      height: calc(100% - 80px - 35px);
+      margin-top: 16px;
+      overflow-y: scroll;
+      padding-right: 13px;
+
+      &::-webkit-scrollbar {
+        width: 7px;
+        @include var.r-s;
+        margin-top: 20px;
+        background-color: #dee9fe;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #fff;
+        @include var.r-s;
+      }
+      .search__result--box {
+        height: fit-content;
+        border-radius: 9px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        .search__result__small-box {
+          background-color: #fff;
+          padding: 20px 16px;
+          @include var.r-s;
+          &.search__result__small-box--star {
+            position: relative;
+            .search__star {
+              position: absolute;
+              width: fit-content;
+              top: 20px;
+              right: 20px;
+              color: var.$yellow;
+              svg {
+                color: inherit;
+                font-size: 1.4rem;
+                cursor: pointer;
+              }
+            }
+          }
+          h3 {
+            margin-bottom: 6px;
+            color: var.$blue;
+          }
+          div {
+            line-height: 160%;
+          }
+        }
+      }
+    }
+    .search__null {
+      color: #fff;
+      @include var.center;
+      height: 60%;
+      margin-bottom: 100px;
+    }
+  }
 }
