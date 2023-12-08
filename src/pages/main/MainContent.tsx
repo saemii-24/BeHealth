@@ -9,38 +9,59 @@ import Search from './Search'
 import momentum from './momentum'
 import { MomentumType } from './momentum'
 
-import mainCalendar from './mainCalendar'
-import { MainCalendarType } from './mainCalendar'
-
 import todayList from './todayList'
 import { TodayListType } from './todayList'
 
 const MainContent = () => {
   const [momentumData, setMomentumData] = useState<MomentumType[]>(momentum);
-  const [mainCalendarData, setMainCalendarData] = useState<MainCalendarType[]>(mainCalendar);
   const [todayListData, setTodayListData] = useState<TodayListType[]>(todayList);
 
 
-    const fetchData = async () => {
-      try {
-        const URL = '';
-        const response = await axios.get(URL, {
-          // params: {
-          //   serviceKey: process.env.REACT_APP_API_KEY,
-          //   numOfRows: 1,
-          //   pageNo: 10,
-          // },
-        });
-        const result = convert.xml2json(response.data, { compact: true, spaces: 4});
-        console.log(response);
-      } catch (err) {
-        console.log(err);
-      }
-   
-    };
-    fetchData();
+  const fetchData = async () => {
+    try {
+      const URL = '';
+      const response = await axios.get(URL, {
+        // params: {
+        //   serviceKey: process.env.REACT_APP_API_KEY,
+        //   numOfRows: 1,
+        //   pageNo: 10,
+        // },
+      });
+      const result = convert.xml2json(response.data, { compact: true, spaces: 4});
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+      
+    }
+  
+  };
+  fetchData();
   
 
+
+  let currentDay = new Date();  
+  let theYear = currentDay.getFullYear();
+  let theMonth = currentDay.getMonth();
+  let theDayOfWeek = currentDay.getDay();
+  let thisDate = currentDay.getDate();
+
+  let thisDay = String(currentDay).substring(0,2);  
+  let days:string[] = [];
+  let thisWeek:string[] = [];
+
+  
+  for(let i=0; i<7; i++) {
+    let resultDay = new Date(theYear, theMonth, thisDate + (i - theDayOfWeek));
+    let thisDay:string = String(resultDay).substring(0,2);  
+
+    let dd:string = String(resultDay.getDate());
+    dd = dd.length === 1 ? '0' + dd : dd;
+  
+    thisWeek.push(dd);
+    days.push(thisDay)
+  }  
+  console.log(thisWeek);
+  console.log(days);
 
   
   return (
@@ -90,15 +111,15 @@ const MainContent = () => {
               <h3>이번주 알림</h3>
               <div className="main__date">
                 {
-                  mainCalendarData.map((v,i)=>{
+                  days.map((v,i)=>{
                     return(
                       <div key={i} className="main__calendar" style={{
                         background:`${
-                          v.today === true? '#FFD749' : 'transparent'
+                          v === thisDay? '#FFD749' : 'transparent'
                         }`
                       }}>
-                        <p>{v.day}</p>
-                        <p>{v.date}</p>
+                        <p>{v}</p>
+                        <p>{thisWeek[i]}</p>
                       </div>
                     )
                   })
@@ -111,13 +132,15 @@ const MainContent = () => {
                 {
                   todayListData.map((v,i)=>{
                     return(
-                      <div key={i} style={{background : `${
-                        v.today === true? '#306DE5' : '#fff'
-                      }`, color: `${
-                        v.today === true? '#fff' : '#333333'
-                      }`}}>
-                        <p>{v.time}</p>
-                        <p>{v.todo}</p>
+                      <div key={i} style={{
+                        background : `${ v.today === true? '#306DE5' : '#fff' }`
+                      }}>
+                        <p style={{
+                          color: `${ v.today === true? '#fff' : '#333333'}`
+                        }}>{v.time}</p>
+                        <p style={{
+                          color: `${ v.today === true? '#fff' : '#333333'}`
+                        }}>{v.todo}</p>
                       </div>
                     )
                   })

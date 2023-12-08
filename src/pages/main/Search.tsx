@@ -38,7 +38,7 @@ const Search = () => {
   }
 
 
-  let [selected, setSelected] = useState('');
+  let [selected, setSelected] = useState(0);
   const handleSelect = (e) => {
     setSelected(e.target.value);
   }
@@ -57,8 +57,7 @@ const Search = () => {
       <p>{string}</p>
 
       <div className="select-institution">
-        <select name="institution" id="institution"  onChange={(e)=>{handleSelect(e)}}>
-          <option defaultValue="시군구">행정구역을 선택하세요.</option>
+        <select name="institution" id="institution" onChange={(e)=>{handleSelect(e)}}>
           {
             institution.map((v,i)=>{
               return(
@@ -71,7 +70,7 @@ const Search = () => {
         <button className="search-icon" onClick={()=>{setSearchPop(true)}}>
           <FontAwesomeIcon icon={faMagnifyingGlass} className='fontawesome'/>
         </button>
-        {searchPop ? <SearchPop institution={institution} selected={selected} /> : null}
+        {searchPop ? <SearchPop institution={institution} selected={selected} setSearchPop={setSearchPop} /> : null}
       </div>
     </div>
   )

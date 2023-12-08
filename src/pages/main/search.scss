@@ -19,13 +19,13 @@
         @include var.title-s;
     }
 
-    .select-institution{
+    .select-institution {
         width: 43%;
         padding-top: 50px;
         display: flex;
         justify-content: space-between;
 
-        .search-icon{
+        .search-icon {
             width: 40px;
             height: 40px;
             background: var.$blue;
@@ -34,7 +34,7 @@
             cursor: pointer;
             border: none;
             outline: none;
-    
+
             .fontawesome {
                 color: #fff;
                 @include var.title-s;
@@ -43,7 +43,8 @@
         }
     }
 
-    #institution, #popup_select{
+    #institution,
+    #popup_select {
         padding: 12px 40px 12px 20px;
         @include var.r-s;
         border: none;
@@ -56,26 +57,41 @@
 
         // 출처 <a href="https://www.flaticon.com/free-icons/down-arrow" title="down arrow icons">Down arrow icons created by Freepik - Flaticon</a>
         background: {
-            color: #F2F6F9;
+            color: var.$bgColor;
             image: url('../../../public/images/arrow.png');
             repeat: no-repeat;
             size: 10px;
             position: 90% 50%;
-        };
+        }
+
+        ;
     }
 
 
-    .search-pop{
+    .search-pop {
         position: absolute;
         top: 9.3rem;
         left: 20rem;
         background: var.$blue;
         color: #fff;
-        // @include var.solid(5px,var.$blue);
         width: 300px;
         height: 500px;
         z-index: 10;
         @include var.r-m;
-        padding: 30px;
+        padding: 50px 30px;
+        @include var.shadow;
+
+        #popup_select{
+            width: 150px;
+        }
+
+        .xmark {
+            color: #fff;
+            position: absolute;
+            font-size: 1.5rem;
+            top: 30px;
+            right: 30px;
+            cursor: pointer;
+        }
     }
 }

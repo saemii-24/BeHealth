@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
+import { IoClose } from "react-icons/io5";
+
 const SearchPop = (props) => {
-    let {institution, selected} = props;
+    let {institution, selected, setSearchPop} = props;
+    console.log(props)
     
     let [value, setValue] = useState('');    
     const handleValue = (e) => {
@@ -15,8 +18,9 @@ const SearchPop = (props) => {
     
   return (
     <div className='search-pop'>
+        <IoClose onClick={()=>{setSearchPop(false)}} className='xmark' />
+
         <select name="popup-select" id="popup_select" onChange={(e)=>{handleValue(e)}}>
-            <option defaultValue="시군구">행정구역을 선택하세요.</option>
             {
               institution[selected].district.map((v,i)=>{
                 return(
