@@ -60,6 +60,5 @@
   },
   "devDependencies": {
     "prettier": "^3.1.0"
-  },
-  "proxy": "http://apis.data.go.kr"
+  }
 }

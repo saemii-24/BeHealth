@@ -480,6 +480,9 @@
 }
 
 /*Exercise*/
+.exercise__box {
+  position: relative;
+}
 .exercise {
   width: 305px;
   height: 110px;
@@ -559,6 +562,101 @@
     .exercise__calorie {
       @include var.content-m;
       text-indent: 24px;
+    }
+  }
+}
+.exercise__popup {
+  position: absolute;
+  background-color: var.$blue;
+  width: 675px;
+  height: 370px;
+  padding: 30px;
+  z-index: 100;
+  @include var.r-s;
+  top: 140px;
+  display: flex;
+  flex-direction: column;
+  .exercise__popup__close {
+    font-size: 1.5rem;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    right: 30px;
+    svg {
+      color: #fff;
+    }
+  }
+  .exercise__popup__title {
+    color: #fff;
+    @include var.title-m;
+    margin-top: 20px;
+  }
+  .exercise__button-box {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    column-gap: 14px;
+    .exercise__button {
+      background-color: #fff;
+      border: none;
+      outline: none;
+      @include var.center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      &.active {
+        background-color: var.$green;
+      }
+      svg {
+        color: var.$blue;
+        font-size: 1.4rem;
+      }
+    }
+  }
+  .exercise__popup-box {
+    width: 100%;
+    height: 140px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #fff;
+    margin-top: auto;
+    @include var.r-s;
+    h2 {
+      color: var.$blue;
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+      font-weight: 800;
+      height: fit-content;
+      line-height: 2rem;
+    }
+    form {
+      width: 100%;
+      @include var.center;
+      input {
+        background-color: var.$bgColor;
+        width: 60px;
+        height: 30px;
+        border-radius: 4px;
+        border: none;
+        outline: none;
+        text-indent: 8px;
+      }
+
+      .exercise__hour-gap {
+        margin-right: 20px;
+      }
+    }
+    .calorie__box {
+      width: 100%;
+      @include var.title-m;
+      text-align: center;
+      span {
+        @include var.title-m;
+      }
     }
   }
 }
