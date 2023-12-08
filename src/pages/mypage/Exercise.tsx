@@ -3,6 +3,7 @@ import { ExerciseType, exerciseData } from './ExerciseData';
 import { IoIosBicycle } from 'react-icons/io';
 import { IoClose } from 'react-icons/io5';
 import cn from 'classnames';
+import './MyPage.scss';
 
 const Exercise = () => {
   //구조를 위해 exerciseData에서 데이터를 가져왔다고 가정한다.
@@ -10,6 +11,7 @@ const Exercise = () => {
   const [calorie, setCalorie] = useState<number>(0);
   const [exerciseHour, setExerciseHour] = useState<number>(0);
   const [exerciseMin, setExerciseMin] = useState<number>(0);
+  const [popup, setPopup] = useState<boolean>(false);
 
   useEffect(() => {
     //사용자가 선택한 시간에 맞춰 칼로리를 계산한다.
@@ -25,7 +27,14 @@ const Exercise = () => {
   return (
     <div className='exercise__box'>
       <div className='exercise'>
-        <div className='exercise__modify modify'>+</div>
+        <div
+          className='exercise__modify modify'
+          onClick={() => {
+            setPopup(true);
+            console.log(popup);
+          }}>
+          +
+        </div>
         <div className='exercise__summary'>
           <div className='exercise__icon'>
             <IoIosBicycle />
@@ -38,8 +47,13 @@ const Exercise = () => {
           <div className='exercise__calorie'>{130}kcal</div>
         </div>
       </div>
-      <div className='exercise__popup'>
-        <div className='exercise__popup__close'>
+      <div className={cn('exercise__popup', { active: popup })}>
+        <div
+          className='exercise__popup__close'
+          onClick={() => {
+            setPopup(false);
+            console.log(popup);
+          }}>
           <IoClose />
         </div>
         <h3 className='exercise__popup__title'>오늘의 운동을 등록하세요.</h3>
@@ -97,6 +111,10 @@ const Exercise = () => {
             </form>
             <div className='calorie__box'>
               <span className='calorie'>{calorie}</span> 칼로리
+            </div>
+            <div className='exercise__button-box'>
+              <button className='exercise--submit'>등록하기</button>
+              <button className='exercise--reset'>초기화</button>
             </div>
           </div>
         )}

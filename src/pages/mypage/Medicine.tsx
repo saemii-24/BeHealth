@@ -27,7 +27,7 @@ const Medicine = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const URL = 'http://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList';
+      const URL = '/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList';
       const response = await axios.get(URL, {
         params: {
           serviceKey: process.env.REACT_APP_API_KEY,

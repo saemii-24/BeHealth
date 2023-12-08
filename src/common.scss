@@ -1,134 +1,135 @@
 //color 변수
 $black: #333333;
-$red: #FD4E53;
-$yellow: #FFD749;
-$green: #ABDB98;
-$blue: #306DE5;
-$lightGray: #F8F8F8;
-$middleGray: #8F8F8F;
-$blueGray: #F5F6F8;
-$bgColor: #F2F6F9;
-
+$red: #fd4e53;
+$yellow: #ffd749;
+$green: #abdb98;
+$blue: #306de5;
+$lightGray: #f8f8f8;
+$middleGray: #8f8f8f;
+$blueGray: #f5f6f8;
+$bgColor: #f2f6f9;
+$darkBlue: #14419b;
 
 //shadow
 @mixin shadow {
-    box-shadow: 0 0 17px#DEE6F5, 0 0 30px #EEF2F4;
+  box-shadow:
+    0 0 17px#DEE6F5,
+    0 0 30px #eef2f4;
 }
 
 //font 변수
 //Title
 @mixin title-l {
-    font-size: 1.6rem;
-    font-weight: 800;
+  font-size: 1.6rem;
+  font-weight: 800;
 }
 
 @mixin title-m {
-    font-size: 1.2rem;
-    font-weight: 700;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 @mixin title-s {
-    font-size: 1rem;
-    font-weight: 700;
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 //content
 @mixin content-l {
-    font-size: 0.95rem;
-    font-weight: 400;
+  font-size: 0.95rem;
+  font-weight: 400;
 }
 
 @mixin content-m {
-    font-size: 0.85rem;
-    font-weight: 400;
-    line-height: 180%;
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 180%;
 }
 
 @mixin content-s {
-    font-size: 0.75rem;
-    font-weight: 400;
+  font-size: 0.75rem;
+  font-weight: 400;
 }
-
 
 //mixin
 @mixin center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 @mixin transform-center {
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  position: absolute;
 }
 
 @mixin solid($width, $color) {
-    border: $width solid $color;
+  border: $width solid $color;
 }
 
 @mixin r-m {
-    border-radius: 16px;
+  border-radius: 16px;
 }
 
 @mixin r-s {
-    border-radius: 8px;
+  border-radius: 8px;
 }
 
 @mixin icon {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    @include center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  @include center;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'NanumSquareAc', sans-serif;
-    color: $black;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'NanumSquareAc', sans-serif;
+  color: $black;
 }
 
 ul.li,
 ol {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 a {
-    text-decoration: none;
-    color: #333333;
+  text-decoration: none;
+  color: #333333;
 }
 
 .a11y-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    clip-path: polygon(0 0, 0 0, 0 0);
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: polygon(0 0, 0 0, 0 0);
 }
 
 .modify {
-    position: absolute;
-    cursor: pointer;
-    color: $middleGray;
-    top: 26px;
-    right: 26px;
-    @include content-s;
-    transition: color 200ms;
+  position: absolute;
+  cursor: pointer;
+  color: $middleGray;
+  top: 26px;
+  right: 26px;
+  @include content-s;
+  transition: color 200ms;
 
-    &:hover {
-        color: $black;
-    }
+  &:hover {
+    color: $black;
+  }
 }
 
 svg {
-    path {
-        color: inherit;
-    }
+  path {
+    color: inherit;
+  }
 }
