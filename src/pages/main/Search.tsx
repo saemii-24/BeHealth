@@ -1,27 +1,10 @@
 import React, { useEffect, useState }  from 'react'
 import {useDispatch} from 'react-redux'
-import axios from 'axios';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 //옵션 데이터
-import gyeonggi from './gyeonggi'
-import gangwon from './gangwon'
-import chungcheongNorth from './chungcheong_north'
-import chungcheongSouth from './chungcheong_south'
-import jeollaNorth from './jeolla_north'
-import jeollaSouth from './jeolla_south'
-import gyeongsangNorth from './gyeongsang_north'
-import gyeongsangSouth from './gyeongsang_south'
-import seoul from './seoul'
-import busan from './busan'
-import daegu from './daegu'
-import incheon from './incheon'
-import gwangju from './gwangju'
-import daejeon from './daejeon'
-import ulsan from './ulsan'
-import sejong from './sejong'
 import institution from './institution'
 
 import SearchPop from './SearchPop';
@@ -61,7 +44,7 @@ const Search = () => {
           {
             institution.map((v,i)=>{
               return(
-                <option key={i} value={v.id}>{v.city} </option>
+                <option key={i} value={v.id}>{v.city}</option>
               )
             })
           }        

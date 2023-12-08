@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import axios from 'axios';
-import convert from 'xml-js';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouseChimneyMedical } from '@fortawesome/free-solid-svg-icons'
@@ -15,29 +13,6 @@ import { TodayListType } from './todayList'
 const MainContent = () => {
   const [momentumData, setMomentumData] = useState<MomentumType[]>(momentum);
   const [todayListData, setTodayListData] = useState<TodayListType[]>(todayList);
-
-
-  const fetchData = async () => {
-    try {
-      const URL = '';
-      const response = await axios.get(URL, {
-        // params: {
-        //   serviceKey: process.env.REACT_APP_API_KEY,
-        //   numOfRows: 1,
-        //   pageNo: 10,
-        // },
-      });
-      const result = convert.xml2json(response.data, { compact: true, spaces: 4});
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-      
-    }
-  
-  };
-  fetchData();
-  
-
 
   let currentDay = new Date();  
   let theYear = currentDay.getFullYear();

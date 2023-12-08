@@ -7,7 +7,7 @@ let institution:InstitutionType[]  = [
     {   
         id: 0,     
         city: "행정구역을 선택하세요.",
-        district: ['행정구역을 선택하세요.']
+        district: ['시 군 구']
     },
     {
         id: 1,
