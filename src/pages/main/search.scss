@@ -1,0 +1,120 @@
+@charset "utf-8";
+
+.search {
+    width: 100%;
+    height: 240px;
+    background: #fff;
+    @include var.r-m;
+    @include var.shadow;
+    padding: 30px;
+    margin-bottom: 40px;
+
+    h2 {
+        color: var.$blue;
+        @include var.title-l;
+        padding-bottom: 10px
+    }
+
+    &>p {
+        @include var.title-s;
+    }
+
+    .select-institution {
+        width: 43%;
+        padding-top: 50px;
+        display: flex;
+        justify-content: space-between;
+
+        .search-icon {
+            width: 40px;
+            height: 40px;
+            background: var.$blue;
+            border-radius: 7px;
+            @include var.center;
+            cursor: pointer;
+            border: none;
+            outline: none;
+
+            .fontawesome {
+                color: #fff;
+                @include var.title-s;
+            }
+
+        }
+    }
+
+    #institution,
+    #popup_select {
+        padding: 12px 40px 12px 20px;
+        @include var.r-s;
+        border: none;
+        outline: none;
+        font-weight: 700;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        width: 200px;
+
+        // 출처 <a href="https://www.flaticon.com/free-icons/down-arrow" title="down arrow icons">Down arrow icons created by Freepik - Flaticon</a>
+        background: {
+            color: var.$bgColor;
+            image: url('../../../public/images/arrow.png');
+            repeat: no-repeat;
+            size: 10px;
+            position: 90% 50%;
+        }
+
+        ;
+    }
+
+
+    .search-pop {
+        position: absolute;
+        top: 9.3rem;
+        left: 20rem;
+        background: var.$blue;
+        color: #fff;
+        width: 300px;
+        height: 500px;
+        z-index: 10;
+        @include var.r-m;
+        padding: 50px 30px;
+        @include var.shadow;
+
+        #popup_select{
+            width: 150px;
+        }
+
+        .xmark {
+            color: #fff;
+            position: absolute;
+            font-size: 1.5rem;
+            top: 30px;
+            right: 30px;
+            cursor: pointer;
+        }
+
+        .hospital-wrap{
+            width: 100%;
+            height: calc(100% - 40px);
+            padding-top: 30px;
+
+            .hospital{
+                width: 100%;
+                height: 89px;
+                @include var.r-m;
+                background: var.$bgColor;
+                @include var.center;
+
+                .icon{
+                    background: var.$blue;
+                }
+
+                .hospital-info{
+                    width: 60%;
+                    padding-left: 20px;
+                }
+            }
+        }
+    }
+}
