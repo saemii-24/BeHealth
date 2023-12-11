@@ -9,6 +9,7 @@ import { MomentumType } from './momentum'
 
 import todayList from './todayList'
 import { TodayListType } from './todayList'
+import PharmacyPop from './PharmacyPop'
 
 const MainContent = () => {
   const [momentumData, setMomentumData] = useState<MomentumType[]>(momentum);
@@ -36,6 +37,8 @@ const MainContent = () => {
     days.push(thisDay)
   }  
 
+  let [pharmacyPop, setPharmacyPop] = useState(false);
+
   
   return (
     <div className='main-content'>
@@ -43,15 +46,18 @@ const MainContent = () => {
         
         <div className='main--bottom'>
             <div className='main--bottom--left'>
-              <div className="pharmacy">
+              <div className="pharmacy" onClick={()=>{setPharmacyPop(true)}}>
+                {
+                  pharmacyPop === true ? <PharmacyPop setPharmacyPop={setPharmacyPop} /> : null
+                }
                   <div className="icon">
                     {/* <FontAwesomeIcon icon={faSyringe} className='fontawesome'/> faPrescriptionBottleMedical */}
                     <FontAwesomeIcon icon={faHouseChimneyMedical} className='fontawesome' />
                   </div>
 
                   <div className="pharmacy-txt">
-                    <h3>가까운 약국 찾기</h3>
-                    <p></p>
+                    <h3>가까운 약국을 찾아 보세요!</h3>
+                    <p>검색하러 가기</p>
                   </div>
               </div>
 

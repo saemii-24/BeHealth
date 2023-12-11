@@ -59,7 +59,7 @@
         -moz-appearance: none;
         -webkit-appearance: none;
         appearance: none;
-        width: 200px;
+        width: 250px;
 
         // 출처 <a href="https://www.flaticon.com/free-icons/down-arrow" title="down arrow icons">Down arrow icons created by Freepik - Flaticon</a>
         background: {
@@ -87,15 +87,6 @@
 
         #popup_select{
             width: 150px;
-        }
-
-        .xmark {
-            color: #fff;
-            position: absolute;
-            font-size: 1.5rem;
-            top: 30px;
-            right: 30px;
-            cursor: pointer;
         }
 
         &>h4{
