@@ -76,6 +76,9 @@
       &:hover {
         background-color: #295ec9;
       }
+      &.submit--disabled {
+        color: var.$lightGray;
+      }
     }
 
     label {
