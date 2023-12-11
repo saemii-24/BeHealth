@@ -78,6 +78,12 @@
       margin-bottom: 10px;
       margin-top: 20px;
     }
+    .login--error {
+      @include var.content-s;
+      color: var.$red;
+      margin-top: 5px;
+      height: 0.75rem;
+    }
   }
   a {
     font-size: 0.75rem;

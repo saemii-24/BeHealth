@@ -5,7 +5,7 @@ import { FaHome, FaLaugh, FaSignal, FaEnvelope } from 'react-icons/fa';
 import cn from 'classnames';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { getAuth, signOut } from 'firebase/auth';
+import { getAuth, signOut, deleteUser } from 'firebase/auth';
 import { app } from '../firebase/firebaseApp'; //firebase 초기화 해둔값
 
 type SelectTabType = 'home' | 'myPage' | 'analyzes' | 'memo';
@@ -33,6 +33,16 @@ const Menu = () => {
       console.log(err);
     }
   };
+  const handleDeleteUser = async () => {
+    try {
+      const auth = getAuth(app);
+      const user = auth.currentUser;
+
+      await deleteUser(user!);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className='side-menu'>
@@ -52,7 +62,7 @@ const Menu = () => {
             <li onClick={handleSignOut}>
               <span>로그아웃</span>
             </li>
-            <li>
+            <li onClick={handleDeleteUser}>
               <span>회원탈퇴</span>
             </li>
           </>

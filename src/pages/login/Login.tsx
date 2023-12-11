@@ -7,6 +7,8 @@ import { useNavigate, Link } from 'react-router-dom';
 const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
+
   const navigate = useNavigate();
 
   const auth = getAuth(app);
@@ -18,9 +20,9 @@ const Login = () => {
       await signInWithEmailAndPassword(auth, email, password);
       navigate('/');
       console.log('click');
+      setError('');
     } catch (err) {
-      //에러발생 상황 추가//
-      console.log(err);
+      setError('일치하는 계정이 없습니다.');
     }
   };
 
@@ -71,11 +73,12 @@ const Login = () => {
           autoComplete='off'
           onChange={onChange}
         />
+        <p className='login--error'>{error}</p>
         <button className='submit' type='submit'>
           로그인
         </button>
       </form>
-      <Link to='/signin'>계정이 없으신가요?</Link>
+      <Link to='/signup'>계정이 없으신가요?</Link>
     </div>
   );
 };
