@@ -4,7 +4,7 @@ import './common.scss';
 import SideMenu from './component/SideMenu';
 import ContentTap from './component/ContentTap';
 import Login from './pages/login/Login';
-import SignUp from './pages/siginup/SignUp';
+import SignUp from './pages/siginup/Signup';
 import './API.js';
 import { Routes, Route } from 'react-router-dom';
 import Main from './pages/main/Main';
