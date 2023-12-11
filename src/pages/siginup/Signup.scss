@@ -1,7 +1,7 @@
 @charset "UTF-8";
 @use '../../common' as var;
 
-.signin {
+.signup {
   width: 100%;
   height: 100%;
   background-color: #fff;
@@ -10,24 +10,24 @@
   @include var.center;
   flex-direction: column;
 
-  .signin__header {
+  .signup__header {
     display: flex;
     gap: 10px;
     align-items: center;
     justify-content: center;
 
-    .signin__header__logo-img {
+    .signup__header__logo-img {
       width: 25px;
       transform: translateY(1px);
     }
 
-    .signin__header__logo-text {
+    .signup__header__logo-text {
       @include var.title-l;
       color: var.$blue;
     }
   }
 
-  .signin__header__summary {
+  .signup__header__summary {
     @include var.content-l;
     text-align: center;
     margin-top: 10px;
@@ -51,13 +51,13 @@
       }
     }
 
-    .signin__warning {
+    .signup__warning {
       @include var.content-s;
       margin-top: 5px;
-      .signin__warning--error {
+      .signup__warning--error {
         color: var.$red;
       }
-      .signin__warning--success {
+      .signup__warning--success {
         color: #20d9a8;
       }
     }
