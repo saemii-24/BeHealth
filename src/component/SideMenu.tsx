@@ -1,15 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Component.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaHome, FaLaugh, FaSignal, FaEnvelope } from 'react-icons/fa';
 import cn from 'classnames';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import { getAuth, signOut, deleteUser } from 'firebase/auth';
+import { app } from '../firebase/firebaseApp'; //firebase 초기화 해둔값
 
 type SelectTabType = 'home' | 'myPage' | 'analyzes' | 'memo';
 
 const Menu = () => {
-  const [isSignIn, setIsSignIn] = useState<boolean>(false);
   const [selectTab, setSelectTab] = useState<SelectTabType>('home');
+  const [isAuth, setIsAuth] = useState<boolean>(false);
+
   const navigate = useNavigate();
+  const context = useContext(AuthContext);
+
+  useEffect(() => {
+    if (context.user) {
+      setIsAuth(true);
+    } else {
+      setIsAuth(false);
+    }
+  }, [context]);
+
+  const handleSignOut = async () => {
+    try {
+      const auth = getAuth(app);
+      await signOut(auth);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleDeleteUser = async () => {
+    try {
+      const auth = getAuth(app);
+      const user = auth.currentUser;
+
+      await deleteUser(user!);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className='side-menu'>
@@ -24,12 +57,25 @@ const Menu = () => {
         </div>
       </Link>
       <ul className='side-menu__authentication'>
-        <li>
-          <Link to='/login'>로그인</Link>
-        </li>
-        <li>
-          <Link to='/signin'>회원가입</Link>
-        </li>
+        {isAuth ? (
+          <>
+            <li onClick={handleSignOut}>
+              <span>로그아웃</span>
+            </li>
+            <li onClick={handleDeleteUser}>
+              <span>회원탈퇴</span>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to='/login'>로그인</Link>
+            </li>
+            <li>
+              <Link to='/signin'>회원가입</Link>
+            </li>
+          </>
+        )}
       </ul>
       <ul className='side-menu__page'>
         <li

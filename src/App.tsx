@@ -4,17 +4,13 @@ import './common.scss';
 import SideMenu from './component/SideMenu';
 import ContentTap from './component/ContentTap';
 import Login from './pages/login/Login';
-import Signin from './pages/signin/Signin';
+import SignUp from './pages/siginup/SignUp';
 import './API.js';
 import { Routes, Route } from 'react-router-dom';
 import Main from './pages/main/Main';
 import MyPage from './pages/mypage/MyPage';
-import { getAuth } from 'firebase/auth';
-import { app } from './firebase/firebaseApp';
-function App() {
-  const auth = getAuth(app); //current User가 있으면 login, 없으면 logout 상태
-  console.log(auth);
 
+function App() {
   return (
     <div className='App'>
       <div id='wrap'>
@@ -26,7 +22,7 @@ function App() {
               <Route path='/' element={<Main />} />
               <Route path='/mypage' element={<MyPage />} />
               <Route path='/login' element={<Login />} />
-              <Route path='/signin' element={<Signin />} />
+              <Route path='/signup' element={<SignUp />} />
             </Routes>
           </div>
         </div>
