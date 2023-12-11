@@ -7,10 +7,8 @@ import { MoodType, moodArr } from './MyPageData.ts';
 import { IoClose } from 'react-icons/io5';
 import cn from 'classnames';
 
-type SexType = 'male' | 'female';
-
 const MyStatus = () => {
-  const [sex, setSex] = useState<string>('male');
+  const [gender, setGender] = useState<string>('male');
   const [mood, setMood] = useState<MoodType>(moodArr[0]);
   const [showMoodBox, setShowMoodBox] = useState<boolean>(false);
   const [popup, setPopup] = useState<boolean>(false);
@@ -54,11 +52,11 @@ const MyStatus = () => {
           <h1 className='my-status__name'>{'김철수'}</h1>
           <h3 className='my-status__birth'>{'2001.01.18'}</h3>
           <h3 className='my-status__age'>{23}years</h3>
-          <h3 className='my-status__sex'>
-            {sex === 'male' ? (
-              <MdMale className='my-status__sex--male' />
+          <h3 className='my-status__gender'>
+            {gender === 'male' ? (
+              <MdMale className='my-status__gender--male' />
             ) : (
-              <MdFemale className='my-status__sex--female' />
+              <MdFemale className='my-status__gender--female' />
             )}
           </h3>
         </div>
@@ -96,6 +94,15 @@ const MyStatus = () => {
           <div>
             <label htmlFor='birth'>생일</label>
             <input type='date' id='birth' name='birth' />
+          </div>
+          <div className='gender__radio'>
+            <p>성별</p>
+            <label htmlFor='gender--male'>남성</label>
+            <input type='radio' id='gender--male' name='gender' />
+            <label htmlFor='gender--female' className='gender--female'>
+              여성
+            </label>
+            <input type='radio' id='gender--female' name='gender' />
           </div>
           <div>
             <label htmlFor='height'>키</label>

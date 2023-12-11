@@ -5,6 +5,9 @@ import Loading from '../../component/Loading';
 import { FaRegStar, FaStar } from 'react-icons/fa';
 import { FiPlus } from 'react-icons/fi';
 import cn from 'classnames';
+import { app, db } from '../../firebase/firebaseApp';
+import { doc, setDoc } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 
 const Medicine = () => {
   //input으로 searchItem 받아오기
@@ -27,17 +30,18 @@ const Medicine = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const URL = '/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList';
-      const response = await axios.get(URL, {
-        params: {
-          serviceKey: process.env.REACT_APP_API_KEY,
-          numOfRows: 1,
-          pageNo: 10,
-          type: 'json',
-          itemName: medicine,
-        },
-      });
-      console.log (response);
+      const api = '';
+      const URL = `http://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList?serviceKey=${api}&numOfRows=1&pageNo=10&type=json&itemName=%EC%95%84%EC%84%B8%ED%8B%B8`;
+      const response = await axios.get(URL);
+      // const response = await axios.get(URL, {
+      //   params: {
+      //     numOfRows: 1,
+      //     pageNo: 10,
+      //     type: 'json',
+      //     itemName: medicine,
+      //   },
+      // });
+      console.log(response);
       const searchItem = response.data.body.items[0];
       setSideEffect(searchItem.seQesitm);
       setCaution(searchItem.intrcQesitm);
@@ -52,6 +56,17 @@ const Medicine = () => {
   };
 
   //만약 laoding이 true이면 그 이하 내용이 보여지지 않는다.
+
+  //별을 클릭할 경우 (채워진 경우) myMedicine 컬렉션에 내용을 추가한다.
+
+  const user = getAuth(app).currentUser?.uid;
+
+  const addStoreMyMedicine = async () => {
+    await setDoc(doc(db, 'myMedicine'), {
+      name: name,
+      user: user,
+    });
+  };
 
   return (
     <div className='medicine__box'>
