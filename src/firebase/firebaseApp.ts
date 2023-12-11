@@ -1,5 +1,7 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import { initializeApp, FirebaseApp, getApp } from 'firebase/app';
+
+export let app: FirebaseApp;
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_APIKEY,
@@ -11,6 +13,11 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
+try {
+  app = getApp('app');
+} catch (e) {
+  app = initializeApp(firebaseConfig, 'app');
+}
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
 export default firebase;

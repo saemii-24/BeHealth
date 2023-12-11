@@ -9,8 +9,12 @@ import './API.js';
 import { Routes, Route } from 'react-router-dom';
 import Main from './pages/main/Main';
 import MyPage from './pages/mypage/MyPage';
-
+import { getAuth } from 'firebase/auth';
+import { app } from './firebase/firebaseApp';
 function App() {
+  const auth = getAuth(app); //current User가 있으면 login, 없으면 logout 상태
+  console.log(auth);
+
   return (
     <div className='App'>
       <div id='wrap'>

@@ -52,9 +52,14 @@
     }
 
     .signin__warning {
-      color: var.$red;
       @include var.content-s;
       margin-top: 5px;
+      .signin__warning--error {
+        color: var.$red;
+      }
+      .signin__warning--success {
+        color: #20d9a8;
+      }
     }
 
     .submit {
@@ -63,9 +68,12 @@
       font-weight: 700;
       cursor: pointer;
       margin-top: 30px;
-
-      &:hover,
-      &:focus {
+      border: none;
+      outline: none;
+      height: 40px;
+      @include var.r-s;
+      transition: all 200ms;
+      &:hover {
         background-color: #295ec9;
       }
     }

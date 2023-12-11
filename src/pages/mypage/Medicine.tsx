@@ -37,6 +37,7 @@ const Medicine = () => {
           itemName: medicine,
         },
       });
+      console.log (response);
       const searchItem = response.data.body.items[0];
       setSideEffect(searchItem.seQesitm);
       setCaution(searchItem.intrcQesitm);
