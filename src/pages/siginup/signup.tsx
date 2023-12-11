@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Signup.scss';
+import './SignUp.scss';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -8,7 +8,7 @@ import {
 import { app } from '../../firebase/firebaseApp';
 import { useNavigate } from 'react-router-dom';
 
-const signup = () => {
+const SignUp = () => {
   const [email, setEmail] = useState<string>('');
   const [emailError, setEmailError] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -139,4 +139,4 @@ const signup = () => {
   );
 };
 
-export default signup;
+export default SignUp;

@@ -32,6 +32,14 @@
         margin: 0 10px;
         color: #fff;
       }
+      span {
+        color: #fff;
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+          text-underline-offset: 6px;
+        }
+      }
 
       a {
         color: #fff;

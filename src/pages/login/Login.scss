@@ -58,14 +58,18 @@
     }
 
     .submit {
+      height: 40px;
+      border: none;
+      outline: none;
+      transition: all 200ms;
+      @include var.r-s;
       background-color: var.$blue;
       color: #fff;
       font-weight: 700;
       cursor: pointer;
       margin-top: 30px;
 
-      &:hover,
-      &:focus {
+      &:hover {
         background-color: #295ec9;
       }
     }
@@ -73,6 +77,16 @@
     label {
       margin-bottom: 10px;
       margin-top: 20px;
+    }
+  }
+  a {
+    font-size: 0.75rem;
+    font-weight: 400;
+    margin-top: 15px;
+    color: var.$middleGray;
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
     }
   }
 }
