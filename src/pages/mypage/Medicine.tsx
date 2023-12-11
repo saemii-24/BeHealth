@@ -30,7 +30,7 @@ const Medicine = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const api = '';
+      const api = '123';
       const URL = `http://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList?serviceKey=${api}&numOfRows=1&pageNo=10&type=json&itemName=%EC%95%84%EC%84%B8%ED%8B%B8`;
       const response = await axios.get(URL);
       // const response = await axios.get(URL, {
