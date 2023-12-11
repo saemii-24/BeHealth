@@ -153,38 +153,45 @@
                     padding: 20px 10px 0px;
                 }
 
-                .today-list {
+                .today-box{
                     width: 100%;
                     height: calc(100% - 159px);
-                    overflow-y: scroll;
-                    padding: 20px 20px 0 10px;
-                    position: relative;
+                    padding-top: 20px;
                     
-                    &::-webkit-scrollbar{
-                        width: 7px;
-                        background: #DEE9FE;  
-                        @include var.r-s;   
-                        margin-top: 20px;       
-                    }
-                    &::-webkit-scrollbar-thumb{
-                        background: var.$blue;
-                        @include var.r-s;    
-                    }
-
-                    div{
+                    .today-list {
                         width: 100%;
-                        height: 70px;
-                        background: #fff;
-                        @include var.r-m;
-                        @include var.shadow;
-                        @include var.center;
-                        margin-bottom: 20px;
-
-                        p{
-                            @include var.content-l;
-                            line-height: 20px;
-                            &:first-of-type{width: 25%;}
-                            &:last-of-type{width: 55%;}
+                        height: 100%;
+                        overflow-y: scroll;
+                        padding: 20px 20px 0 10px;
+                        // margin-top: 20px;
+                        position: relative;
+                        
+                        &::-webkit-scrollbar{
+                            width: 7px;
+                            background: #DEE9FE;  
+                            @include var.r-s;   
+                            margin-top: 20px;       
+                        }
+                        &::-webkit-scrollbar-thumb{
+                            background: var.$blue;
+                            @include var.r-s;    
+                        }
+    
+                        div{
+                            width: 100%;
+                            height: 70px;
+                            background: #fff;
+                            @include var.r-m;
+                            @include var.shadow;
+                            @include var.center;
+                            margin-bottom: 20px;
+    
+                            p{
+                                @include var.content-l;
+                                line-height: 20px;
+                                &:first-of-type{width: 25%;}
+                                &:last-of-type{width: 55%;}
+                            }
                         }
                     }
                 }

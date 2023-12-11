@@ -36,24 +36,30 @@ const Search = () => {
   
   return (
     <div className='search'>
-      <h2>국가 검진 기관 찾기</h2>
-      <p>{string}</p>
+      <div className='search--left'>
+        <h2>국가 검진 기관 찾기</h2>
+        <p>{string}</p>
+  
+        <div className="select-institution">
+          <select name="institution" id="institution" onChange={(e)=>{handleSelect(e)}}>
+            {
+              institution.map((v,i)=>{
+                return(
+                  <option key={i} value={v.id}>{v.city}</option>
+                )
+              })
+            }        
+          </select>
+  
+          <button className="search-icon" onClick={()=>{setSearchPop(true)}}>
+            <FontAwesomeIcon icon={faMagnifyingGlass} className='fontawesome'/>
+          </button>
+          {searchPop ? <SearchPop institution={institution} selected={selected} setSearchPop={setSearchPop} /> : null}
+        </div>
+      </div>
 
-      <div className="select-institution">
-        <select name="institution" id="institution" onChange={(e)=>{handleSelect(e)}}>
-          {
-            institution.map((v,i)=>{
-              return(
-                <option key={i} value={v.id}>{v.city}</option>
-              )
-            })
-          }        
-        </select>
-
-        <button className="search-icon" onClick={()=>{setSearchPop(true)}}>
-          <FontAwesomeIcon icon={faMagnifyingGlass} className='fontawesome'/>
-        </button>
-        {searchPop ? <SearchPop institution={institution} selected={selected} setSearchPop={setSearchPop} /> : null}
+      <div className="search--right">
+        
       </div>
     </div>
   )

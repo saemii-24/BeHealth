@@ -8,38 +8,44 @@
     @include var.shadow;
     padding: 30px;
     margin-bottom: 40px;
+    display: flex;
 
-    h2 {
-        color: var.$blue;
-        @include var.title-l;
-        padding-bottom: 10px
-    }
+    .search--left{
+        width: 54%;
+        height: 100%;
 
-    &>p {
-        @include var.title-s;
-    }
-
-    .select-institution {
-        width: 43%;
-        padding-top: 50px;
-        display: flex;
-        justify-content: space-between;
-
-        .search-icon {
-            width: 40px;
-            height: 40px;
-            background: var.$blue;
-            border-radius: 7px;
-            @include var.center;
-            cursor: pointer;
-            border: none;
-            outline: none;
-
-            .fontawesome {
-                color: #fff;
-                @include var.title-s;
+        h2 {
+            color: var.$blue;
+            @include var.title-l;
+            padding-bottom: 10px
+        }
+    
+        &>p {
+            @include var.title-s;
+        }
+    
+        .select-institution {
+            width: 100%;
+            padding-top: 50px;
+            display: flex;
+            justify-content: space-between;
+    
+            .search-icon {
+                width: 40px;
+                height: 40px;
+                background: var.$blue;
+                border-radius: 7px;
+                @include var.center;
+                cursor: pointer;
+                border: none;
+                outline: none;
+    
+                .fontawesome {
+                    color: #fff;
+                    @include var.title-s;
+                }
+    
             }
-
         }
     }
 
@@ -63,8 +69,6 @@
             size: 10px;
             position: 90% 50%;
         }
-
-        ;
     }
 
 
@@ -74,7 +78,7 @@
         left: 20rem;
         background: var.$blue;
         color: #fff;
-        width: 300px;
+        width: 330px;
         height: 500px;
         z-index: 10;
         @include var.r-m;
@@ -94,27 +98,119 @@
             cursor: pointer;
         }
 
+        &>h4{
+            color: #fff;
+            padding: 30px 0 15px;
+        }
+
         .hospital-wrap{
             width: 100%;
-            height: calc(100% - 40px);
-            padding-top: 30px;
+            height: calc(100% - 160px);
+            overflow-y: scroll;
+            padding-right: 20px;
+            
+            &::-webkit-scrollbar{
+                width: 7px;
+                background: #DEE9FE;  
+                @include var.r-s;   
+                margin-top: 20px;       
+            }
+            &::-webkit-scrollbar-thumb{
+                background: #a6c7f3;
+                @include var.r-s;    
+            }
 
             .hospital{
                 width: 100%;
-                height: 89px;
+                height: 90px;
                 @include var.r-m;
                 background: var.$bgColor;
-                @include var.center;
+                padding: 20px 20px 20px 40px;
+                margin-bottom: 20px;
+                position: relative;
+                cursor: pointer;
 
                 .icon{
-                    background: var.$blue;
+                    position: absolute;
+                    top: 10px; left: 10px;
+                    background: #DEE9FE;
+                    width: 20px;
+                    height: 20px;
+                    
+                    .fontawesome{
+                        color: var.$blue;
+                        font-size: 0.5rem;
+                    }
                 }
 
                 .hospital-info{
-                    width: 60%;
-                    padding-left: 20px;
+                    width: 100%;
+                    height: 100%;
+
+                    h4{
+                        @include var.content-s;
+                        font-weight: 700;
+                        padding-bottom: 5px;
+                        overflow: hidden;
+                        width: 100%;
+                        height: 20px;
+                        line-height: 20px;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        word-break: break-all;
+                    }
+                    p{
+                        @include var.content-s;
+                        width: 100%;
+                        height: 35px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        word-break: break-word;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                    }
                 }
             }
         }
+
+        .button-box{
+            width: 100%;
+            height: 50px;
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .button, input[type=button]{
+                background: #fff;
+                border: none;
+                outline: none;
+                @include var.r-s;
+                cursor: pointer;
+
+                color: var.$darkBlue;
+                .arrow{
+                    color: var.$darkBlue;
+                }
+            }
+
+            .prev{
+                padding: 5px 6px 3px 4px;
+            }
+            .next{
+                padding: 5px 4px 3px 6px;
+            }
+            input[type=button]{
+                padding: 7px 10px;
+            }
+        }
+    }
+
+
+    .search--right{
+        width: 46%;
+        height: 100%;
+        padding-left: 30px;
     }
 }

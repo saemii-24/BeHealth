@@ -35,8 +35,6 @@ const MainContent = () => {
     thisWeek.push(dd);
     days.push(thisDay)
   }  
-  console.log(thisWeek);
-  console.log(days);
 
   
   return (
@@ -103,25 +101,27 @@ const MainContent = () => {
 
               <h4>오늘 할일</h4>
 
-              <div className="today-list">
-                {
-                  todayListData.map((v,i)=>{
-                    return(
-                      <div key={i} style={{
-                        background : `${ v.today === true? '#306DE5' : '#fff' }`
-                      }}>
-                        <p style={{
-                          color: `${ v.today === true? '#fff' : '#333333'}`
-                        }}>{v.time}</p>
-                        <p style={{
-                          color: `${ v.today === true? '#fff' : '#333333'}`
-                        }}>{v.todo}</p>
-                      </div>
-                    )
-                  })
-                }
+              <div className='today-box'>
+                <div className="today-list">
+                  {
+                    todayListData.map((v,i)=>{
+                      return(
+                        <div key={i} style={{
+                          background : `${ v.today === true? '#306DE5' : '#fff' }`
+                        }}>
+                          <p style={{
+                            color: `${ v.today === true? '#fff' : '#333333'}`
+                          }}>{v.time}</p>
+                          <p style={{
+                            color: `${ v.today === true? '#fff' : '#333333'}`
+                          }}>{v.todo}</p>
+                        </div>
+                      )
+                    })
+                  }
+                </div>
               </div>
-            </div>
+              </div>
         </div>    
     </div>
   )
