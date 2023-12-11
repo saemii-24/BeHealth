@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import './Signin.scss';
+import './Signup.scss';
 import {
   getAuth,
   createUserWithEmailAndPassword,
-  fetchSignInMethodsForEmail,
+  //fetchsignupMethodsForEmail,
 } from 'firebase/auth';
 import { app } from '../../firebase/firebaseApp';
 import { useNavigate } from 'react-router-dom';
 
-const Signin = () => {
+const signup = () => {
   const [email, setEmail] = useState<string>('');
   const [emailError, setEmailError] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -65,16 +65,16 @@ const Signin = () => {
   };
 
   return (
-    <div className='signin'>
-      <div className='signin__header'>
+    <div className='signup'>
+      <div className='signup__header'>
         <img
-          className='signin__header__logo-img'
+          className='signup__header__logo-img'
           src={process.env.PUBLIC_URL + './images/logo.svg'}
           alt='Be Health 로고'
         />
-        <h1 className='signin__header__logo-text'>Be Health</h1>
+        <h1 className='signup__header__logo-text'>Be Health</h1>
       </div>
-      <h3 className='signin__header__summary'>
+      <h3 className='signup__header__summary'>
         나의 건강정보를 손쉽게 관리하고 싶다면?
         <br /> Be Health에서 지금 시작해 보세요.
       </h3>
@@ -88,11 +88,11 @@ const Signin = () => {
           placeholder='이메일'
           autoComplete='off'
         />
-        <div className='signin__warning'>
+        <div className='signup__warning'>
           {emailError ? (
-            <div className='signin__warning--error'>{emailError}</div>
+            <div className='signup__warning--error'>{emailError}</div>
           ) : (
-            <div className='signin__warning--success'>
+            <div className='signup__warning--success'>
               이메일 주소가 바르게 입력되었습니다.
             </div>
           )}
@@ -106,11 +106,11 @@ const Signin = () => {
           placeholder='비밀번호'
           autoComplete='off'
         />
-        <div className='signin__warning'>
+        <div className='signup__warning'>
           {passwordError ? (
-            <div className='signin__warning--error'>{passwordError}</div>
+            <div className='signup__warning--error'>{passwordError}</div>
           ) : (
-            <div className='signin__warning--success'>
+            <div className='signup__warning--success'>
               비밀번호가 바르게 입력되었습니다.
             </div>
           )}
@@ -124,11 +124,11 @@ const Signin = () => {
           placeholder='비밀번호 확인'
           autoComplete='off'
         />
-        <div className='signin__warning'>
+        <div className='signup__warning'>
           {confirmError ? (
-            <div className='signin__warning--error'>{confirmError}</div>
+            <div className='signup__warning--error'>{confirmError}</div>
           ) : (
-            <div className='signin__warning--success'>비밀번호가 일치합니다.</div>
+            <div className='signup__warning--success'>비밀번호가 일치합니다.</div>
           )}
         </div>
         <button className='submit' type='submit'>
@@ -139,4 +139,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default signup;
