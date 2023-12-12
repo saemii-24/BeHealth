@@ -13,7 +13,6 @@ const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      console.log(user);
       if (user) {
         setCurrentUser(user);
       } else {

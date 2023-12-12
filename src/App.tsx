@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './App.scss';
 import './common.scss';
 import SideMenu from './component/SideMenu';
-import ContentTap from './component/ContentTap';
 import Login from './pages/login/Login';
-import SignUp from './pages/siginup/Signup';
+import Signup from './pages/siginup/Signup';
 import './API.js';
 import { Routes, Route } from 'react-router-dom';
 import Main from './pages/main/Main';
@@ -22,7 +21,7 @@ function App() {
               <Route path='/' element={<Main />} />
               <Route path='/mypage' element={<MyPage />} />
               <Route path='/login' element={<Login />} />
-              <Route path='/signup' element={<SignUp />} />
+              <Route path='/signup' element={<Signup />} />
             </Routes>
           </div>
         </div>
