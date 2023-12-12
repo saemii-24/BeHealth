@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios';
 import convert from 'xml-js';
 // import dotenv from "dotenv";
-// dotenv.config();
+// require("dotenv").config();
 
 import { IoClose } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa";
@@ -48,17 +48,18 @@ const SearchPop = (props) => {
       const URL = 'http://apis.data.go.kr/openapi/service/rest/HmcSearchService/getHchkTypesHmcList';
       const response = await axios.get(URL, {
         params: {
-          // serviceKey: process.env.REACT_APP_API_KEY_NR,
+          serviceKey: process.env.REACT_APP_APIKEY_NR,
           numOfRows: 10,
           pageNo: chNum,
           locAddr: `${selectCity} ${value}`
         },
       });
-      const searchItem = response.data.response.body.items.item;
-      setCallHospital(searchItem)
-      setTotalCount(response.data.response.body.totalCount)
+      // const searchItem = response.data.response.body.items.item;
+      // setCallHospital(searchItem)
+      // setTotalCount(response.data.response.body.totalCount)
+      console.log(response)
     } catch (err) {
-      console.log(4);
+      console.log(err);
     }
 
   };

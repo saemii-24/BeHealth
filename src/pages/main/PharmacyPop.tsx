@@ -6,7 +6,7 @@ const PharmacyPop = (props) => {
     
   return (
     <div className='pharmacy-pop'>
-        <IoClose onClick={()=>{setPharmacyPop(false)}} className='xmark' />
+      <IoClose onClick={() => { setPharmacyPop(false) }} className='xmark' />
     </div>
   )
 }

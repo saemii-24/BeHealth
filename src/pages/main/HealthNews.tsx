@@ -2,10 +2,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDisease, faAngleRight, faDumbbell } from '@fortawesome/free-solid-svg-icons'
 import React from 'react'
 
-const HealthNews = () => {
+const HealthNews = (props) => {
+  let {clickHealthNews} = props;
+  
+  
   return (
     <div className='health-news'>
-      <div className="disease">
+      <div className="disease" onClick={()=>{clickHealthNews()}}>
         <div className="icon">
           <FontAwesomeIcon icon={faDisease} className='fontawesome'/>
         </div>
