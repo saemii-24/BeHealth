@@ -7,15 +7,32 @@ import {
 } from 'firebase/auth';
 import { app } from '../../firebase/firebaseApp';
 import { useNavigate } from 'react-router-dom';
+import cn from 'classnames';
 
 const Signup = () => {
   const [email, setEmail] = useState<string>('');
-  const [emailError, setEmailError] = useState<string>('');
+  const [emailError, setEmailError] =
+    useState<string>('이메일 주소를 바르게 입력해주세요.');
   const [password, setPassword] = useState<string>('');
-  const [passwordError, setPasswordError] = useState<string>('');
+  const [passwordError, setPasswordError] =
+    useState<string>('비밀번호는 8자 이상 입력해주세요.');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
-  const [confirmError, setConfirmError] = useState<string>('');
+  const [confirmError, setConfirmError] =
+    useState<string>('비밀번호가 일치하지 않습니다.');
+
+  //에러가 하나라도 있는지 확인한다.
+  const [isError, setIsError] = useState<boolean[]>([false, false, false]);
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isError[0] && isError[1] && isError[2]) {
+      setButtonDisabled(true);
+    }
+  }, [isError]);
+
   const navigate = useNavigate();
+
+  //에러메세지가 하나라도 존재하면 회원가입이 불가하다
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -23,10 +40,11 @@ const Signup = () => {
       const auth = getAuth(app);
       await createUserWithEmailAndPassword(auth, email, password);
       navigate('/');
-      console.log('click');
     } catch (err) {
       //에러발생 상황 추가//
-      console.log(err);
+      if (err.code === 'auth/email-already-in-use') {
+        setEmailError('이미 사용중인 이메일 입니다.');
+      }
     }
   };
 
@@ -34,6 +52,8 @@ const Signup = () => {
     const {
       target: { name, value },
     } = e;
+    const errorArr = [...isError];
+
     if (name === 'email') {
       setEmail(value);
       const emailRegex =
@@ -41,25 +61,43 @@ const Signup = () => {
 
       if (!value?.match(emailRegex)) {
         setEmailError('이메일 주소를 바르게 입력해주세요.');
+        errorArr[0] = false;
+        setIsError(errorArr);
       } else {
         setEmailError('');
         setEmail(value);
+        errorArr[0] = true;
+        setIsError(errorArr);
       }
     }
     if (name === 'password') {
       setPassword(value);
-      if (password?.length < 8) {
+      if (password?.length < 7) {
         setPasswordError('비밀번호는 8자 이상 입력해주세요.');
+        errorArr[1] = false;
+        setIsError(errorArr);
       } else {
         setPasswordError('');
+        errorArr[1] = true;
+        setIsError(errorArr);
+      }
+      //만약 password를 지운다면
+      if (passwordConfirm !== value) {
+        setConfirmError('비밀번호가 일치하지 않습니다.');
+      } else {
+        setConfirmError('');
       }
     }
     if (name === 'passwordConfirm') {
       setPasswordConfirm(value);
       if (password !== value) {
         setConfirmError('비밀번호가 일치하지 않습니다.');
+        errorArr[2] = false;
+        setIsError(errorArr);
       } else {
         setConfirmError('');
+        errorArr[2] = true;
+        setIsError(errorArr);
       }
     }
   };
@@ -131,9 +169,14 @@ const Signup = () => {
             <div className='signup__warning--success'>비밀번호가 일치합니다.</div>
           )}
         </div>
-        <button className='submit' type='submit'>
-          회원가입
-        </button>
+        {
+          <button
+            className={cn('submit', { 'submit--disabled': buttonDisabled })}
+            type='submit'
+            disabled={buttonDisabled}>
+            회원가입
+          </button>
+        }
       </form>
     </div>
   );
