@@ -7,7 +7,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { getAuth, signOut, deleteUser } from 'firebase/auth';
 import { app } from '../firebase/firebaseApp'; //firebase 초기화 해둔값
-
+import { useLocation } from 'react-router-dom';
 type SelectTabType = 'home' | 'myPage' | 'analyzes' | 'memo';
 
 const Menu = () => {
@@ -16,6 +16,20 @@ const Menu = () => {
 
   const navigate = useNavigate();
   const context = useContext(AuthContext);
+
+  //location에 따라 탭 변동
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setSelectTab('home');
+    } else if (location.pathname === '/mypage') {
+      setSelectTab('myPage');
+    } else if (location.pathname === '/login') {
+      setSelectTab('home');
+    } else if (location.pathname === '/signup') {
+      setSelectTab('home');
+    }
+  }, [location]);
 
   useEffect(() => {
     if (context.user) {
@@ -60,10 +74,10 @@ const Menu = () => {
         {isAuth ? (
           <>
             <li onClick={handleSignOut}>
-              <span>로그아웃</span>
+              <Link to='/'>로그아웃</Link>
             </li>
             <li onClick={handleDeleteUser}>
-              <span>회원탈퇴</span>
+              <Link to='/'>회원탈퇴</Link>
             </li>
           </>
         ) : (
@@ -100,23 +114,11 @@ const Menu = () => {
           <FaLaugh />
           <span>My Page</span>
         </li>
-        <li
-          className={cn('side-menu__authentication-tab', {
-            select: selectTab === 'analyzes',
-          })}
-          onClick={() => {
-            setSelectTab('analyzes');
-          }}>
+        <li className='side-menu__authentication-tab'>
           <FaSignal />
           <span>Analyzes</span>
         </li>
-        <li
-          className={cn('side-menu__authentication-tab', {
-            select: selectTab === 'memo',
-          })}
-          onClick={() => {
-            setSelectTab('memo');
-          }}>
+        <li className='side-menu__authentication-tab'>
           <FaEnvelope />
           <span>Memo</span>
         </li>
