@@ -241,6 +241,12 @@
       width: 100%;
       text-align: center;
       margin-bottom: 4px;
+      a{
+        &:hover{
+          text-decoration: underline;
+          text-underline-offset: 4px;
+        }
+      }
     }
 
     .my-status__birth {
@@ -463,6 +469,9 @@
       .button--submit {
         background-color: var.$bgColor;
         color: var.$blue;
+        &:hover{
+          opacity: 0.9;
+        }
       }
       .button--reset {
         background-color: #f2f6f9;
@@ -548,6 +557,9 @@
   .bmi__title {
     @include var.title-m;
     margin: 0 8px;
+  }
+  .bmi__login{
+    @include var.content-m;
   }
 
   .bmi__graph {
@@ -665,12 +677,16 @@
       @include var.content-m;
     }
   }
-
+  .exercise__login{
+    @include var.content-m;
+    margin-top:4px;
+  }
   .exercise__detail {
     width: 100%;
     padding-left: 44px;
     display: flex;
 
+   
     .exercise__time {
       @include var.content-m;
       position: relative;
@@ -885,6 +901,12 @@
     @include var.r-s;
     flex-grow: 1;
     padding: 10px 16px;
+    svg{
+      width: 100%;
+      font-size:3rem;
+      color: var.$blue;
+      margin-top: 2rem;
+    }
 
     .medicine__caution--title {
       color: var.$blue;

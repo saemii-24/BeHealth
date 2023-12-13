@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaWeight } from 'react-icons/fa';
+import { FaWeight } from "react-icons/fa";
 import { FaPerson } from 'react-icons/fa6';
 import { MdBloodtype } from 'react-icons/md';
 import { MdMale, MdFemale } from 'react-icons/md';
@@ -8,6 +8,7 @@ import { IoClose } from 'react-icons/io5';
 import cn from 'classnames';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext.tsx';
+import { MyStatusContext } from '../../context/MyStatusContext.tsx';
 import {
   collection,
   addDoc,
@@ -21,6 +22,18 @@ import { db, app } from '../../firebase/firebaseApp';
 import { getAuth, updateProfile } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 
+  //실제 렌더링 될 값이 담길 변수
+export interface RenderDataType {
+    birth?: string;
+    bloodType?: string;
+    gender?: string;
+    height?: number;
+    weight?: number;
+    mood?: { emoji: string; moodText: string };
+    name?: string;
+    userId?: string;
+  }
+
 const MyStatus = () => {
   const [mood, setMood] = useState<MoodType>(moodArr[0]);
   const [showMoodBox, setShowMoodBox] = useState<boolean>(false);
@@ -30,7 +43,9 @@ const MyStatus = () => {
   //최초 정보 등록
   const context = useContext(AuthContext);
   const auth = getAuth(app);
-  console.log(context);
+
+  //setState
+  const { setData } = useContext(MyStatusContext);
 
   //input value값이 담길 변수
   const [myName, setName] = useState<string>('');
@@ -41,17 +56,6 @@ const MyStatus = () => {
   const [bloodType, setBloodType] = useState<string>('');
   const [myId, setMyId] = useState<string>(''); //컬렉션의 객체 아이디를 저장한다.
 
-  //실제 렌더링 될 값이 담길 변수
-  interface RenderDataType {
-    birth?: string;
-    bloodType?: string;
-    gender?: string;
-    height?: number;
-    weight?: number;
-    mood?: { emoji: string; moodText: string };
-    name?: string;
-    userId?: string;
-  }
   const [renderData, setRenderData] = useState<RenderDataType>({});
   //나이 계산
   const [age, setAge] = useState<number>(0);
@@ -73,7 +77,7 @@ const MyStatus = () => {
     }
   }, [renderData]);
 
-  const fetchData = async () => {
+const fetchData = async () => {
     if (context.user) {
       const q = query(
         collection(db, 'myStatus'),
@@ -86,6 +90,7 @@ const MyStatus = () => {
         querySnapshot.forEach((doc) => {
           setMyId(doc.id);
           setRenderData(doc.data());
+          setData(doc.data());
         });
       } else {
         setAddInfo(false);
@@ -95,60 +100,55 @@ const MyStatus = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [context]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
     //userData를 조회한다.
-    fetchData();
-    console.log(addInfo);
+    await fetchData();
     if (addInfo) {
       //만약 정보가 있다면 수정한다.
-      const myStatusRef = doc(db, 'myStatus', myId);
-      await updateDoc(myStatusRef, {
-        name: myName,
-        birth: birth,
-        gender: gender,
-        height: height,
-        weight: weight,
-        bloodType: bloodType,
-        userId: context.user!.uid,
-        mood: mood,
-      })
-        .then(() => {
-          updateProfile(auth.currentUser!, {
-            displayName: myName,
-          });
+      try{
+        const myStatusRef = doc(db, 'myStatus', myId);
+        await updateDoc(myStatusRef, {
+          name: myName,
+          birth: birth,
+          gender: gender,
+          height: height,
+          weight: weight,
+          bloodType: bloodType,
+          userId: context.user!.uid,
+          mood: mood,
         })
-        .then(() => {
-          setPopup(false);
-        })
-        .catch((err) => {
-          console.log(err);
+
+        updateProfile(auth.currentUser!, {
+          displayName: myName,
         });
+        await fetchData();
+        setPopup(false);
+      }catch(err){
+        console.log(err);
+      }
     } else {
-      //만약 정보가 없어 신규 생성이라면
-      await addDoc(collection(db, 'myStatus'), {
-        name: myName,
-        birth: birth,
-        gender: gender,
-        height: height,
-        weight: weight,
-        bloodType: bloodType,
-        userId: context.user!.uid,
-        mood: mood,
-      })
-        .then(() => {
-          updateProfile(auth.currentUser!, {
+      try{
+        await addDoc(collection(db, 'myStatus'), {
+          name: myName,
+          birth: birth,
+          gender: gender,
+          height: height,
+          weight: weight,
+          bloodType:bloodType,
+          userId: context.user!.uid,
+          mood: mood,
+        })
+        updateProfile(auth.currentUser!, {
             displayName: myName,
-          });
         })
-        .then(() => {
-          setPopup(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        await fetchData();
+        setPopup(false);
+      }catch(err){
+        console.log(err);
+      }
     }
   };
   const onChange = (e) => {
@@ -171,7 +171,7 @@ const MyStatus = () => {
       setWeight(value);
     }
     if (name === 'blood-type') {
-      setBloodType(value);
+      setBloodType(value.toUpperCase());
     }
   };
   return (
@@ -184,7 +184,7 @@ const MyStatus = () => {
               onClick={() => {
                 setPopup(true);
               }}>
-              {'수정'}
+              수정
             </p>
             <div
               className='my-status__mood'
@@ -215,7 +215,7 @@ const MyStatus = () => {
               <h1 className='my-status__name'>
                 {renderData.name ? renderData.name : '-'}
               </h1>
-              <h3 className='my-status__birth'>{renderData.birth}</h3>
+              <h3 className='my-status__birth'>{renderData.birth ? renderData.birth : " - "}</h3>
               <h3 className='my-status__age'>{age}years</h3>
               <h3 className='my-status__gender'>
                 {renderData.gender === 'male' ? (
@@ -262,7 +262,7 @@ const MyStatus = () => {
               </svg>
             </div>
             <div className='my-status__middle'>
-              <h1 className='my-status__name'>로그인 해주세요</h1>
+              <h1 className='my-status__name'><Link to='/login'>로그인 해주세요</Link></h1>
               <p className='my-status__welcome'>
                 <Link to='/signup'>Be health에 처음이신가요?</Link>
               </p>
@@ -281,11 +281,11 @@ const MyStatus = () => {
         <form onSubmit={onSubmit}>
           <div>
             <label htmlFor='name'>이름</label>
-            <input type='text' id='name' name='name' onChange={onChange} />
+            <input type='text' id='name' name='name' onChange={onChange} defaultValue={renderData.name ? renderData.name : ""}/>
           </div>
           <div>
             <label htmlFor='birth'>생일</label>
-            <input type='date' id='birth' name='birth' onChange={onChange} />
+            <input type='date' id='birth' name='birth' onChange={onChange} defaultValue={renderData.birth ? renderData.birth : ""}/>
           </div>
           <div className='gender__radio'>
             <p>성별</p>
@@ -309,18 +309,18 @@ const MyStatus = () => {
             />
           </div>
           <div>
-            <label htmlFor='height'>키</label>
-            <input type='number' name='height' id='height' min={0} onChange={onChange} />
+            <label htmlFor='height' >키</label>
+            <input type='number' name='height' id='height' min={0} onChange={onChange}  defaultValue={renderData.height ? renderData.height : 0}/>
             <span>cm</span>
           </div>
           <div>
-            <label htmlFor='weight'>몸무게</label>
-            <input type='number' name='weight' id='weight' min={0} onChange={onChange} />
+            <label htmlFor='weight' defaultValue={45}>몸무게</label>
+            <input type='number' name='weight' id='weight' min={0} onChange={onChange} defaultValue={renderData.weight ? renderData.weight : 0}/>
             <span>kg</span>
           </div>
           <div>
-            <label htmlFor='blood-type'>혈액형</label>
-            <input type='text' name='blood-type' id='blood-type' onChange={onChange} />
+            <label htmlFor='blood-type' >혈액형</label>
+            <input type='text' name='blood-type' id='blood-type' onChange={onChange} defaultValue={renderData.bloodType? renderData.bloodType : ""} />
           </div>
           <div className='button__box'>
             <button className='button--submit' type='submit'>

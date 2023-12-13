@@ -11,7 +11,7 @@ import { useLocation } from 'react-router-dom';
 type SelectTabType = 'home' | 'myPage' | 'analyzes' | 'memo';
 
 const Menu = () => {
-  const [selectTab, setSelectTab] = useState<SelectTabType>('home');
+  const [selectTab, setSelectTab] = useState<SelectTabType|null>('home');
   const [isAuth, setIsAuth] = useState<boolean>(false);
 
   const navigate = useNavigate();
@@ -25,9 +25,9 @@ const Menu = () => {
     } else if (location.pathname === '/mypage') {
       setSelectTab('myPage');
     } else if (location.pathname === '/login') {
-      setSelectTab('home');
+      setSelectTab(null);
     } else if (location.pathname === '/signup') {
-      setSelectTab('home');
+      setSelectTab(null);
     }
   }, [location]);
 

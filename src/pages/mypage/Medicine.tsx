@@ -3,13 +3,19 @@ import axios from 'axios';
 import { IoSearch, IoClose } from 'react-icons/io5';
 import Loading from '../../component/Loading';
 import { FaRegStar, FaStar } from 'react-icons/fa';
+import { GiMedicines } from "react-icons/gi";
 import { FiPlus } from 'react-icons/fi';
 import cn from 'classnames';
 import { app, db } from '../../firebase/firebaseApp';
 import { doc, setDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext.tsx';
 
 const Medicine = () => {
+  
+  let context = useContext(AuthContext);
+  
   //input으로 searchItem 받아오기
   const [name, setName] = useState<string>(''); //약 명칭
   const [medicine, setMedicine] = useState<string>(''); //input창
@@ -33,14 +39,6 @@ const Medicine = () => {
       const api = '123';
       const URL = `http://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList?serviceKey=${api}&numOfRows=1&pageNo=10&type=json&itemName=%EC%95%84%EC%84%B8%ED%8B%B8`;
       const response = await axios.get(URL);
-      // const response = await axios.get(URL, {
-      //   params: {
-      //     numOfRows: 1,
-      //     pageNo: 10,
-      //     type: 'json',
-      //     itemName: medicine,
-      //   },
-      // });
       console.log(response);
       const searchItem = response.data.body.items[0];
       setSideEffect(searchItem.seQesitm);
@@ -56,7 +54,6 @@ const Medicine = () => {
   };
 
   //만약 laoding이 true이면 그 이하 내용이 보여지지 않는다.
-
   //별을 클릭할 경우 (채워진 경우) myMedicine 컬렉션에 내용을 추가한다.
 
   const user = getAuth(app).currentUser?.uid;
@@ -68,8 +65,11 @@ const Medicine = () => {
     });
   };
 
+
+
   return (
     <div className='medicine__box'>
+      {context.user ?
       <div className='medicine'>
         <h1 className='medicine__title'>현재 약 복용 기간입니다.</h1>
         <h5 className='medicine__summary'>
@@ -87,6 +87,17 @@ const Medicine = () => {
           </div>
         </div>
       </div>
+      :
+      <div className='medicine'>
+        <h1 className='medicine__title'>현재 약을 복용중이신가요?</h1>
+        <h5 className='medicine__summary'>
+          로그인 하고`` 현재 복용중인 의약품을 검색하고, 주의사항과 부작용에 대해 알아보세요.
+        </h5>
+        <div className='medicine__caution'>
+          <GiMedicines/>
+        </div>
+      </div>
+      }
       <div className={cn('medicine__popup', { active: popup })}>
         <div
           className='medicine__popup__close'
