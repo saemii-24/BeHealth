@@ -1,0 +1,83 @@
+@charset "utf-8";
+
+.disease-pop {
+  width: 100%;
+  height: 100%;
+  padding-left: 70px;
+  position: relative;
+
+  .icon {
+    background: var.$red;
+  }
+
+  & > .icon {
+    position: absolute;
+    top: 45%;
+    left: -20px;
+  }
+
+  .spread-title,
+  .vaccination-title {
+    display: flex;
+    height: 50px;
+    margin-bottom: 20px;
+
+    h3 {
+      align-self: center;
+      padding-left: 20px;
+    }
+  }
+
+  .spread {
+    width: 100%;
+    height: calc(100% - 200px);
+    padding-bottom: 60px;
+
+    .spread-content {
+      width: 100%;
+      height: calc(100% - 50px);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-content: space-between;
+      row-gap: 20px;
+      overflow-y: scroll;
+      padding-right: 20px;
+
+      &::-webkit-scrollbar {
+        width: 7px;
+        background: #dee9fe;
+        @include var.r-s;
+        margin-top: 20px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: var.$blue;
+        @include var.r-s;
+      }
+
+      & > div {
+        width: 45%;
+        height: 45%;
+        background: var.$blueGray;
+        @include var.r-m;
+        // margin-bottom: 20px;
+      }
+    }
+  }
+
+  .vaccination {
+    width: 100%;
+    height: 240px;
+
+    // .vaccination-title {
+    //   margin-bottom: 20px;
+    // }
+
+    .vaccination-content {
+      width: 100%;
+      height: calc(100% - 70px);
+      background: var.$blueGray;
+      @include var.r-m;
+    }
+  }
+}

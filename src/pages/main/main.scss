@@ -1,179 +1,181 @@
 @charset "utf-8";
 
 .main {
-    position: relative;     
+  position: relative;
 
-    .icon {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        @include var.center;
+  .icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    @include var.center;
 
-        .fontawesome {
-            color: #fff;
-            @include var.title-l;
-        }
+    .fontawesome {
+      color: #fff;
+      @include var.title-l;
     }
+  }
 
-    .xmark {
-        color: #fff;
-        position: absolute;
-        font-size: 1.5rem;
-        top: 30px;
-        right: 30px;
-        cursor: pointer;
-    }
+  .xmark {
+    color: #fff;
+    position: absolute;
+    font-size: 1.5rem;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+  }
 
-    .main-content {
-        width: calc(100% - 310px);
+  .main-content {
+    width: calc(100% - 310px);
+    height: 100%;
+    padding-right: 40px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .main--bottom {
+      width: 100%;
+      height: calc(100% - 280px);
+      display: flex;
+      justify-content: space-between;
+
+      .main--bottom--left {
+        width: 290px;
         height: 100%;
-        padding-right: 40px;
-        display: flex;
-        flex-wrap: wrap;
 
+        .momentum {
+          width: 100%;
+          height: calc(100% - 150px);
+          background: #fff;
+          @include var.r-m;
+          @include var.shadow;
+          padding: 30px;
+          transition: 1s;
 
-        .main--bottom {
+          h3 {
+            padding-bottom: 20px;
+            text-indent: 10px;
+          }
+
+          .graph-box {
             width: 100%;
-            height: calc(100% - 280px);
+            height: calc(100% - 45px);
             display: flex;
             justify-content: space-between;
+            padding-top: 30px;
 
-            .main--bottom--left {
-                width: 290px;
-                height: 100%;
+            .graph {
+              width: 14.3%;
+              height: 100%;
+              position: relative;
 
-                .momentum {
-                    width: 100%;
-                    height: calc(100% - 150px);
-                    background: #fff;
-                    @include var.r-m;
-                    @include var.shadow;
-                    padding: 30px;
+              div {
+                width: 30%;
+                position: absolute;
+                bottom: 30px;
+                left: 10px;
+                @include var.r-s;
+              }
 
-                    h3 {
-                        padding-bottom: 20px;
-                        text-indent: 10px;
-                    }
-
-                    .graph-box {
-                        width: 100%;
-                        height: calc(100% - 45px);
-                        display: flex;
-                        justify-content: space-between;
-                        padding-top: 30px;
-
-                        .graph {
-                            width: 14.3%;
-                            height: 100%;
-                            position: relative;
-
-                            div {
-                                width: 30%;
-                                position: absolute;
-                                bottom: 30px;
-                                left: 10px;
-                                @include var.r-s;
-                            }
-
-                            p {
-                                position: absolute;
-                                bottom: 0;
-                                left: 0;
-                                text-align: center;
-                                width: 100%;
-                                @include var.content-s;
-                            }
-                        }
-                    }
-                }
+              p {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                text-align: center;
+                width: 100%;
+                @include var.content-s;
+              }
             }
-
-
-            .main--bottom--right {
-                width: 305px;
-                height: 100%;
-
-                h3 {
-                    padding-bottom: 20px;
-                    text-indent: 10px;
-                }
-
-                .main__date {
-
-                    width: 100%;
-                    height: 70px;
-                    display: flex;
-
-                    .main__calendar {
-                        width: 14.3%;
-                        height: 100%;
-                        border-radius: 25px;
-                        @include var.center;
-
-                        p {
-                            width: 100%;
-                            text-align: center;
-
-                            &:first-of-type {
-                                @include var.content-s;
-                                padding-top: 10px;
-                            }
-
-                            &:last-of-type {
-                                @include var.content-m;
-                                font-weight: 700;
-                            }
-                        }
-                    }
-                }
-
-                h4 {
-                    padding: 20px 10px 0px;
-                }
-
-                .today-box{
-                    width: 100%;
-                    height: calc(100% - 159px);
-                    padding-top: 20px;
-                    
-                    .today-list {
-                        width: 100%;
-                        height: 100%;
-                        overflow-y: scroll;
-                        padding: 20px 20px 0 10px;
-                        // margin-top: 20px;
-                        position: relative;
-                        
-                        &::-webkit-scrollbar{
-                            width: 7px;
-                            background: #DEE9FE;  
-                            @include var.r-s;   
-                            margin-top: 20px;       
-                        }
-                        &::-webkit-scrollbar-thumb{
-                            background: var.$blue;
-                            @include var.r-s;    
-                        }
-    
-                        div{
-                            width: 100%;
-                            height: 70px;
-                            background: #fff;
-                            @include var.r-m;
-                            @include var.shadow;
-                            @include var.center;
-                            margin-bottom: 20px;
-    
-                            p{
-                                @include var.content-l;
-                                line-height: 20px;
-                                &:first-of-type{width: 25%;}
-                                &:last-of-type{width: 55%;}
-                            }
-                        }
-                    }
-                }
-            }
+          }
         }
+      }
+
+      .main--bottom--right {
+        width: 305px;
+        height: 100%;
+
+        h3 {
+          padding-bottom: 20px;
+          text-indent: 10px;
+        }
+
+        .main__date {
+          width: 100%;
+          height: 70px;
+          display: flex;
+          margin-bottom: 15px;
+
+          .main__calendar {
+            width: 14.3%;
+            height: 100%;
+            border-radius: 25px;
+            @include var.center;
+
+            p {
+              width: 100%;
+              text-align: center;
+
+              &:first-of-type {
+                @include var.content-s;
+                padding-top: 10px;
+              }
+
+              &:last-of-type {
+                @include var.content-m;
+                font-weight: 700;
+              }
+            }
+          }
+        }
+
+        // h4 {
+        //   padding: 20px 10px 0px;
+        // }
+
+        .today-list {
+          width: 100%;
+          height: calc(100% - 130px);
+          overflow-y: scroll;
+          padding: 20px 20px 0 10px;
+          display: flex;
+          flex-wrap: wrap;
+          row-gap: 20px;
+          // margin-top: 20px;
+
+          &::-webkit-scrollbar {
+            width: 7px;
+            background: #dee9fe;
+            @include var.r-s;
+            margin-top: 20px;
+          }
+          &::-webkit-scrollbar-thumb {
+            background: var.$blue;
+            @include var.r-s;
+          }
+
+          div {
+            width: 100%;
+            height: 65px;
+            background: #fff;
+            @include var.r-m;
+            @include var.shadow;
+            @include var.center;
+
+            p {
+              @include var.content-l;
+              line-height: 20px;
+              &:first-of-type {
+                width: 25%;
+              }
+              &:last-of-type {
+                width: 55%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                word-break: break-all;
+              }
+            }
+          }
+        }
+      }
     }
+  }
 }

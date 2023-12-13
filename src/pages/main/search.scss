@@ -1,207 +1,208 @@
 @charset "utf-8";
 
 .search {
-    width: 100%;
-    height: 240px;
-    background: #fff;
-    @include var.r-m;
-    @include var.shadow;
-    padding: 30px;
-    margin-bottom: 40px;
-    display: flex;
+  width: 100%;
+  height: 240px;
+  background: #fff;
+  @include var.r-m;
+  @include var.shadow;
+  padding: 30px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  transition: 0.5s;
 
-    .search--left{
-        width: 54%;
-        height: 100%;
+  .search--left {
+    width: 54%;
+    height: 100%;
 
-        h2 {
-            color: var.$blue;
-            @include var.title-l;
-            padding-bottom: 10px
-        }
-    
-        &>p {
-            @include var.title-s;
-        }
-    
-        .select-institution {
-            width: 100%;
-            padding-top: 50px;
-            display: flex;
-            justify-content: space-between;
-    
-            .search-icon {
-                width: 40px;
-                height: 40px;
-                background: var.$blue;
-                border-radius: 7px;
-                @include var.center;
-                cursor: pointer;
-                border: none;
-                outline: none;
-    
-                .fontawesome {
-                    color: #fff;
-                    @include var.title-s;
-                }
-    
-            }
-        }
+    h2 {
+      color: var.$blue;
+      @include var.title-l;
+      padding-bottom: 10px;
     }
 
-    #institution,
-    #popup_select {
-        padding: 12px 40px 12px 20px;
-        @include var.r-s;
+    & > p {
+      @include var.title-s;
+    }
+
+    .select-institution {
+      width: 100%;
+      padding-top: 50px;
+      display: flex;
+      justify-content: space-between;
+
+      .search-icon {
+        width: 40px;
+        height: 40px;
+        background: var.$blue;
+        border-radius: 7px;
+        @include var.center;
+        cursor: pointer;
         border: none;
         outline: none;
-        font-weight: 700;
-        -moz-appearance: none;
-        -webkit-appearance: none;
-        appearance: none;
-        width: 250px;
 
-        // 출처 <a href="https://www.flaticon.com/free-icons/down-arrow" title="down arrow icons">Down arrow icons created by Freepik - Flaticon</a>
-        background: {
-            color: var.$bgColor;
-            image: url('../../../public/images/arrow.png');
-            repeat: no-repeat;
-            size: 10px;
-            position: 90% 50%;
+        .fontawesome {
+          color: #fff;
+          @include var.title-s;
         }
+      }
+    }
+  }
+
+  #institution,
+  #popup_select {
+    padding: 12px 40px 12px 20px;
+    @include var.r-s;
+    border: none;
+    outline: none;
+    font-weight: 700;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 250px;
+
+    // 출처 <a href="https://www.flaticon.com/free-icons/down-arrow" title="down arrow icons">Down arrow icons created by Freepik - Flaticon</a>
+    background: {
+      color: var.$bgColor;
+      image: url('../../../public/images/arrow.png');
+      repeat: no-repeat;
+      size: 10px;
+      position: 90% 50%;
+    }
+  }
+
+  .search-pop {
+    position: absolute;
+    top: 9.3rem;
+    left: 19.3rem;
+    background: var.$blue;
+    color: #fff;
+    width: 340px;
+    height: 500px;
+    z-index: 10;
+    @include var.r-m;
+    padding: 50px 30px;
+    @include var.shadow;
+
+    #popup_select {
+      width: 150px;
     }
 
+    & > h4 {
+      color: #fff;
+      padding: 30px 0 15px;
+    }
 
-    .search-pop {
-        position: absolute;
-        top: 9.3rem;
-        left: 20rem;
-        background: var.$blue;
-        color: #fff;
-        width: 330px;
-        height: 500px;
-        z-index: 10;
+    .hospital-wrap {
+      width: 100%;
+      height: calc(100% - 160px);
+      overflow-y: scroll;
+      padding-right: 20px;
+
+      &::-webkit-scrollbar {
+        width: 7px;
+        background: #dee9fe;
+        @include var.r-s;
+        margin-top: 20px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: #a6c7f3;
+        @include var.r-s;
+      }
+
+      .hospital {
+        width: 100%;
+        height: 90px;
         @include var.r-m;
-        padding: 50px 30px;
-        @include var.shadow;
+        background: var.$bgColor;
+        padding: 20px 20px 20px 40px;
+        margin-bottom: 20px;
+        position: relative;
+        cursor: pointer;
 
-        #popup_select{
-            width: 150px;
+        .icon {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          background: #dee9fe;
+          width: 20px;
+          height: 20px;
+
+          .fontawesome {
+            color: var.$blue;
+            font-size: 0.5rem;
+          }
         }
 
-        &>h4{
-            color: #fff;
-            padding: 30px 0 15px;
-        }
+        .hospital-info {
+          width: 100%;
+          height: 100%;
 
-        .hospital-wrap{
+          h4 {
+            @include var.content-s;
+            font-weight: 700;
+            padding-bottom: 5px;
+            overflow: hidden;
             width: 100%;
-            height: calc(100% - 160px);
-            overflow-y: scroll;
-            padding-right: 20px;
-            
-            &::-webkit-scrollbar{
-                width: 7px;
-                background: #DEE9FE;  
-                @include var.r-s;   
-                margin-top: 20px;       
-            }
-            &::-webkit-scrollbar-thumb{
-                background: #a6c7f3;
-                @include var.r-s;    
-            }
-
-            .hospital{
-                width: 100%;
-                height: 90px;
-                @include var.r-m;
-                background: var.$bgColor;
-                padding: 20px 20px 20px 40px;
-                margin-bottom: 20px;
-                position: relative;
-                cursor: pointer;
-
-                .icon{
-                    position: absolute;
-                    top: 10px; left: 10px;
-                    background: #DEE9FE;
-                    width: 20px;
-                    height: 20px;
-                    
-                    .fontawesome{
-                        color: var.$blue;
-                        font-size: 0.5rem;
-                    }
-                }
-
-                .hospital-info{
-                    width: 100%;
-                    height: 100%;
-
-                    h4{
-                        @include var.content-s;
-                        font-weight: 700;
-                        padding-bottom: 5px;
-                        overflow: hidden;
-                        width: 100%;
-                        height: 20px;
-                        line-height: 20px;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                        word-break: break-all;
-                    }
-                    p{
-                        @include var.content-s;
-                        width: 100%;
-                        height: 35px;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        word-break: break-word;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 2;
-                        -webkit-box-orient: vertical;
-                    }
-                }
-            }
-        }
-
-        .button-box{
+            height: 20px;
+            line-height: 20px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-break: break-all;
+          }
+          p {
+            @include var.content-s;
             width: 100%;
-            height: 50px;
-            padding-top: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            .button, input[type=button]{
-                background: #fff;
-                border: none;
-                outline: none;
-                @include var.r-s;
-                cursor: pointer;
-
-                color: var.$darkBlue;
-                .arrow{
-                    color: var.$darkBlue;
-                }
-            }
-
-            .prev{
-                padding: 5px 6px 3px 4px;
-            }
-            .next{
-                padding: 5px 4px 3px 6px;
-            }
-            input[type=button]{
-                padding: 7px 10px;
-            }
+            height: 35px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: break-word;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          }
         }
+      }
     }
 
+    .button-box {
+      width: 100%;
+      height: 50px;
+      padding-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-    .search--right{
-        width: 46%;
-        height: 100%;
-        padding-left: 30px;
+      .button,
+      input[type='button'] {
+        background: #fff;
+        border: none;
+        outline: none;
+        @include var.r-s;
+        cursor: pointer;
+
+        color: var.$darkBlue;
+        .arrow {
+          color: var.$darkBlue;
+        }
+      }
+
+      .prev {
+        padding: 5px 6px 3px 4px;
+      }
+      .next {
+        padding: 5px 4px 3px 6px;
+      }
+      input[type='button'] {
+        padding: 7px 10px;
+      }
     }
+  }
+
+  .search--right {
+    width: 46%;
+    height: 100%;
+    padding-left: 30px;
+  }
 }
