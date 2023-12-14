@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ExerciseType, exerciseData } from './ExerciseData';
 import { IoIosBicycle } from 'react-icons/io';
 import { IoClose } from 'react-icons/io5';
+import { BiDumbbell } from 'react-icons/bi';
+import { FiMinus } from 'react-icons/fi';
 import cn from 'classnames';
 import './MyPage.scss';
 import { useContext } from 'react';
@@ -9,21 +11,26 @@ import { AuthContext } from '../../context/AuthContext.tsx';
 import {
   collection,
   addDoc,
-  updateDoc,
+  deleteDoc,
   query,
   where,
+  orderBy,
   getDocs,
   doc,
 } from 'firebase/firestore';
-import { db, app } from '../../firebase/firebaseApp';
-
+import { db } from '../../firebase/firebaseApp';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
 interface ExerciseDataType {
-  exercise? : [{
-    date?: Date,
-    name?: string,
-    time?: number,
-  }],
-  userId?: string,
+  calorie: number;
+  detailDate: string;
+  date: string;
+  id?: string;
+  name: string;
+  time: number;
+  userId: string;
 }
 
 const Exercise = () => {
@@ -37,38 +44,8 @@ const Exercise = () => {
 
   //ExerciseData를 가져온다.
   const [addInfo, setAddInfo] = useState<boolean>(false); //이미 생성된 데이터가 있는가?
-  const [myId, setMyId] = useState<string>(""); //생성된 사용자 객체 데이터
-  const [renderData, setRenderData] = useState<ExerciseDataType>({});
- 
-  const fetchData = async () => {
-    if (context.user) {
-      try{
-        const q = query(
-          collection(db, 'myExercise'),
-          where('userId', '==', context.user!.uid),
-        );
-        const querySnapshot = await getDocs(q);
-  
-        if (!querySnapshot.empty) {
-          setAddInfo(true);
-          querySnapshot.forEach((doc) => {
-            setMyId(doc.id);
-            setRenderData(doc.data());
-          });
-        } else {
-          setAddInfo(false);
-        }
-      }catch(err){
-        console.log(err);
-      }
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-    console.log(renderData);
-  }, [context]);
-
+  const [myId, setMyId] = useState<string>(''); //생성된 사용자 객체 데이터
+  const [renderData, setRenderData] = useState<(ExerciseDataType | { id: string })[]>([]);
 
   //운동 시간 업데이트
   const [exerciseHour, setExerciseHour] = useState<number>(0);
@@ -84,49 +61,185 @@ const Exercise = () => {
     if (name === 'exerciseMin') {
       setExerciseMin(value);
     }
-  }
-  
-//사용자가 선택한 시간에 맞춰 칼로리를 계산한다.
- 
+  };
+
+  useEffect(() => {
+    //사용자가 선택한 시간에 맞춰 칼로리를 계산한다.
+    if (selectExercise) {
+      let exerciseCalorie = selectExercise.calorie;
+      let resultCalorie = (exerciseHour + exerciseMin / 60) * exerciseCalorie;
+      resultCalorie = parseInt(String(resultCalorie));
+
+      setCalorie(resultCalorie);
+    }
+  }, [selectExercise, exerciseHour, exerciseMin]);
+
+  //firestore 처리
+  //firestore 데이터 불러오기
+
+  const fetchData = async () => {
+    if (context.user) {
+      try {
+        const q = query(
+          collection(db, 'myExercise'),
+          where('userId', '==', context.user!.uid),
+          where('date', '==', new Date().toLocaleDateString()),
+          orderBy('dateDetail', 'asc'),
+        );
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+          setAddInfo(true);
+          querySnapshot.forEach((doc) => {
+            console.log(doc.data(), doc.id);
+            const dataObj = { ...doc.data(), id: doc.id };
+            setRenderData((prev) => {
+              if (prev.some((item) => item.id === dataObj.id)) {
+                return prev;
+              } else {
+                return [...prev, dataObj];
+              }
+            });
+          });
+        } else {
+          setAddInfo(false);
+        }
+        console.log(renderData);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+    console.log(renderData);
+  }, [context, renderData]);
+
+  //firestore 업데이트
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await addDoc(collection(db, 'myExercise'), {
+        name: selectExercise.exerciseName,
+        time: exerciseHour * 60 + exerciseMin,
+        date: new Date().toLocaleDateString(),
+        dateDetail: new Date()?.toLocaleDateString('ko', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+        }),
+        calorie: calorie,
+        userId: context.user!.uid,
+      });
+      setPopup(false);
+      fetchData();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //클릭하면 삭제
+  const [hoverBtn, setHoverBtn] = useState<string>('');
+  //hover
+  const onMouseEnter = (id) => {
+    setHoverBtn(id);
+  };
+  const onDelete = async (data) => {
+    await deleteDoc(doc(db, 'myExercise', data.id));
+  };
 
   return (
     <div className='exercise__box'>
-      {context.user ?
+      {context.user ? (
+        <>
+          {renderData.length > 0 ? (
+            <Swiper navigation={true} modules={[Navigation]} className='mySwiper'>
+              {renderData.map((data, index) => {
+                return (
+                  <SwiperSlide className='exercise' key={index}>
+                    <div
+                      className='exercise__modify modify'
+                      onClick={() => {
+                        setPopup(true);
+                        console.log(popup);
+                      }}>
+                      +
+                    </div>
+                    <div className='exercise__summary'>
+                      <div
+                        className='exercise__icon'
+                        onMouseEnter={() => {
+                          setHoverBtn(data.id as string);
+                        }}
+                        onMouseLeave={() => {
+                          setHoverBtn('');
+                        }}
+                        onClick={() => {
+                          onDelete(data);
+                        }}>
+                        {hoverBtn === data.id ? (
+                          <div>
+                            <FiMinus />
+                          </div>
+                        ) : (
+                          <>
+                            {exerciseData
+                              .filter((exercise) => data.name === exercise.exerciseName)
+                              .map((exerciseData, index) => {
+                                return (
+                                  <div key={index}>
+                                    {React.createElement(exerciseData.icon)}
+                                  </div>
+                                );
+                              })}
+                          </>
+                        )}
+                      </div>
+                      <h1 className='exercise__title'>오늘의 운동</h1>
+                      <div className='exercise__type'>{data.name}</div>
+                    </div>
+                    <div className='exercise__detail'>
+                      <div className='exercise__time'>총 {data.time}분</div>
+                      <div className='exercise__calorie'>{data.calorie}kcal</div>
+                    </div>
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          ) : (
+            <div className='exercise exercise__one'>
+              <div
+                className='exercise__modify modify'
+                onClick={() => {
+                  setPopup(true);
+                  console.log(popup);
+                }}>
+                +
+              </div>
+              <div className='exercise__summary'>
+                <div className='exercise__icon'>
+                  <BiDumbbell />
+                </div>
+                <h1 className='exercise__title'>오늘의 운동</h1>
+              </div>
+              <div className='exercise__detail'>
+                <div className='exercise__update'>오늘 한 운동을 업데이트 하세요.</div>
+              </div>
+            </div>
+          )}
+        </>
+      ) : (
         <div className='exercise'>
-          <div
-            className='exercise__modify modify'
-            onClick={() => {
-              setPopup(true);
-              console.log(popup);
-            }}>
-            +
-          </div>
           <div className='exercise__summary'>
             <div className='exercise__icon'>
               <IoIosBicycle />
             </div>
             <h1 className='exercise__title'>{'오늘의 운동'}</h1>
-            <div className='exercise__type'>{'사이클'}</div>
           </div>
-          <div className='exercise__detail'>
-            <div className='exercise__time'>총 {70}분</div>
-            <div className='exercise__calorie'>{130}kcal</div>
-          </div>
+          <div className='exercise__login'>로그인하고 오늘 한 운동을 등록하세요</div>
         </div>
-      :
-        <div className='exercise'>
-         
-          <div className='exercise__summary'>
-            <div className='exercise__icon'>
-              <IoIosBicycle />
-            </div>
-            <h1 className='exercise__title'>{'오늘의 운동'}</h1>
-          </div>
-          <div className='exercise__login'>
-            로그인하고 오늘 한 운동을 등록하세요
-          </div>
-        </div>
-      }
+      )}
       <div className={cn('exercise__popup', { active: popup })}>
         <div
           className='exercise__popup__close'
@@ -160,7 +273,7 @@ const Exercise = () => {
         {selectExercise && (
           <div className='exercise__popup-box'>
             <h2>{selectExercise.exerciseName}</h2>
-            <form>
+            <form onSubmit={onSubmit}>
               <input
                 type='number'
                 name='exerciseHour'
@@ -184,14 +297,14 @@ const Exercise = () => {
                 onChange={onChange}
               />
               <label htmlFor='exerciseMin'>분</label>
+
+              <div className='calorie__box'>
+                <span className='calorie'>{calorie}</span> 칼로리
+              </div>
+              <div className='exercise__button-box'>
+                <button className='exercise--submit'>등록하기</button>
+              </div>
             </form>
-            <div className='calorie__box'>
-              <span className='calorie'>{calorie}</span> 칼로리
-            </div>
-            <div className='exercise__button-box'>
-              <button className='exercise--submit'>등록하기</button>
-              <button className='exercise--reset'>초기화</button>
-            </div>
           </div>
         )}
       </div>

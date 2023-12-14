@@ -241,8 +241,8 @@
       width: 100%;
       text-align: center;
       margin-bottom: 4px;
-      a{
-        &:hover{
+      a {
+        &:hover {
           text-decoration: underline;
           text-underline-offset: 4px;
         }
@@ -469,7 +469,7 @@
       .button--submit {
         background-color: var.$bgColor;
         color: var.$blue;
-        &:hover{
+        &:hover {
           opacity: 0.9;
         }
       }
@@ -558,7 +558,7 @@
     @include var.title-m;
     margin: 0 8px;
   }
-  .bmi__login{
+  .bmi__login {
     @include var.content-m;
   }
 
@@ -592,23 +592,23 @@
     }
 
     .bmi__graph--bar--underweight {
-      width: 25%;
+      width: calc(100 / 15 * 3.5%);
       background-color: var.$blue;
       border-radius: 4px 0 0 4px;
     }
 
     .bmi__graph--bar--normal {
-      width: 20%;
+      width: calc(100 / 15 * 4.5%);
       background-color: var.$green;
     }
 
     .bmi__graph--bar--overweight {
-      width: 18%;
+      width: calc(100 / 15 * 2%);
       background-color: var.$yellow;
     }
 
     .bmi__graph--bar--obese {
-      width: 37%;
+      width: calc(100 / 15 * 5%);
       background-color: var.$red;
       border-radius: 0 4px 4px 0;
     }
@@ -618,6 +618,11 @@
 /*Exercise*/
 .exercise__box {
   position: relative;
+  .swiper {
+    width: 305px;
+    height: 110px;
+    @include var.shadow;
+  }
 }
 
 .exercise {
@@ -625,11 +630,13 @@
   height: 110px;
   background-color: #fff;
   @include var.r-s;
-  @include var.shadow;
   display: flex;
   flex-wrap: wrap;
   padding: 20px 30px;
   position: relative;
+  &.exercise__one {
+    @include var.shadow;
+  }
 
   .exercise__modify {
     font-size: 1.2rem;
@@ -677,16 +684,19 @@
       @include var.content-m;
     }
   }
-  .exercise__login{
+  .exercise__login {
     @include var.content-m;
-    margin-top:4px;
+    margin-top: 4px;
   }
   .exercise__detail {
     width: 100%;
     padding-left: 44px;
+    margin-top: 5px;
     display: flex;
 
-   
+    .exercise__update {
+      @include var.content-m;
+    }
     .exercise__time {
       @include var.content-m;
       position: relative;
@@ -800,6 +810,8 @@
       width: 100%;
       @include var.title-m;
       text-align: center;
+      margin-bottom: 16px;
+      margin-top: 10px;
 
       span {
         @include var.title-m;
@@ -822,10 +834,10 @@
         background-color: var.$bgColor;
       }
       .exercise--submit {
+        width: 86%;
         background-color: var.$blue;
         color: #fff;
-        &:hover,
-        &:focus {
+        &:hover {
           background-color: #14419b;
           color: #fff;
         }
@@ -901,9 +913,9 @@
     @include var.r-s;
     flex-grow: 1;
     padding: 10px 16px;
-    svg{
+    svg {
       width: 100%;
-      font-size:3rem;
+      font-size: 3rem;
       color: var.$blue;
       margin-top: 2rem;
     }
@@ -912,6 +924,10 @@
       color: var.$blue;
       @include var.content-m;
       font-weight: 700;
+    }
+    .medicine__caution__search {
+      margin-top: 1rem;
+      cursor: pointer;
     }
   }
 }
@@ -988,6 +1004,11 @@
           }
         }
       }
+    }
+    .search--laod {
+      width: 100%;
+      height: 65%;
+      @include var.center;
     }
     .search__result {
       height: calc(100% - 80px - 35px);
