@@ -14,23 +14,54 @@ const SearchPop = (props) => {
 
   // console.log(process.env.REACT_APP_APIKEY_NR);
 
+  //팝업 옵션 값 받아오기
   let [value, setValue] = useState('');
   const handleValue = (e) => {
     setValue(e.target.value);
   };
 
-  let [callHospital, setCallHospital] = useState([]);
-  let [selectCity, setSelectCity] = useState<string>('');
-
+  //이전, 다음 버튼
   let [chNum, setChNum] = useState<number>(1);
   let [totalCount, setTotalCount] = useState(0);
-
+  //마지막에서 안넘어가게 하기
   if (chNum === 0) {
     setChNum(1);
   }
   if (chNum === Math.ceil(totalCount / 10)) {
     setChNum(Math.ceil(totalCount / 10) - 1);
   }
+
+  //api
+  let [callHospital, setCallHospital] = useState([]);
+  let [selectCity, setSelectCity] = useState<string>('');
+  let [selectName, setSelectName] = useState('');
+  let [selectAdd, setSelectAdd] = useState('');
+
+  const fetchData = async () => {
+    try {
+      const apiKey = process.env.REACT_APP_APIKEY_DATA;
+      const response = await axios.get(
+        `/openapi/service/rest/HmcSearchService/getHmcList?serviceKey=${apiKey}&numOfRows=10&pageNo=${chNum}&locAddr=${selectCity} ${value}&hmcNm=%EC%83%88%ED%95%98%EB%8A%98&siDoCd=11&siGunGuCd=590&locAddr=300&hmcRdatCd=0&hchType=0&type=json`,
+      );
+      const searchItem = response.data.response.body.items.item;
+      setCallHospital(searchItem);
+      setTotalCount(response.data.response.body.totalCount);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+    // try {
+    //   // const apiKey = process.env.REACT_APP_APIKEY_NR;
+    //   const URL = `https://apis.data.go.kr/openapi/service/rest/HmcSearchService/getHchkTypesHmcList?serviceKey=Pnz3JkMQMszFg9JlQpehLxMHCNMfZwA12Bpdtwz0lqimEj7RHM%2F6yJ%2Fl6SobwjmWEjsX6vnI00x1p34xQPenfg%3D%3D&numOfRows=10&pageNo=${chNum}&locAddr=${selectCity} ${value}`;
+    //   const response = await axios.get(URL);
+    //   const searchItem = response.data.response.body.items.item;
+    //   setCallHospital(searchItem);
+    //   setTotalCount(response.data.response.body.totalCount);
+    //   console.log(response);
+    // } catch (err) {
+    //   console.log(err);
+    // }
+  };
 
   useEffect(() => {
     fetchData();
@@ -40,30 +71,6 @@ const SearchPop = (props) => {
     setSelectCity(institution[selected].city);
     fetchData();
   }, [value]);
-
-  const fetchData = async () => {
-    try {
-      const URL =
-        'http://apis.data.go.kr/openapi/service/rest/HmcSearchService/getHchkTypesHmcList';
-      const response = await axios.get(URL, {
-        params: {
-          // serviceKey: process.env.REACT_APP_APIKEY_NR,
-          numOfRows: 10,
-          pageNo: chNum,
-          locAddr: `${selectCity} ${value}`,
-        },
-      });
-      // const searchItem = response.data.response.body.items.item;
-      // setCallHospital(searchItem)
-      // setTotalCount(response.data.response.body.totalCount)
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  let [selectName, setSelectName] = useState('');
-  let [selectAdd, setSelectAdd] = useState('');
 
   return (
     <div className='search-pop'>
@@ -120,7 +127,7 @@ const SearchPop = (props) => {
           onClick={() => {
             setChNum(--chNum);
           }}
-          style={{ background: `${chNum === 1 ? '#DEE9FE' : '#fff'}` }}>
+          style={{ background: `${chNum === 1 ? '#cfd9eb' : '#fff'}` }}>
           <IoIosArrowBack className='arrow' />
         </button>
         <input type='button' value={0 + chNum} />
@@ -131,7 +138,7 @@ const SearchPop = (props) => {
           className='next button'
           style={{
             background: `${
-              chNum === Math.ceil(totalCount / 10) - 1 ? '#DEE9FE' : '#fff'
+              chNum === Math.ceil(totalCount / 10) - 1 ? '#cfd9eb' : '#fff'
             }`,
           }}>
           <IoIosArrowForward

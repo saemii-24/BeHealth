@@ -3,12 +3,14 @@
 .exercise-pop {
   width: 100%;
   height: 100%;
+  padding-left: 70px;
   position: relative;
 
   .icon {
-    position: absolute;
-    top: 45%;
-    left: -20px;
     background: var.$green;
+  }
+
+  .title {
+    margin-bottom: 40px;
   }
 }

@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDisease, faAngleRight, faDumbbell } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faDumbbell } from '@fortawesome/free-solid-svg-icons';
+import { FaVirus } from 'react-icons/fa6';
 import DiseasePop from './DiseasePop';
 import ExercisePop from './ExercisePop';
 import CommonPop from './CommonPop';
@@ -83,7 +84,7 @@ const HealthNews = (props) => {
           clickDisease();
         }}>
         <div className='icon'>
-          <FontAwesomeIcon icon={faDisease} className='fontawesome' />
+          <FaVirus className='fontawesome' />
         </div>
 
         <div className='disease__txt'>

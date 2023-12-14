@@ -7,7 +7,7 @@ const CommonPop = (props) => {
   return (
     <div className='common-pop'>
       <div
-        className='icon'
+        className='icon close'
         onClick={() => {
           closeCommon();
           closeHealthNews();

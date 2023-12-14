@@ -63,5 +63,7 @@
     "@types/node": "^20.10.4",
     "prettier": "^3.1.0"
   },
-  "proxy": "http://apis.data.go.kr"
+  "options": {
+    "proxy": "https://apis.data.go.kr/"
+  }
 }

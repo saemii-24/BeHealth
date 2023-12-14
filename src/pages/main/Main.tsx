@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import HealthNews from './HealthNews';
 import SearchPop from './SearchPop';
-// import MainContent from './MainContent'
 
 //옵션 데이터
 import institution from './institution';
@@ -10,7 +9,6 @@ import institution from './institution';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouseChimneyMedical } from '@fortawesome/free-solid-svg-icons';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-// import Search from './Search'
 
 import momentum from './momentum';
 import { MomentumType } from './momentum';
@@ -99,10 +97,7 @@ const Main = () => {
 
   return (
     <div className='main'>
-      {/* <MainContent/> */}
-
       <div className='main-content'>
-        {/* <Search /> */}
         <div className='search' ref={chSearch}>
           <div className='search--left' ref={searchLeft}>
             <h2>국가 검진 기관 찾기</h2>
@@ -159,7 +154,7 @@ const Main = () => {
 
               <div className='pharmacy-txt'>
                 <h3>가까운 약국 찾기</h3>
-                <p>검색하러 가기</p>
+                <p>우리동네 약국은 어디에 있을까?</p>
               </div>
             </div>
             {pharmacyPop ? <PharmacyPop setPharmacyPop={setPharmacyPop} /> : null}
