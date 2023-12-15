@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import './Login.scss';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { app } from '../../firebase/firebaseApp';
 import { useNavigate, Link } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ title }: { title?: ReactElement }) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
@@ -51,8 +51,15 @@ const Login = () => {
         <h1 className='login__header__logo-text'>Be Health</h1>
       </div>
       <h3 className='login__header__summary'>
-        나의 건강정보를 손쉽게 관리하고 싶다면?
-        <br /> Be Health에서 지금 시작해 보세요.
+        {title ? (
+          <>{title}</>
+        ) : (
+          <>
+            {' '}
+            나의 건강정보를 손쉽게 관리하고 싶다면?
+            <br /> Be Health에서 지금 시작해 보세요.
+          </>
+        )}
       </h3>
       <form onSubmit={onSubmit}>
         <label htmlFor='email'>아이디(이메일)</label>
@@ -78,7 +85,7 @@ const Login = () => {
           로그인
         </button>
       </form>
-      <Link to='/signup'>계정이 없으신가요?</Link>
+      {!title && <Link to='/signup'>계정이 없으신가요?</Link>}
     </div>
   );
 };

@@ -77,7 +77,8 @@
         background-color: #295ec9;
       }
       &.submit--disabled {
-        color: var.$lightGray;
+        background-color: #e7e7e7;
+        color: var.$middleGray;
       }
     }
 
