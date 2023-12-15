@@ -57,6 +57,19 @@
       background: transparent;
       border: none;
     }
+    .calendar--reset {
+      color: #8f8f8f;
+      margin-left: auto;
+      margin-right: 16px;
+      font-size: 0.85rem;
+      font-weight: 400;
+      line-height: 180%;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+    }
 
     svg {
       font-size: 1.2rem;
@@ -241,6 +254,12 @@
       width: 100%;
       text-align: center;
       margin-bottom: 4px;
+      a {
+        &:hover {
+          text-decoration: underline;
+          text-underline-offset: 4px;
+        }
+      }
     }
 
     .my-status__birth {
@@ -439,7 +458,7 @@
       width: 150px;
       padding: 0 10px;
       border: none;
-      outline: none;
+
       border-radius: 4px;
       background-color: var.$bgColor;
     }
@@ -456,13 +475,16 @@
         height: 35px;
         width: 100%;
         border-radius: 4px;
-        outline: none;
+
         border: none;
         cursor: pointer;
       }
       .button--submit {
         background-color: var.$bgColor;
         color: var.$blue;
+        &:hover {
+          opacity: 0.9;
+        }
       }
       .button--reset {
         background-color: #f2f6f9;
@@ -488,6 +510,26 @@
       div {
         width: 16px;
         height: 16px;
+      }
+    }
+    select {
+      width: 150px;
+      height: 35px;
+      padding: 0 10px;
+      border-radius: 4px;
+      border: none;
+      outline: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+
+      // 출처 <a href="https://www.flaticon.com/free-icons/down-arrow" title="down arrow icons">Down arrow icons created by Freepik - Flaticon</a>
+      background: {
+        color: var.$bgColor;
+        image: url('../../../public/images/arrow.png');
+        repeat: no-repeat;
+        size: 10px;
+        position: 90% 50%;
       }
     }
   }
@@ -549,6 +591,9 @@
     @include var.title-m;
     margin: 0 8px;
   }
+  .bmi__login {
+    @include var.content-m;
+  }
 
   .bmi__graph {
     width: 100%;
@@ -580,23 +625,23 @@
     }
 
     .bmi__graph--bar--underweight {
-      width: 25%;
+      width: calc(100 / 15 * 3.5%);
       background-color: var.$blue;
       border-radius: 4px 0 0 4px;
     }
 
     .bmi__graph--bar--normal {
-      width: 20%;
+      width: calc(100 / 15 * 4.5%);
       background-color: var.$green;
     }
 
     .bmi__graph--bar--overweight {
-      width: 18%;
+      width: calc(100 / 15 * 2%);
       background-color: var.$yellow;
     }
 
     .bmi__graph--bar--obese {
-      width: 37%;
+      width: calc(100 / 15 * 5%);
       background-color: var.$red;
       border-radius: 0 4px 4px 0;
     }
@@ -604,8 +649,36 @@
 }
 
 /*Exercise*/
+/*Exercise에서 사용되는 Swiper*/
+.swiper-button-next {
+  background: url('../../images/right.svg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 24px !important;
+  height: 24px !important;
+  top: 90% !important;
+  right: 5% !important;
+}
+
+.swiper-button-prev {
+  background: url('../../images/left.svg') no-repeat;
+  width: 24px !important;
+  height: 24px !important;
+  top: 90% !important;
+  left: 5% !important;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  display: none;
+}
 .exercise__box {
   position: relative;
+  .swiper {
+    width: 305px;
+    height: 110px;
+    @include var.shadow;
+  }
 }
 
 .exercise {
@@ -613,11 +686,13 @@
   height: 110px;
   background-color: #fff;
   @include var.r-s;
-  @include var.shadow;
   display: flex;
   flex-wrap: wrap;
   padding: 20px 30px;
   position: relative;
+  &.exercise__one {
+    @include var.shadow;
+  }
 
   .exercise__modify {
     font-size: 1.2rem;
@@ -632,6 +707,7 @@
 
   .exercise__summary {
     width: 100%;
+    height: 36px;
     display: flex;
     align-items: center;
 
@@ -639,12 +715,29 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background-color: #306de5;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
-
+      background-color: #306de5;
+      div {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        &.exercise__icon--delete {
+          background-color: var.$red;
+          svg {
+            color: #fff;
+          }
+        }
+        &.exercise__icon--type {
+          background-color: #306de5;
+        }
+      }
       svg {
         color: #fff;
         font-size: 1.2rem;
@@ -665,12 +758,21 @@
       @include var.content-m;
     }
   }
-
+  .exercise__login {
+    @include var.content-m;
+    margin-top: 4px;
+  }
   .exercise__detail {
     width: 100%;
     padding-left: 44px;
+    margin-top: 5px;
     display: flex;
+    height: 25px;
 
+    .exercise__update {
+      @include var.content-m;
+      height: 25px;
+    }
     .exercise__time {
       @include var.content-m;
       position: relative;
@@ -732,7 +834,7 @@
     .exercise__button {
       background-color: #fff;
       border: none;
-      outline: none;
+
       @include var.center;
       width: 36px;
       height: 36px;
@@ -763,6 +865,7 @@
       height: fit-content;
       line-height: 2rem;
     }
+
     form {
       width: 100%;
       @include var.center;
@@ -772,7 +875,7 @@
         height: 30px;
         border-radius: 4px;
         border: none;
-        outline: none;
+
         text-indent: 8px;
       }
 
@@ -784,6 +887,8 @@
       width: 100%;
       @include var.title-m;
       text-align: center;
+      margin-bottom: 16px;
+      margin-top: 10px;
 
       span {
         @include var.title-m;
@@ -799,17 +904,17 @@
         width: 135px;
         height: 40px;
         border-radius: 4px;
-        outline: none;
+
         border: none;
         cursor: pointer;
         transition: all 0.2s;
         background-color: var.$bgColor;
       }
       .exercise--submit {
+        width: 86%;
         background-color: var.$blue;
         color: #fff;
-        &:hover,
-        &:focus {
+        &:hover {
           background-color: #14419b;
           color: #fff;
         }
@@ -885,11 +990,21 @@
     @include var.r-s;
     flex-grow: 1;
     padding: 10px 16px;
+    svg {
+      width: 100%;
+      font-size: 3rem;
+      color: var.$blue;
+      margin-top: 2rem;
+    }
 
     .medicine__caution--title {
       color: var.$blue;
       @include var.content-m;
       font-weight: 700;
+    }
+    .medicine__caution__search {
+      margin-top: 1rem;
+      cursor: pointer;
     }
   }
 }
@@ -941,7 +1056,6 @@
         background-color: #fff;
         @include var.r-s;
         input {
-          outline: none;
           border: none;
           height: 40px;
           font-weight: 700;
@@ -953,7 +1067,7 @@
           height: 40px;
           width: 40px;
           font-weight: 700;
-          outline: none;
+
           border: none;
           border-radius: 0 9px 9px 0;
           cursor: pointer;
@@ -966,6 +1080,11 @@
           }
         }
       }
+    }
+    .search--laod {
+      width: 100%;
+      height: 65%;
+      @include var.center;
     }
     .search__result {
       height: calc(100% - 80px - 35px);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Calendar from './Calendar';
 import MyStatus from './MyStatus';
 import Bmi from './Bmi';
@@ -6,6 +6,7 @@ import Exercise from './Exercise';
 import Medicine from './Medicine';
 
 const MyPage = () => {
+  
   return (
     <div className='my-page'>
       <div className='my-page__top'>
