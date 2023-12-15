@@ -6,11 +6,11 @@
 
 // const ExerciseContextProvider = ({ children }) => {
 //     const [data, setData] = useState<RenderDataType>({});
-  
+
 //     const updateData = (newData: RenderDataType) => {
 //       setData(newData);
 //     };
-  
+
 //     return (
 //       <ExerciseContext.Provider value={{ data, setData: updateData }}>
 //         {children}

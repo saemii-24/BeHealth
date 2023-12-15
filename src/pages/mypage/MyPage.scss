@@ -57,6 +57,19 @@
       background: transparent;
       border: none;
     }
+    .calendar--reset {
+      color: #8f8f8f;
+      margin-left: auto;
+      margin-right: 16px;
+      font-size: 0.85rem;
+      font-weight: 400;
+      line-height: 180%;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+    }
 
     svg {
       font-size: 1.2rem;
@@ -445,7 +458,7 @@
       width: 150px;
       padding: 0 10px;
       border: none;
-      outline: none;
+
       border-radius: 4px;
       background-color: var.$bgColor;
     }
@@ -462,7 +475,7 @@
         height: 35px;
         width: 100%;
         border-radius: 4px;
-        outline: none;
+
         border: none;
         cursor: pointer;
       }
@@ -497,6 +510,26 @@
       div {
         width: 16px;
         height: 16px;
+      }
+    }
+    select {
+      width: 150px;
+      height: 35px;
+      padding: 0 10px;
+      border-radius: 4px;
+      border: none;
+      outline: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+
+      // 출처 <a href="https://www.flaticon.com/free-icons/down-arrow" title="down arrow icons">Down arrow icons created by Freepik - Flaticon</a>
+      background: {
+        color: var.$bgColor;
+        image: url('../../../public/images/arrow.png');
+        repeat: no-repeat;
+        size: 10px;
+        position: 90% 50%;
       }
     }
   }
@@ -616,6 +649,29 @@
 }
 
 /*Exercise*/
+/*Exercise에서 사용되는 Swiper*/
+.swiper-button-next {
+  background: url('../../images/right.svg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 24px !important;
+  height: 24px !important;
+  top: 90% !important;
+  right: 5% !important;
+}
+
+.swiper-button-prev {
+  background: url('../../images/left.svg') no-repeat;
+  width: 24px !important;
+  height: 24px !important;
+  top: 90% !important;
+  left: 5% !important;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  display: none;
+}
 .exercise__box {
   position: relative;
   .swiper {
@@ -651,6 +707,7 @@
 
   .exercise__summary {
     width: 100%;
+    height: 36px;
     display: flex;
     align-items: center;
 
@@ -658,12 +715,29 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background-color: #306de5;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
-
+      background-color: #306de5;
+      div {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        &.exercise__icon--delete {
+          background-color: var.$red;
+          svg {
+            color: #fff;
+          }
+        }
+        &.exercise__icon--type {
+          background-color: #306de5;
+        }
+      }
       svg {
         color: #fff;
         font-size: 1.2rem;
@@ -693,9 +767,11 @@
     padding-left: 44px;
     margin-top: 5px;
     display: flex;
+    height: 25px;
 
     .exercise__update {
       @include var.content-m;
+      height: 25px;
     }
     .exercise__time {
       @include var.content-m;
@@ -758,7 +834,7 @@
     .exercise__button {
       background-color: #fff;
       border: none;
-      outline: none;
+
       @include var.center;
       width: 36px;
       height: 36px;
@@ -789,6 +865,7 @@
       height: fit-content;
       line-height: 2rem;
     }
+
     form {
       width: 100%;
       @include var.center;
@@ -798,7 +875,7 @@
         height: 30px;
         border-radius: 4px;
         border: none;
-        outline: none;
+
         text-indent: 8px;
       }
 
@@ -827,7 +904,7 @@
         width: 135px;
         height: 40px;
         border-radius: 4px;
-        outline: none;
+
         border: none;
         cursor: pointer;
         transition: all 0.2s;
@@ -979,7 +1056,6 @@
         background-color: #fff;
         @include var.r-s;
         input {
-          outline: none;
           border: none;
           height: 40px;
           font-weight: 700;
@@ -991,7 +1067,7 @@
           height: 40px;
           width: 40px;
           font-weight: 700;
-          outline: none;
+
           border: none;
           border-radius: 0 9px 9px 0;
           cursor: pointer;

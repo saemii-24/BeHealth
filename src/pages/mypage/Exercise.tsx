@@ -17,6 +17,7 @@ import {
   orderBy,
   getDocs,
   doc,
+  onSnapshot,
 } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseApp';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -67,10 +68,13 @@ const Exercise = () => {
     //사용자가 선택한 시간에 맞춰 칼로리를 계산한다.
     if (selectExercise) {
       let exerciseCalorie = selectExercise.calorie;
-      let resultCalorie = (exerciseHour + exerciseMin / 60) * exerciseCalorie;
-      resultCalorie = parseInt(String(resultCalorie));
+      let resultCalorie =
+        ((Number(exerciseHour * 60) + Number(exerciseMin)) / 60) * exerciseCalorie;
 
-      setCalorie(resultCalorie);
+      resultCalorie = Number(resultCalorie.toFixed(0));
+      console.log(resultCalorie);
+
+      setCalorie(Number(resultCalorie.toFixed(0)));
     }
   }, [selectExercise, exerciseHour, exerciseMin]);
 
@@ -90,31 +94,30 @@ const Exercise = () => {
 
         if (!querySnapshot.empty) {
           setAddInfo(true);
+          setRenderData([]);
           querySnapshot.forEach((doc) => {
-            console.log(doc.data(), doc.id);
-            const dataObj = { ...doc.data(), id: doc.id };
+            console.log(doc.data());
+            //const dataObj = { ...doc.data(), id: doc.id };
             setRenderData((prev) => {
-              if (prev.some((item) => item.id === dataObj.id)) {
+              if (prev.some((item) => item.id === doc.id)) {
                 return prev;
               } else {
-                return [...prev, dataObj];
+                return [...prev, { ...doc.data(), id: doc.id }];
               }
             });
           });
+          console.log(renderData);
         } else {
+          setRenderData([]);
           setAddInfo(false);
         }
-        console.log(renderData);
       } catch (err) {
         console.log(err);
       }
     }
   };
 
-  useEffect(() => {
-    fetchData();
-    console.log(renderData);
-  }, [context, renderData]);
+  //업데이트 확인
 
   //firestore 업데이트
   const onSubmit = async (e) => {
@@ -122,7 +125,7 @@ const Exercise = () => {
     try {
       await addDoc(collection(db, 'myExercise'), {
         name: selectExercise.exerciseName,
-        time: exerciseHour * 60 + exerciseMin,
+        time: Number(exerciseHour * 60) + Number(exerciseMin),
         date: new Date().toLocaleDateString(),
         dateDetail: new Date()?.toLocaleDateString('ko', {
           hour: '2-digit',
@@ -141,13 +144,18 @@ const Exercise = () => {
 
   //클릭하면 삭제
   const [hoverBtn, setHoverBtn] = useState<string>('');
-  //hover
-  const onMouseEnter = (id) => {
-    setHoverBtn(id);
-  };
+  //
   const onDelete = async (data) => {
-    await deleteDoc(doc(db, 'myExercise', data.id));
+    try {
+      await deleteDoc(doc(db, 'myExercise', data.id));
+      fetchData();
+    } catch (err) {
+      console.log(err);
+    }
   };
+  useEffect(() => {
+    fetchData();
+  }, [context]);
 
   return (
     <div className='exercise__box'>
@@ -155,7 +163,7 @@ const Exercise = () => {
         <>
           {renderData.length > 0 ? (
             <Swiper navigation={true} modules={[Navigation]} className='mySwiper'>
-              {renderData.map((data, index) => {
+              {renderData.map((data: any, index) => {
                 return (
                   <SwiperSlide className='exercise' key={index}>
                     <div
@@ -179,7 +187,7 @@ const Exercise = () => {
                           onDelete(data);
                         }}>
                         {hoverBtn === data.id ? (
-                          <div>
+                          <div className='exercise__icon--delete'>
                             <FiMinus />
                           </div>
                         ) : (
@@ -188,7 +196,12 @@ const Exercise = () => {
                               .filter((exercise) => data.name === exercise.exerciseName)
                               .map((exerciseData, index) => {
                                 return (
-                                  <div key={index}>
+                                  <div
+                                    key={index}
+                                    className='exercise__icon--type'
+                                    onClick={() => {
+                                      fetchData();
+                                    }}>
                                     {React.createElement(exerciseData.icon)}
                                   </div>
                                 );

@@ -41,7 +41,7 @@ const Medicine = () => {
     setSearchNow(false);
     try {
       const apiKey = process.env.REACT_APP_APIKEY_DATA;
-      const URL = `/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList?serviceKey=${apiKey}&pageNo=1&numOfRows=1&itemName=${medicine}&type=json`;
+      const URL = `http://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList?serviceKey=${apiKey}&pageNo=1&numOfRows=1&itemName=${medicine}&type=json`;
       const response = await axios.get(URL);
       const searchItem = response.data.body.items[0];
       setSideEffect(searchItem.seQesitm);

@@ -70,7 +70,11 @@ const MyStatus = () => {
       const thisDate = new Date().getDate();
 
       if (Number(myBirthMonth + '' + myBirthDate) > Number(thisMonth + '' + thisDate)) {
-        setAge(thisYear - myBirthYear - 1);
+        if (thisYear - myBirthYear - 1 < 0) {
+          setAge(0);
+        } else {
+          setAge(thisYear - myBirthYear - 1);
+        }
       } else {
         setAge(thisYear - myBirthYear);
       }
@@ -171,7 +175,7 @@ const MyStatus = () => {
       setWeight(value);
     }
     if (name === 'blood-type') {
-      setBloodType(value.toUpperCase());
+      setBloodType(value);
     }
   };
   return (
@@ -352,13 +356,14 @@ const MyStatus = () => {
           </div>
           <div>
             <label htmlFor='blood-type'>혈액형</label>
-            <input
-              type='text'
-              name='blood-type'
-              id='blood-type'
-              onChange={onChange}
-              defaultValue={renderData.bloodType ? renderData.bloodType : ''}
-            />
+
+            <select name='blood-type' id='blood-type' onChange={onChange}>
+              <option value='A'>A</option>
+              <option value='B'>B</option>
+              <option value='AB'>AB</option>
+              <option value='O'>O</option>
+              <option value='그 외'>그 외</option>
+            </select>
           </div>
           <div className='button__box'>
             <button className='button--submit' type='submit'>
