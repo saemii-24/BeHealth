@@ -1,15 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Component.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaHome, FaLaugh, FaSignal, FaEnvelope } from 'react-icons/fa';
 import cn from 'classnames';
-
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
+import { getAuth, signOut, deleteUser } from 'firebase/auth';
+import { app } from '../firebase/firebaseApp'; //firebase 초기화 해둔값
+import { useLocation } from 'react-router-dom';
 type SelectTabType = 'home' | 'myPage' | 'analyzes' | 'memo';
 
 const Menu = () => {
-  const [isSignIn, setIsSignIn] = useState<boolean>(false);
   const [selectTab, setSelectTab] = useState<SelectTabType>('home');
+  const [isAuth, setIsAuth] = useState<boolean>(false);
+
   const navigate = useNavigate();
+  const context = useContext(AuthContext);
+
+  //location에 따라 탭 변동
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setSelectTab('home');
+    } else if (location.pathname === '/mypage') {
+      setSelectTab('myPage');
+    } else if (location.pathname === '/login') {
+      setSelectTab('home');
+    } else if (location.pathname === '/signup') {
+      setSelectTab('home');
+    }
+  }, [location]);
+
+  useEffect(() => {
+    if (context.user) {
+      setIsAuth(true);
+    } else {
+      setIsAuth(false);
+    }
+  }, [context]);
+
+  const handleSignOut = async () => {
+    try {
+      const auth = getAuth(app);
+      await signOut(auth);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleDeleteUser = async () => {
+    try {
+      const auth = getAuth(app);
+      const user = auth.currentUser;
+
+      await deleteUser(user!);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className='side-menu'>
@@ -24,12 +71,25 @@ const Menu = () => {
         </div>
       </Link>
       <ul className='side-menu__authentication'>
-        <li>
-          <Link to='/login'>로그인</Link>
-        </li>
-        <li>
-          <Link to='/signin'>회원가입</Link>
-        </li>
+        {isAuth ? (
+          <>
+            <li onClick={handleSignOut}>
+              <Link to='/'>로그아웃</Link>
+            </li>
+            <li onClick={handleDeleteUser}>
+              <Link to='/'>회원탈퇴</Link>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to='/login'>로그인</Link>
+            </li>
+            <li>
+              <Link to='/signup'>회원가입</Link>
+            </li>
+          </>
+        )}
       </ul>
       <ul className='side-menu__page'>
         <li
@@ -54,23 +114,11 @@ const Menu = () => {
           <FaLaugh />
           <span>My Page</span>
         </li>
-        <li
-          className={cn('side-menu__authentication-tab', {
-            select: selectTab === 'analyzes',
-          })}
-          onClick={() => {
-            setSelectTab('analyzes');
-          }}>
+        <li className='side-menu__authentication-tab'>
           <FaSignal />
           <span>Analyzes</span>
         </li>
-        <li
-          className={cn('side-menu__authentication-tab', {
-            select: selectTab === 'memo',
-          })}
-          onClick={() => {
-            setSelectTab('memo');
-          }}>
+        <li className='side-menu__authentication-tab'>
           <FaEnvelope />
           <span>Memo</span>
         </li>

@@ -7,7 +7,7 @@ import './MyPage.scss';
 
 const Exercise = () => {
   //구조를 위해 exerciseData에서 데이터를 가져왔다고 가정한다.
-  const [selectExercise, setSelectExercise] = useState<ExerciseType | null>(null);
+  const [selectExercise, setSelectExercise] = useState<ExerciseType>(exerciseData[0]);
   const [calorie, setCalorie] = useState<number>(0);
   const [exerciseHour, setExerciseHour] = useState<number>(0);
   const [exerciseMin, setExerciseMin] = useState<number>(0);

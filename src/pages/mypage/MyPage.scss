@@ -255,24 +255,35 @@
         line-height: 0.7rem;
       }
     }
+    .my-status__welcome {
+      @include var.content-s;
+      font-weight: 700;
+      a {
+        color: var.$middleGray;
+      }
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+    }
 
     .my-status__age,
-    .my-status__sex {
+    .my-status__gender {
       @include var.content-s;
       font-weight: 700;
     }
 
-    .my-status__sex {
+    .my-status__gender {
       svg {
         font-size: 1rem;
         margin-top: 2px;
         margin-left: 5px;
 
-        &.my-status__sex--male {
+        &.my-status__gender--male {
           color: var.$blue;
         }
 
-        &.my-status__sex--female {
+        &.my-status__gender--female {
           color: var.$red;
         }
       }
@@ -288,6 +299,14 @@
     border-radius: 50%;
     position: relative;
     cursor: pointer;
+    &.my-status__mood-logo {
+      cursor: default;
+    }
+    svg {
+      transform: scale(2);
+      margin-left: 2px;
+      margin-top: 4px;
+    }
 
     h3 {
       font-size: 2.5rem;
@@ -382,7 +401,7 @@
   position: absolute;
   padding: 30px;
   width: 300px;
-  height: 340px;
+  height: 400px;
   background-color: var.$blue;
   z-index: 123;
   border-radius: 8px;
@@ -442,11 +461,33 @@
         cursor: pointer;
       }
       .button--submit {
-        background-color: #fff;
+        background-color: var.$bgColor;
         color: var.$blue;
       }
       .button--reset {
         background-color: #f2f6f9;
+      }
+    }
+    .gender__radio {
+      display: flex;
+      p {
+        color: #fff;
+        margin-right: 10px;
+        width: 45px;
+      }
+      input[type='radio'] {
+        width: 16px;
+        height: 16px;
+      }
+      label {
+        width: 30px;
+      }
+      .gender--female {
+        margin-left: 40px;
+      }
+      div {
+        width: 16px;
+        height: 16px;
       }
     }
   }
