@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import Loading from '../../component/Loading';
 
@@ -6,9 +6,11 @@ import { IoClose } from 'react-icons/io5';
 import { FaPlus } from 'react-icons/fa';
 import { IoIosArrowForward } from 'react-icons/io';
 import { IoIosArrowBack } from 'react-icons/io';
+import { HospitalNameContext } from '../../context/HospitalNameContext';
+import { HospitalAddContext } from '../../context/HospitalAddContext';
 
 const SearchPop = (props) => {
-  let { institution, selected, setSearchPop } = props;
+  let { institution, selected, setSearchPop, setAdd } = props;
 
   // console.log(process.env.REACT_APP_APIKEY_NR);
 
@@ -32,8 +34,6 @@ const SearchPop = (props) => {
   //api
   let [callHospital, setCallHospital] = useState([]);
   let [selectCity, setSelectCity] = useState<string>('');
-  let [selectName, setSelectName] = useState('');
-  let [selectAdd, setSelectAdd] = useState('');
   let [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
@@ -83,6 +83,10 @@ const SearchPop = (props) => {
   //   fetchData();
   // }, [callHospital]);
 
+  //정보 클릭하면 저장해서 목록에 보여줌
+  let { setSelectName } = useContext(HospitalNameContext);
+  let { setSelectAdd } = useContext(HospitalAddContext);
+
   return (
     <div className='search-pop'>
       <IoClose
@@ -119,8 +123,9 @@ const SearchPop = (props) => {
                 className='hospital'
                 key={i}
                 onClick={() => {
-                  setSelectAdd(v.locAddr);
-                  setSelectName(v.hmcNm);
+                  setSelectAdd!(v.locAddr);
+                  setSelectName!(v.hmcNm);
+                  setAdd(true);
                 }}>
                 <div className='icon'>
                   <FaPlus className='fontawesome' />

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import HealthNews from './HealthNews';
 import SearchPop from './SearchPop';
@@ -16,6 +16,8 @@ import { MomentumType } from './momentum';
 import todayList from './todayList';
 import { TodayListType } from './todayList';
 import PharmacyPop from './PharmacyPop';
+import { HospitalAddContext } from '../../context/HospitalAddContext';
+import { HospitalNameContext } from '../../context/HospitalNameContext';
 
 const Main = () => {
   //mainContent 변수
@@ -52,10 +54,12 @@ const Main = () => {
   //홀수 짝수 구하기
   let string = '';
   if (theYear % 2 === 0) {
-    string = `${theYear}년은 짝수년도 출생자가 검진 대상자입니다.`;
+    string = `${theYear}년은 짝수년도 출생자가\n 검진 대상자입니다.`;
   } else if (theYear % 2 === 1) {
-    string = `${theYear}년은 홀수년도 출생자가 검진 대상자입니다.`;
+    string = `${theYear}년은 홀수년도 출생자가\n 검진 대상자입니다.`;
   }
+  //줄바꿈 하기
+  let newStr = string.split('\n');
 
   //옵션 선택한 값의 인덱스 가져옴
   let [selected, setSelected] = useState(0);
@@ -72,28 +76,36 @@ const Main = () => {
   let chSearch = useRef<any>(null);
   let searchLeft = useRef<any>(null);
   let chInstitution = useRef<any>(null);
-  let searchBottonLeft = useRef<any>(null);
+  let searchBottomLeft = useRef<any>(null);
   let chNotice = useRef<any>(null);
+  let hospital = useRef<any>(null);
+
+  let [add, setAdd] = useState(false);
 
   function clickHealthNews() {
     chSearch.current.style.width = '270px';
     chSearch.current.style.overflow = 'hidden';
     searchLeft.current.style.width = '100%';
     chInstitution.current.style.width = '150px';
+    setAdd(false);
 
-    searchBottonLeft.current.style.width = '270px';
+    searchBottomLeft.current.style.width = '270px';
     chNotice.current.style.display = 'none';
   }
 
   function closeHealthNews() {
     chSearch.current.style.width = '100%';
     chSearch.current.style.overflow = 'visible';
-    searchLeft.current.style.width = '54%';
-    chInstitution.current.style.width = '250px';
+    searchLeft.current.style.width = '260px';
+    chInstitution.current.style.width = '200px';
+    setAdd(true);
 
-    searchBottonLeft.current.style.width = '290px';
+    searchBottomLeft.current.style.width = '290px';
     chNotice.current.style.display = 'block';
   }
+
+  let { selectAdd } = useContext(HospitalAddContext);
+  let { selectName } = useContext(HospitalNameContext);
 
   return (
     <div className='main'>
@@ -101,7 +113,9 @@ const Main = () => {
         <div className='search' ref={chSearch}>
           <div className='search--left' ref={searchLeft}>
             <h2>국가 검진 기관 찾기</h2>
-            <p>{string}</p>
+            {newStr.map((v, i) => {
+              return <p key={i}>{v}</p>;
+            })}
 
             <div className='select-institution'>
               <select
@@ -132,16 +146,43 @@ const Main = () => {
                   institution={institution}
                   selected={selected}
                   setSearchPop={setSearchPop}
+                  setAdd={setAdd}
                 />
               ) : null}
             </div>
           </div>
+          {/*  */}
+          <div
+            className={`search--right ${add ? null : 'hospital-css'} ${
+              add ? null : 'hospital-css-hide'
+            } ${add ? 'hospital-css-show' : null}`}
+            ref={hospital}
+            // style={
+            // add ? { display: 'none' } : { display: 'flex' }
+            // {
+            //   // display: `${add ? 'flex' : 'none'}`,
+            //   visibility: `${add ? 'visible' : 'hidden'}`,
+            //   transform: `${add ? 'scale(1)' : 'scale(0)'}`,
+            // }
+            // }
+          >
+            {selectName!.map((v, i) => {
+              return (
+                <div key={i} className='show-hospital'>
+                  <div className='icon'></div>
 
-          <div className='search--right'></div>
+                  <div className='show-hospital__txt'>
+                    <h4>{v}</h4>
+                    <p>{selectAdd![i]}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         <div className='main--bottom'>
-          <div className='main--bottom--left' ref={searchBottonLeft}>
+          <div className='main--bottom--left' ref={searchBottomLeft}>
             <div
               className='pharmacy'
               onClick={() => {
@@ -154,7 +195,9 @@ const Main = () => {
 
               <div className='pharmacy-txt'>
                 <h3>가까운 약국 찾기</h3>
-                <p>우리동네 약국은 어디에 있을까?</p>
+                <p>
+                  주변에 있는 약국을 <br></br> 확인해 보세요!
+                </p>
               </div>
             </div>
             {pharmacyPop ? <PharmacyPop setPharmacyPop={setPharmacyPop} /> : null}
