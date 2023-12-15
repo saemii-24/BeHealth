@@ -160,7 +160,9 @@ const Main = () => {
             {pharmacyPop ? <PharmacyPop setPharmacyPop={setPharmacyPop} /> : null}
 
             <div className='momentum'>
-              <h3>이번주 운동량</h3>
+              <h3>
+                이번주 운동량 <span>&#40; 평균 1시간 &#41;</span>
+              </h3>
 
               <div className='graph-box'>
                 {momentumData.map((v, i) => {
@@ -196,8 +198,6 @@ const Main = () => {
                 );
               })}
             </div>
-
-            {/* <h4>오늘 할일</h4> */}
 
             <div className='today-list'>
               {todayListData.map((v, i) => {

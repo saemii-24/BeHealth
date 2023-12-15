@@ -99,6 +99,7 @@
       height: calc(100% - 160px);
       overflow-y: scroll;
       padding-right: 20px;
+      @include var.center;
 
       &::-webkit-scrollbar {
         width: 7px;
