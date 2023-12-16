@@ -11,24 +11,22 @@ import cn from 'classnames';
 
 const Signup = () => {
   const [email, setEmail] = useState<string>('');
-  const [emailError, setEmailError] =
-    useState<string>('이메일 주소를 바르게 입력해주세요.');
+  const [emailError, setEmailError] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [passwordError, setPasswordError] =
-    useState<string>('비밀번호는 8자 이상 입력해주세요.');
+  const [passwordError, setPasswordError] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
-  const [confirmError, setConfirmError] =
-    useState<string>('비밀번호가 일치하지 않습니다.');
+  const [confirmError, setConfirmError] = useState<string>('');
 
   //에러가 하나라도 있는지 확인한다.
-  const [isError, setIsError] = useState<boolean[]>([false, false, false]);
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
 
   useEffect(() => {
-    if (isError[0] && isError[1] && isError[2]) {
+    if (emailError.length < 1 && passwordError.length < 1 && confirmError.length < 1) {
       setButtonDisabled(true);
+    } else {
+      setButtonDisabled(false);
     }
-  }, [isError]);
+  }, [emailError, passwordError, confirmError]);
 
   const navigate = useNavigate();
 
@@ -52,7 +50,6 @@ const Signup = () => {
     const {
       target: { name, value },
     } = e;
-    const errorArr = [...isError];
 
     if (name === 'email') {
       setEmail(value);
@@ -61,25 +58,18 @@ const Signup = () => {
 
       if (!value?.match(emailRegex)) {
         setEmailError('이메일 주소를 바르게 입력해주세요.');
-        errorArr[0] = false;
-        setIsError(errorArr);
       } else {
         setEmailError('');
         setEmail(value);
-        errorArr[0] = true;
-        setIsError(errorArr);
       }
     }
     if (name === 'password') {
       setPassword(value);
       if (password?.length < 7) {
         setPasswordError('비밀번호는 8자 이상 입력해주세요.');
-        errorArr[1] = false;
-        setIsError(errorArr);
       } else {
         setPasswordError('');
-        errorArr[1] = true;
-        setIsError(errorArr);
+        setPassword(value);
       }
       //만약 password를 지운다면
       if (passwordConfirm !== value) {
@@ -92,12 +82,8 @@ const Signup = () => {
       setPasswordConfirm(value);
       if (password !== value) {
         setConfirmError('비밀번호가 일치하지 않습니다.');
-        errorArr[2] = false;
-        setIsError(errorArr);
       } else {
         setConfirmError('');
-        errorArr[2] = true;
-        setIsError(errorArr);
       }
     }
   };
@@ -127,13 +113,7 @@ const Signup = () => {
           autoComplete='off'
         />
         <div className='signup__warning'>
-          {emailError ? (
-            <div className='signup__warning--error'>{emailError}</div>
-          ) : (
-            <div className='signup__warning--success'>
-              이메일 주소가 바르게 입력되었습니다.
-            </div>
-          )}
+          <div className='signup__warning--error'>{emailError}</div>
         </div>
         <label htmlFor='password'>비밀번호</label>
         <input
@@ -145,13 +125,7 @@ const Signup = () => {
           autoComplete='off'
         />
         <div className='signup__warning'>
-          {passwordError ? (
-            <div className='signup__warning--error'>{passwordError}</div>
-          ) : (
-            <div className='signup__warning--success'>
-              비밀번호가 바르게 입력되었습니다.
-            </div>
-          )}
+          <div className='signup__warning--error'>{passwordError}</div>
         </div>
         <label htmlFor='passwordConfirm'>비밀번호 확인</label>
         <input
@@ -163,17 +137,13 @@ const Signup = () => {
           autoComplete='off'
         />
         <div className='signup__warning'>
-          {confirmError ? (
-            <div className='signup__warning--error'>{confirmError}</div>
-          ) : (
-            <div className='signup__warning--success'>비밀번호가 일치합니다.</div>
-          )}
+          <div className='signup__warning--error'>{confirmError}</div>
         </div>
         {
           <button
-            className={cn('submit', { 'submit--disabled': buttonDisabled })}
+            className={cn('submit', { 'submit--disabled': !buttonDisabled })}
             type='submit'
-            disabled={buttonDisabled}>
+            disabled={!buttonDisabled}>
             회원가입
           </button>
         }
