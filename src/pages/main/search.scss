@@ -13,7 +13,7 @@
   transition: 0.5s;
 
   .search--left {
-    width: 54%;
+    width: 260px;
     height: 100%;
 
     h2 {
@@ -23,7 +23,7 @@
     }
 
     & > p {
-      @include var.title-s;
+      @include var.content-l;
     }
 
     .select-institution {
@@ -60,7 +60,7 @@
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
-    width: 250px;
+    width: 200px;
 
     // 출처 <a href="https://www.flaticon.com/free-icons/down-arrow" title="down arrow icons">Down arrow icons created by Freepik - Flaticon</a>
     background: {
@@ -99,6 +99,7 @@
       height: calc(100% - 160px);
       overflow-y: scroll;
       padding-right: 20px;
+      @include var.center;
 
       &::-webkit-scrollbar {
         width: 7px;
@@ -201,8 +202,113 @@
   }
 
   .search--right {
-    width: 46%;
+    width: calc(100% - 260px);
     height: 100%;
-    padding-left: 30px;
+    padding-left: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    row-gap: 20px;
+    padding-right: 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+      width: 7px;
+      background: #dee9fe;
+      @include var.r-s;
+      margin-top: 20px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: var.$blue;
+      @include var.r-s;
+    }
+
+    .show-hospital {
+      width: 100%;
+      background: var.$blueGray;
+      padding: 15px;
+      @include var.r-m;
+      display: flex;
+      justify-content: space-between;
+
+      .icon {
+        background: var.$red;
+      }
+
+      .show-hospital__txt {
+        width: 70%;
+
+        h4 {
+          @include var.content-m;
+          font-weight: 800;
+          width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          word-break: break-all;
+        }
+        p {
+          // @include var.content-s;
+          font-size: 0.7rem;
+          font-weight: 700;
+          width: 100%;
+          height: 32px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
+      }
+    }
+  }
+
+  .hospital-css {
+    transform: scale(0);
+    overflow: hidden;
+    opacity: 0;
+  }
+
+  .hospital-css-hide {
+    animation: hide 0.5s linear forwards;
+  }
+  @keyframes hide {
+    0% {
+      overflow-y: scroll;
+      transform: scale(1);
+    }
+    1% {
+      transform: scale(0.3);
+      overflow: hidden;
+    }
+    // 10% {
+    //   transform: scale(0);
+    //   overflow: hidden;
+    // }
+    100% {
+      transform: scale(0);
+      overflow: hidden;
+    }
+  }
+
+  .hospital-css-show {
+    animation: show 0.5s linear;
+  }
+  @keyframes show {
+    0% {
+      overflow-y: hidden;
+      transform: scale(0);
+    }
+    50% {
+      overflow-y: hidden;
+      transform: scale(0.5);
+      opacity: 0.5;
+    }
+    100% {
+      overflow-y: scroll;
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 }
