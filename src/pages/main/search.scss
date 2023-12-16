@@ -201,14 +201,33 @@
     }
   }
 
-  .search--right {
+  .basic-search, .search--right{    
     width: calc(100% - 260px);
-    height: 100%;
     padding-left: 50px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
+    @include var.center;
     row-gap: 20px;
+  }
+
+  .basic-search{
+    height: 50%;
+    padding-top: 60px;
+    
+    h5{
+      width: 100%;
+      text-align: center;
+    }    
+
+    .icon{
+
+      .fontawesome{
+        color: var.$blue;
+      }
+    }
+  }
+
+  .search--right {
+    height: 100%;
+    align-items: flex-start;
     padding-right: 20px;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -233,7 +252,11 @@
       justify-content: space-between;
 
       .icon {
-        background: var.$red;
+        background: #ff676c;
+
+        // .fontawesome{
+        //   color: var.$red;
+        // }
       }
 
       .show-hospital__txt {

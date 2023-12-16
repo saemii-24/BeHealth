@@ -1,21 +1,26 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import HealthNews from './HealthNews';
 import SearchPop from './SearchPop';
-
-//옵션 데이터
-import institution from './institution';
+import PharmacyPop from './PharmacyPop';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouseChimneyMedical } from '@fortawesome/free-solid-svg-icons';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { TiPlus } from "react-icons/ti";
+import { FaRegHospital } from "react-icons/fa";
 
+//옵션 데이터
+import institution from './institution';
+
+//운동량 데이터
 import momentum from './momentum';
 import { MomentumType } from './momentum';
 
+//오늘 할 일 데이터
 import todayList from './todayList';
 import { TodayListType } from './todayList';
-import PharmacyPop from './PharmacyPop';
+
+//병원 정보 추가 변수
 import { HospitalAddContext } from '../../context/HospitalAddContext';
 import { HospitalNameContext } from '../../context/HospitalNameContext';
 
@@ -48,10 +53,7 @@ const Main = () => {
 
   let [pharmacyPop, setPharmacyPop] = useState(false);
 
-  //search 변수
-  const dispatch = useDispatch();
-
-  //홀수 짝수 구하기
+  //올해 홀수 짝수 구하기
   let string = '';
   if (theYear % 2 === 0) {
     string = `${theYear}년은 짝수년도 출생자가\n 검진 대상자입니다.`;
@@ -151,34 +153,36 @@ const Main = () => {
               ) : null}
             </div>
           </div>
-          {/*  */}
-          <div
-            className={`search--right ${add ? null : 'hospital-css'} ${
-              add ? null : 'hospital-css-hide'
-            } ${add ? 'hospital-css-show' : null}`}
-            ref={hospital}
-            // style={
-            // add ? { display: 'none' } : { display: 'flex' }
-            // {
-            //   // display: `${add ? 'flex' : 'none'}`,
-            //   visibility: `${add ? 'visible' : 'hidden'}`,
-            //   transform: `${add ? 'scale(1)' : 'scale(0)'}`,
-            // }
-            // }
-          >
-            {selectName!.map((v, i) => {
-              return (
-                <div key={i} className='show-hospital'>
-                  <div className='icon'></div>
 
-                  <div className='show-hospital__txt'>
-                    <h4>{v}</h4>
-                    <p>{selectAdd![i]}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          {
+            add ? (
+              <div
+                className={`search--right ${add ? null : 'hospital-css'} ${
+                  add ? null : 'hospital-css-hide'
+                } ${add ? 'hospital-css-show' : null}`}
+                ref={hospital}
+              >
+                {selectName!.map((v, i) => {
+                  return (
+                    <div key={i} className='show-hospital'>
+                      <div className='icon'><FaRegHospital className='fontawesome' /></div>
+
+                      <div className='show-hospital__txt'>
+                        <h4>{v}</h4>
+                        <p>{selectAdd![i]}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className='basic-search'>
+                <h5>원하시는 병원을 선택 해보세요!</h5>
+                <div className='icon'><TiPlus className='fontawesome' /></div>
+              </div>
+            )
+          }
+          
         </div>
 
         <div className='main--bottom'>
