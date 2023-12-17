@@ -201,87 +201,92 @@
     }
   }
 
-  .basic-search, .search--right{    
-    width: calc(100% - 260px);
-    padding-left: 50px;
-    @include var.center;
-    row-gap: 20px;
-  }
-
-  .basic-search{
-    height: 50%;
-    padding-top: 60px;
-    
-    h5{
-      width: 100%;
-      text-align: center;
-    }    
-
-    .icon{
-
-      .fontawesome{
-        color: var.$blue;
-      }
-    }
-  }
-
   .search--right {
+    width: calc(100% - 260px);
     height: 100%;
-    align-items: flex-start;
-    padding-right: 20px;
-    overflow-y: scroll;
-    overflow-x: hidden;
 
-    &::-webkit-scrollbar {
-      width: 7px;
-      background: #dee9fe;
-      @include var.r-s;
-      margin-top: 20px;
-    }
-    &::-webkit-scrollbar-thumb {
-      background: var.$blue;
-      @include var.r-s;
-    }
-
-    .show-hospital {
+    .basic-search,
+    .add-search {
       width: 100%;
-      background: var.$blueGray;
-      padding: 15px;
-      @include var.r-m;
-      display: flex;
-      justify-content: space-between;
+      padding-left: 50px;
+      @include var.center;
+      row-gap: 20px;
+    }
+
+    .basic-search {
+      height: 50%;
+      padding-top: 60px;
+
+      h5 {
+        width: 100%;
+        text-align: center;
+      }
 
       .icon {
-        background: #ff676c;
+        .fontawesome {
+          color: var.$blue;
+        }
+      }
+    }
 
-        // .fontawesome{
-        //   color: var.$red;
-        // }
+    .add-search {
+      height: 100%;
+      align-items: flex-start;
+      padding-right: 20px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+
+      &::-webkit-scrollbar {
+        width: 7px;
+        background: #dee9fe;
+        @include var.r-s;
+        margin-top: 20px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: var.$blue;
+        @include var.r-s;
       }
 
-      .show-hospital__txt {
-        width: 70%;
+      .show-hospital {
+        width: 100%;
+        background: var.$blueGray;
+        padding: 15px;
+        @include var.r-m;
+        display: flex;
+        justify-content: space-between;
 
-        h4 {
-          @include var.content-m;
-          font-weight: 800;
-          width: 100%;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          word-break: break-all;
+        .icon {
+          background: #ff676c;
+
+          // .fontawesome{
+          //   color: var.$red;
+          // }
         }
-        p {
-          // @include var.content-s;
-          font-size: 0.7rem;
-          font-weight: 700;
-          width: 100%;
-          height: 32px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
+
+        .show-hospital__txt {
+          width: 70%;
+
+          h4 {
+            @include var.content-m;
+            font-weight: 800;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            word-break: break-all;
+          }
+          p {
+            // @include var.content-s;
+            font-size: 0.7rem;
+            font-weight: 700;
+            width: 100%;
+            height: 32px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          }
         }
       }
     }
@@ -298,12 +303,12 @@
   }
   @keyframes hide {
     0% {
-      overflow-y: scroll;
+      // overflow-y: scroll;
       transform: scale(1);
     }
     1% {
       transform: scale(0.3);
-      overflow: hidden;
+      // overflow: hidden;
     }
     // 10% {
     //   transform: scale(0);
@@ -311,7 +316,7 @@
     // }
     100% {
       transform: scale(0);
-      overflow: hidden;
+      // overflow: hidden;
     }
   }
 
@@ -320,16 +325,16 @@
   }
   @keyframes show {
     0% {
-      overflow-y: hidden;
+      // overflow-y: hidden;
       transform: scale(0);
     }
     50% {
-      overflow-y: hidden;
+      // overflow-y: hidden;
       transform: scale(0.5);
       opacity: 0.5;
     }
     100% {
-      overflow-y: scroll;
+      // overflow-y: scroll;
       transform: scale(1);
       opacity: 1;
     }

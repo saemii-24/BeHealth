@@ -6,8 +6,8 @@ import PharmacyPop from './PharmacyPop';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouseChimneyMedical } from '@fortawesome/free-solid-svg-icons';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { TiPlus } from "react-icons/ti";
-import { FaRegHospital } from "react-icons/fa";
+import { TiPlus } from 'react-icons/ti';
+import { FaRegHospital } from 'react-icons/fa';
 
 //옵션 데이터
 import institution from './institution';
@@ -89,7 +89,9 @@ const Main = () => {
     chSearch.current.style.overflow = 'hidden';
     searchLeft.current.style.width = '100%';
     chInstitution.current.style.width = '150px';
-    setAdd(false);
+    // setAdd(false);
+    hospital.current.classList.add('hospital-css-hide');
+    hospital.current.classList.remove('hospital-css-show');
 
     searchBottomLeft.current.style.width = '270px';
     chNotice.current.style.display = 'none';
@@ -100,7 +102,9 @@ const Main = () => {
     chSearch.current.style.overflow = 'visible';
     searchLeft.current.style.width = '260px';
     chInstitution.current.style.width = '200px';
-    setAdd(true);
+    // setAdd(true);
+    hospital.current.classList.remove('hospital-css-hide');
+    hospital.current.classList.add('hospital-css-show');
 
     searchBottomLeft.current.style.width = '290px';
     chNotice.current.style.display = 'block';
@@ -154,18 +158,15 @@ const Main = () => {
             </div>
           </div>
 
-          {
-            add ? (
-              <div
-                className={`search--right ${add ? null : 'hospital-css'} ${
-                  add ? null : 'hospital-css-hide'
-                } ${add ? 'hospital-css-show' : null}`}
-                ref={hospital}
-              >
+          <div className={`search--right`} ref={hospital}>
+            {add ? (
+              <div className={`add-search`}>
                 {selectName!.map((v, i) => {
                   return (
                     <div key={i} className='show-hospital'>
-                      <div className='icon'><FaRegHospital className='fontawesome' /></div>
+                      <div className='icon'>
+                        <FaRegHospital className='fontawesome' />
+                      </div>
 
                       <div className='show-hospital__txt'>
                         <h4>{v}</h4>
@@ -176,13 +177,14 @@ const Main = () => {
                 })}
               </div>
             ) : (
-              <div className='basic-search'>
+              <div className={`basic-search`}>
                 <h5>원하시는 병원을 선택 해보세요!</h5>
-                <div className='icon'><TiPlus className='fontawesome' /></div>
+                <div className='icon'>
+                  <TiPlus className='fontawesome' />
+                </div>
               </div>
-            )
-          }
-          
+            )}
+          </div>
         </div>
 
         <div className='main--bottom'>

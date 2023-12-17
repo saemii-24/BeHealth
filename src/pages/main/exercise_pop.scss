@@ -24,17 +24,7 @@
       button {
         width: 70px;
         height: 30px;
-        // padding-top: 1px;
-        @include var.center;
-        @include var.content-s;
-        background: transparent;
-        color: var.$green;
-        border: none;
-        outline: none;
         @include var.r-s;
-        cursor: pointer;
-        transition: .5s;
-        @include var.solid(1px, var.$green);
       }
 
       .click-age {
@@ -54,12 +44,40 @@
   .exercise-category {
     width: 100%;
     height: calc(100% - 440px);
+
+    .classify {
+      width: 60%;
+
+      button {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+    }
+
+    .category-content {
+      width: 100%;
+      height: calc(100% - 110px);
+      padding: 30px;
+      background: var.$blueGray;
+      @include var.r-m;
+    }
   }
 }
 
 .classify {
   padding: 20px 0;
-  width: 80%;
   display: flex;
   justify-content: space-between;
+
+  button {
+    @include var.center;
+    color: var.$green;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.5s;
+    @include var.solid(1px, var.$green);
+    @include var.content-s;
+  }
 }
