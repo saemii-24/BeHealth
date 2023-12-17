@@ -46,7 +46,7 @@ const SearchPop = (props) => {
       const searchItem = response.data.response.body.items.item;
       setCallHospital(searchItem);
       setTotalCount(response.data.response.body.totalCount);
-      // console.log(searchItem);
+      console.log(response);
       // console.log(callHospital);
 
       //검색 결과가 없을때 시의 결과만 보여줌
