@@ -1,5 +1,6 @@
 export interface InstitutionType {
   id: number;
+  code?:number;
   city: string;
   district: string[];
 }
@@ -11,6 +12,7 @@ let institution: InstitutionType[] = [
   },
   {
     id: 1,
+    code:11,
     city: '서울특별시',
     district: [
       '시 군 구',
@@ -43,6 +45,7 @@ let institution: InstitutionType[] = [
   },
   {
     id: 2,
+    code:41,
     city: '경기도',
     district: [
       '시 군 구',
@@ -92,6 +95,7 @@ let institution: InstitutionType[] = [
   },
   {
     id: 3,
+    code:28,
     city: '인천광역시',
     district: [
       '시 군 구',
@@ -109,6 +113,7 @@ let institution: InstitutionType[] = [
   },
   {
     id: 4,
+    code:51,
     city: '강원특별자치도',
     district: [
       '시 군 구',
@@ -134,6 +139,7 @@ let institution: InstitutionType[] = [
   },
   {
     id: 5,
+    code:43,
     city: '충청북도',
     district: [
       '시 군 구',
@@ -155,6 +161,7 @@ let institution: InstitutionType[] = [
   },
   {
     id: 6,
+    code:44,
     city: '충청남도',
     district: [
       '시 군 구',
@@ -181,6 +188,7 @@ let institution: InstitutionType[] = [
   },
   {
     id: 7,
+    code: 36,
     city: '세종특별자치시',
     district: [
       '시 군 구',
@@ -210,11 +218,13 @@ let institution: InstitutionType[] = [
   },
   {
     id: 8,
+    code: 30,
     city: '대전광역시',
     district: ['시 군 구', '대덕구', '동구', '서구', '유성구', '중구'],
   },
   {
     id: 9,
+    code: 47,
     city: '경상북도',
     district: [
       '시 군 구',
@@ -248,6 +258,7 @@ let institution: InstitutionType[] = [
   },
   {
     id: 10,
+    code: 48,
     city: '경상남도',
     district: [
       '시 군 구',
@@ -283,11 +294,13 @@ let institution: InstitutionType[] = [
   },
   {
     id: 11,
+    code: 31,
     city: '울산광역시',
     district: ['시 군 구', '남구', '동구', '북구', '울주군', '중구'],
   },
   {
     id: 12,
+    code: 27,
     city: '대구광역시',
     district: [
       '시 군 구',
@@ -304,6 +317,7 @@ let institution: InstitutionType[] = [
   },
   {
     id: 13,
+    code: 26,
     city: '부산광역시',
     district: [
       '시 군 구',
@@ -327,6 +341,7 @@ let institution: InstitutionType[] = [
   },
   {
     id: 14,
+    code: 45,
     city: '전라북도',
     district: [
       '시 군 구',
@@ -350,6 +365,8 @@ let institution: InstitutionType[] = [
   },
   {
     id: 15,
+    
+    code: 46,
     city: '전라남도',
     district: [
       '시 군 구',
@@ -379,11 +396,13 @@ let institution: InstitutionType[] = [
   },
   {
     id: 16,
+    code: 29,
     city: '광주광역시',
     district: ['시 군 구', '광산구', '남구', '동구', '북구', '서구'],
   },
   {
     id: 17,
+    code: 50,
     city: '제주특별자치도',
     district: ['시 군 구', '제주시', '서귀포시'],
   },
