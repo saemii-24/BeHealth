@@ -41,7 +41,7 @@ const SearchPop = (props) => {
 
     try {
       // const apiKey = process.env.REACT_APP_APIKEY_NR;
-      const URL = `https://apis.data.go.kr/openapi/service/rest/HmcSearchService/getHchkTypesHmcList?serviceKey=Pnz3JkMQMszFg9JlQpehLxMHCNMfZwA12Bpdtwz0lqimEj7RHM%2F6yJ%2Fl6SobwjmWEjsX6vnI00x1p34xQPenfg%3D%3D&numOfRows=10&pageNo=${chNum}&locAddr=${selectCity} ${value}`;
+      const URL = ``;
       const response = await axios.get(URL);
       const searchItem = response.data.response.body.items.item;
       setCallHospital(searchItem);
@@ -52,7 +52,7 @@ const SearchPop = (props) => {
       //검색 결과가 없을때 시의 결과만 보여줌
       if (!searchItem) {
         setLoading(true);
-        const URL = `https://apis.data.go.kr/openapi/service/rest/HmcSearchService/getHchkTypesHmcList?serviceKey=Pnz3JkMQMszFg9JlQpehLxMHCNMfZwA12Bpdtwz0lqimEj7RHM%2F6yJ%2Fl6SobwjmWEjsX6vnI00x1p34xQPenfg%3D%3D&numOfRows=10&pageNo=${chNum}&locAddr=${selectCity}`;
+        const URL = ``;
         const response = await axios.get(URL);
         const searchItem = response.data.response.body.items.item;
         setCallHospital(searchItem);
