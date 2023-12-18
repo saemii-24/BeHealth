@@ -151,6 +151,7 @@ const Main = () => {
                 <SearchPop
                   institution={institution}
                   selected={selected}
+                  searchPop={searchPop}
                   setSearchPop={setSearchPop}
                   setAdd={setAdd}
                 />

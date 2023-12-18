@@ -10,32 +10,23 @@ import { HospitalNameContext } from '../../context/HospitalNameContext';
 import { HospitalAddContext } from '../../context/HospitalAddContext';
 
 const SearchPop = (props) => {
-  let { institution, selected, setSearchPop, setAdd } = props;
-
-  // console.log(process.env.REACT_APP_APIKEY_NR);
+  let { institution, selected, searchPop, setSearchPop, setAdd } = props;
 
   //팝업 옵션 값 받아오기
   let [value, setValue] = useState<string | null>('');
   const handleValue = (e) => {
     setValue(e.target.value);
   };
-
-  //이전, 다음 버튼
-  let [chNum, setChNum] = useState<number>(1);
-  let [totalCount, setTotalCount] = useState(0);
-  //마지막에서 안넘어가게 하기
-  if (chNum === 0) {
-    setChNum(1);
-  }
-  if (chNum === Math.ceil(totalCount / 10)) {
-    setChNum(Math.ceil(totalCount / 10) - 1);
-  }
+  let [cidoCode, setCidoCode] = useState<number | null>(null); //시도 코드
 
   //api
-  let [callHospital, setCallHospital] = useState([]);
+  let [callHospital, setCallHospital] = useState<object[]>([]);
   let [selectCity, setSelectCity] = useState<string>('');
-  let [loading, setLoading] = useState(true);
+  let [loading, setLoading] = useState<boolean>(true); //로딩
+  let [nothing, setNothing] = useState<boolean>(true); //정보가 있는가?
+  // let [btnDisabled, setBtnDisabled] = useState<boolean>(false);
 
+  const apiKey = process.env.REACT_APP_APIKEY_DATA;
   const fetchData = async () => {
     setLoading(true);
 
@@ -44,31 +35,42 @@ const SearchPop = (props) => {
       const URL = ``;
       const response = await axios.get(URL);
       const searchItem = response.data.response.body.items.item;
-      setCallHospital(searchItem);
-      setTotalCount(response.data.response.body.totalCount);
-      console.log(response);
-      // console.log(callHospital);
 
-      //검색 결과가 없을때 시의 결과만 보여줌
+      console.log(searchItem);
+
       if (!searchItem) {
-        setLoading(true);
-        const URL = ``;
-        const response = await axios.get(URL);
-        const searchItem = response.data.response.body.items.item;
-        setCallHospital(searchItem);
-        setTotalCount(response.data.response.body.totalCount);
-        console.log(response);
+        setNothing(true);
+        setTotalCount(0);
+        setLoading(false);
+      } else {
+        setNothing(false);
+        if (!Array.isArray(searchItem)) {
+          setCallHospital([searchItem]);
+          setTotalCount(response.data.response.body.totalCount);
+          setLoading(false);
+        } else {
+          setCallHospital(searchItem);
+          setTotalCount(response.data.response.body.totalCount);
+          setLoading(false);
+        }
       }
-
-      // if (Object.keys(searchItem).length === 1) {
-      //   setCallHospital([searchItem]);
-      // }
-
-      setLoading(false);
     } catch (err) {
       console.log(err);
     }
   };
+
+  //이전, 다음 버튼
+  let [chNum, setChNum] = useState<number>(1);
+  let [totalCount, setTotalCount] = useState(0);
+  //마지막에서 안넘어가게 하기
+  useEffect(() => {
+    if (chNum === 0) {
+      setChNum(1);
+    }
+    if (chNum === Math.ceil(totalCount / 10)) {
+      setChNum(Math.ceil(totalCount / 10) - 1);
+    }
+  }, [chNum]);
 
   useEffect(() => {
     fetchData();
@@ -76,16 +78,21 @@ const SearchPop = (props) => {
 
   useEffect(() => {
     setSelectCity(institution[selected].city);
+    setCidoCode(institution[selected].code);
     fetchData();
+    setTotalCount(0);
+    setChNum(1);
   }, [value]);
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, [callHospital]);
 
   //정보 클릭하면 저장해서 목록에 보여줌
   let { setSelectName } = useContext(HospitalNameContext);
   let { setSelectAdd } = useContext(HospitalAddContext);
+
+  //페이지네이션을 설정하면 그에 맞는 페이지를 보여준다
+  // const handleBtn = (e) => {
+  //   const thisNum = e.target.value;
+  //   setChNum(Number(thisNum));
+  // };
 
   return (
     <div className='search-pop'>
@@ -114,59 +121,66 @@ const SearchPop = (props) => {
       <h4>병원 선택</h4>
 
       <div className='hospital-wrap'>
-        {loading ? (
-          <Loading />
+        {nothing ? (
+          <div className='search__null'>검색결과가 없습니다.</div>
         ) : (
-          callHospital.map((v: any, i) => {
-            return (
-              <div
-                className='hospital'
-                key={i}
-                onClick={() => {
-                  setSelectAdd!(v.locAddr);
-                  setSelectName!(v.hmcNm);
-                  setAdd(true);
-                }}>
-                <div className='icon'>
-                  <FaPlus className='fontawesome' />
-                </div>
-
-                <div className='hospital-info'>
-                  <h4>{v.hmcNm}</h4>
-                  <p>{v.locAddr}</p>
-                </div>
+          <>
+            {loading ? (
+              <div className='search--load'>
+                <Loading />
               </div>
-            );
-          })
+            ) : (
+              callHospital.map((v: any, i: number) => {
+                return (
+                  <div
+                    className='hospital'
+                    key={i}
+                    onClick={() => {
+                      setSelectAdd!(v.locAddr);
+                      setSelectName!(v.hmcNm);
+                      setAdd(true);
+                    }}>
+                    <div className='icon'>
+                      <FaPlus className='fontawesome' />
+                    </div>
+
+                    <div className='hospital-info'>
+                      <h4>{v.hmcNm}</h4>
+                      <p>{v.locAddr}</p>
+                    </div>
+                  </div>
+                );
+              })
+            )}
+          </>
         )}
       </div>
 
       <div className='button-box'>
         <button
           className='prev button'
+          disabled={chNum === 1}
           onClick={() => {
             setChNum(--chNum);
-          }}
-          style={{ background: `${chNum === 1 ? '#cfd9eb' : '#fff'}` }}>
+          }}>
           <IoIosArrowBack className='arrow' />
         </button>
         <input type='button' value={0 + chNum} />
         <input type='button' value={1 + chNum} />
         <input type='button' value={2 + chNum} />
         <input type='button' value={3 + chNum} />
+        <input type='button' value={4 + chNum} />
         <button
           className='next button'
-          style={{
-            background: `${
-              chNum === Math.ceil(totalCount / 10) - 1 ? '#cfd9eb' : '#fff'
-            }`,
+          disabled={
+            chNum === Math.ceil(totalCount / 10) - 1 ||
+            totalCount < 6 ||
+            callHospital.length < 10
+          }
+          onClick={() => {
+            setChNum(++chNum);
           }}>
-          <IoIosArrowForward
-            className='arrow'
-            onClick={() => {
-              setChNum(++chNum);
-            }}
-          />
+          <IoIosArrowForward className='arrow' />
         </button>
       </div>
     </div>
