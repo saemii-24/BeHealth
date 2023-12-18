@@ -31,7 +31,8 @@ const SearchPop = (props) => {
     setLoading(true);
 
     try {
-      const URL = `http://apis.data.go.kr/openapi/service/rest/HmcSearchService/getHmcList?serviceKey=${apiKey}&siDoCd=${cidoCode}&locAddr=${value}&pageNo=${chNum}`;
+      // const apiKey = process.env.REACT_APP_APIKEY_NR;
+      const URL = ``;
       const response = await axios.get(URL);
       const searchItem = response.data.response.body.items.item;
 
