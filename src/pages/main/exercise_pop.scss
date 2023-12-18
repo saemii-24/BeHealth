@@ -7,7 +7,7 @@
   position: relative;
 
   .icon {
-    background: var.$green;
+    background: var.$blue;
   }
 
   .title {
@@ -22,13 +22,15 @@
       width: 80%;
 
       button {
-        width: 70px;
-        height: 30px;
-        @include var.r-s;
+
+        &:first-of-type {
+          background: var.$blue;
+          color: #fff;
+        }
       }
 
       .click-age {
-        background: var.$green;
+        background: var.$blue;
         color: #fff;
       }
     }
@@ -36,8 +38,88 @@
     .age-content {
       width: 100%;
       height: calc(100% - 130px);
-      padding: 30px;
-      background: var.$blueGray;
+      display: flex;
+
+      .age-info{
+        width: 50%;
+        height: 100%;
+        background: var.$blueGray;
+        @include var.r-m;
+        @include var.center;
+        align-items: flex-start;
+        row-gap: 20px;
+        padding: 20px;
+        overflow-y: scroll;
+  
+        &::-webkit-scrollbar {
+          width: 7px;
+          background: var.$blueGray;
+          @include var.r-m;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: var.$blue;
+          @include var.r-s;
+        }
+
+        p{
+          @include var.content-s;
+          line-height: 180%;
+        }
+      }
+
+      .age-exercise{
+        width: 50%;
+        height: 100%;
+        padding-left: 30px;
+        @include var.center;
+        align-items: flex-start;
+        row-gap: 20px;
+        overflow-y: scroll;
+        padding-right: 20px;
+
+        &::-webkit-scrollbar {
+          width: 7px;
+          background: #dee9fe;
+          @include var.r-s;
+          margin-top: 20px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: var.$blue;
+          @include var.r-s;
+        }
+
+        &>div{
+          width: 100%;
+          height: 70px;
+          background: var.$blue;
+          @include var.r-s;
+          @include var.center;
+
+          .icon{
+            background: #234ca0;
+            width: 40px;
+            height: 40px;
+
+            svg{
+              color: #fff;
+              font-size: 1.3rem;
+            }
+          }
+
+          .exercise-name{
+            width: calc(100% - 80px);
+            padding-left: 20px;
+
+            h5,p{
+              color: #fff;
+            }
+            
+            p{
+              @include var.content-s;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -48,16 +130,46 @@
     .classify {
       width: 60%;
 
-      button {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-      }
+      // button {
+        // width: 60px;
+        // height: 60px;
+        // border-radius: 50%;
+        // overflow: hidden;
+
+        // svg {
+        //   width: 100%;
+        //   font-size: 1.2rem;
+        //   color: var.$green;
+        //   pointer-events: none;
+        //   transition: .5s;
+        // }        
+
+        // &:first-of-type{
+        //   background: var.$green;     
+        //   color: #fff;    
+
+        //   svg{
+        //     color: #fff;
+        //   }    
+        // }
+      // }      
+
+      // .click-svg{
+      //   svg{
+      //     color: #fff !important;
+      //   }   
+      // }
+
+      // .reset-svg{
+      //   svg{
+      //     color: var.$green !important;
+      //   }   
+      // }
     }
 
     .category-content {
       width: 100%;
-      height: calc(100% - 110px);
+      height: calc(100% - 90px);
       padding: 30px;
       background: var.$blueGray;
       @include var.r-m;
@@ -72,12 +184,15 @@
 
   button {
     @include var.center;
-    color: var.$green;
+    color: var.$blue;
     outline: none;
     background: transparent;
     cursor: pointer;
     transition: 0.5s;
-    @include var.solid(1px, var.$green);
+    @include var.solid(1px, var.$blue);
     @include var.content-s;
+    width: 70px;
+    height: 30px;
+    @include var.r-s;
   }
 }

@@ -72,23 +72,6 @@ const DiseasePop = (props) => {
           })}
         </div>
       </div>
-
-      <div className='vaccination'>
-        <div className='title'>
-          <div className='icon'>
-            <FaVirus className='fontawesome' />
-          </div>
-          <h3>{season}철 질병 예방법</h3>
-        </div>
-
-        {seasonData[0].preventive.map((v, i) => {
-          return (
-            <div className='vaccination--content'>
-              <p key={i}>{v}</p>
-            </div>
-          );
-        })}
-      </div>
     </div>
   );
 };

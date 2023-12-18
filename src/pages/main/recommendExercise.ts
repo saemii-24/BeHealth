@@ -1,6 +1,15 @@
+import { IoBicycleSharp, IoMusicalNotesSharp } from "react-icons/io5";
+import { FaBasketballBall, FaWalking, FaSwimmingPool } from "react-icons/fa";
+import { FaPersonRunning } from "react-icons/fa6";
+import { GrYoga } from "react-icons/gr";
+import { FaSwimmer } from "react-icons/fa";
+import { PiMountainsFill, PiTennisBallFill } from "react-icons/pi";
+import { GiGolfTee, GiJumpingRope } from "react-icons/gi";
+
 export interface ExerciseType {
   name: string;
   minute: string;
+  icon: React.FC;
 }
 export interface RecommendType {
   age: string;
@@ -13,16 +22,19 @@ let recommendExercise: RecommendType[] = [
     age: '10대',
     exercise: [
       {
-        name: '자전거',
+        name: '줄넘기',
         minute: '20 ~ 30분',
+        icon: GiJumpingRope
       },
       {
         name: '농구',
         minute: '주 2회',
+        icon: FaBasketballBall
       },
       {
         name: '테니스',
         minute: '주 3회',
+        icon: PiTennisBallFill
       },
     ],
     explain: [
@@ -36,14 +48,17 @@ let recommendExercise: RecommendType[] = [
       {
         name: '달리기',
         minute: '30분',
+        icon: FaPersonRunning
       },
       {
         name: '수영',
         minute: '주 3회',
+        icon: FaSwimmer
       },
       {
         name: '사이클',
         minute: '주 3 ~ 5회',
+        icon: IoBicycleSharp
       },
     ],
     explain: [
@@ -58,14 +73,17 @@ let recommendExercise: RecommendType[] = [
       {
         name: '요가',
         minute: '30분',
+        icon: GrYoga
       },
       {
         name: '조깅',
         minute: '20 ~ 40분',
+        icon: FaPersonRunning
       },
       {
         name: '에어로빅',
         minute: '주 3회',
+        icon: IoMusicalNotesSharp
       },
     ],
     explain: [
@@ -80,14 +98,17 @@ let recommendExercise: RecommendType[] = [
       {
         name: '수영',
         minute: '주 2회',
+        icon: FaSwimmer
       },
       {
         name: '등산',
         minute: '1시간 이상',
+        icon: PiMountainsFill
       },
       {
         name: '골프',
-        minute: '주 3회',
+        minute: '주 2회',
+        icon: GiGolfTee
       },
     ],
     explain: [
@@ -101,14 +122,17 @@ let recommendExercise: RecommendType[] = [
       {
         name: '걷기',
         minute: '30분',
+        icon: FaWalking
       },
       {
         name: '스트레칭',
         minute: '10분 이상',
+        icon: GrYoga
       },
       {
         name: '아쿠아 에어로빅',
         minute: '주 2 ~ 3회',
+        icon: FaSwimmingPool
       },
     ],
     explain: [
@@ -123,14 +147,17 @@ let recommendExercise: RecommendType[] = [
       {
         name: '산책',
         minute: '30 ~ 40분',
+        icon: FaWalking
       },
       {
         name: '맨손 체조',
         minute: '30분',
+        icon: GrYoga
       },
       {
         name: '실내 자전거',
         minute: '20분',
+        icon: IoBicycleSharp
       },
     ],
     explain: [
