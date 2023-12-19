@@ -109,21 +109,24 @@ const Main = () => {
         if (theYear % 2 === userBirthYear % 2) {
           //3-1. 사용자 생년과 올해 년도의 짝홀이 같을 때
           if (userData.name) {
-            setString(`${userData.name}님은 ${theYear}년 \n 검진 대상자입니다.`);
+            setString(`${userData.name}님은 ${theYear}년 검진 대상자입니다.`);
           } else {
-            setString(`사용자님은 ${theYear}년 \n 검진 대상자입니다.`);
+            setString(`사용자님은 ${theYear}년 검진 대상자입니다.`);
           }
         } else {
           //3-1. 사용자 생년과 올해 년도의 짝홀이 다를 때
           if (userData.name) {
-            setString(`${userData.name}님은 ${theYear + 1}년 \n 검진 대상자입니다.`);
+            setString(`${userData.name}님은 ${theYear + 1}년 검진 대상자입니다.`);
           } else {
-            setString(`사용자님은 ${theYear + 1}년 \n 검진 대상자입니다.`);
+            setString(`사용자님은 ${theYear + 1}년 검진 대상자입니다.`);
           }
         }
       }
     }
   }, [context, addInfo]);
+
+  //줄바꿈 하기
+  let newStr = string.split('\n');
 
   //firestore에 저장된 병원 정보 받아오기
   interface HospitalDataType {
@@ -191,9 +194,6 @@ const Main = () => {
   useEffect(() => {
     fetchData();
   }, [context]);
-
-  //줄바꿈 하기
-  let newStr = string.split('\n');
 
   //옵션 선택한 값의 인덱스 가져옴
   let [selected, setSelected] = useState(0);
