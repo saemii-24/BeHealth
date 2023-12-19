@@ -6,7 +6,6 @@ export interface SpreadType {
 }
 export interface SeasonType {
   spread: SpreadType[];
-  preventive: string[];
 }
 
 let spring: SeasonType[] = [
@@ -45,11 +44,6 @@ let spring: SeasonType[] = [
         route: '수포액의 직접접촉이나 공기를 통한 전파',
         precaution: ['생후12 ~ 15개월에 예방 접종'],
       },
-    ],
-    preventive: [
-      '사람이 많이 모이거나 밀폐된 곳을 피한다.',
-      '외출후 바로 손씻기, 양치질을 한다.',
-      '예방접종 대상 질병은 접종을 실시한다.',
     ],
   },
 ];

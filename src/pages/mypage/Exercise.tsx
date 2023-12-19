@@ -17,7 +17,6 @@ import {
   orderBy,
   getDocs,
   doc,
-  onSnapshot,
 } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseApp';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -44,7 +43,6 @@ const Exercise = () => {
   const [popup, setPopup] = useState<boolean>(false);
 
   //ExerciseData를 가져온다.
-  const [addInfo, setAddInfo] = useState<boolean>(false); //이미 생성된 데이터가 있는가?
   const [myId, setMyId] = useState<string>(''); //생성된 사용자 객체 데이터
   const [renderData, setRenderData] = useState<(ExerciseDataType | { id: string })[]>([]);
 
@@ -93,11 +91,9 @@ const Exercise = () => {
         const querySnapshot = await getDocs(q);
 
         if (!querySnapshot.empty) {
-          setAddInfo(true);
           setRenderData([]);
           querySnapshot.forEach((doc) => {
             console.log(doc.data());
-            //const dataObj = { ...doc.data(), id: doc.id };
             setRenderData((prev) => {
               if (prev.some((item) => item.id === doc.id)) {
                 return prev;
@@ -109,7 +105,6 @@ const Exercise = () => {
           console.log(renderData);
         } else {
           setRenderData([]);
-          setAddInfo(false);
         }
       } catch (err) {
         console.log(err);

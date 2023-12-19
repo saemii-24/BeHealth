@@ -8,9 +8,13 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { IoIosArrowBack } from 'react-icons/io';
 import { HospitalNameContext } from '../../context/HospitalNameContext';
 import { HospitalAddContext } from '../../context/HospitalAddContext';
+import cn from 'classnames';
+import { addDoc, collection, query, where, orderBy, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase/firebaseApp';
+import { AuthContext } from '../../context/AuthContext';
 
 const SearchPop = (props) => {
-  let { institution, selected, searchPop, setSearchPop, setAdd } = props;
+  let { institution, selected, setSearchPop, setHospitalData } = props;
 
   //팝업 옵션 값 받아오기
   let [value, setValue] = useState<string | null>('');
@@ -21,78 +25,127 @@ const SearchPop = (props) => {
 
   //api
   let [callHospital, setCallHospital] = useState<object[]>([]);
-  let [selectCity, setSelectCity] = useState<string>('');
   let [loading, setLoading] = useState<boolean>(true); //로딩
   let [nothing, setNothing] = useState<boolean>(true); //정보가 있는가?
-  // let [btnDisabled, setBtnDisabled] = useState<boolean>(false);
 
   const apiKey = process.env.REACT_APP_APIKEY_DATA;
   const fetchData = async () => {
     setLoading(true);
 
     try {
-      // const apiKey = process.env.REACT_APP_APIKEY_NR;
-      const URL = ``;
-      const response = await axios.get(URL);
-      const searchItem = response.data.response.body.items.item;
+      if (value) {
+        const URL = `http://apis.data.go.kr/openapi/service/rest/HmcSearchService/getHmcList?serviceKey=${apiKey}&siDoCd=${cidoCode}&locAddr=${value}&pageNo=${pageNo}&numOfRows=50`;
+        const response: any = await axios.get(URL);
+        const searchItem = response.data.response.body.items.item;
+        setTotalCount(response.data.response.body.totalCount);
 
-      console.log(searchItem);
+        console.log(response);
 
-      if (!searchItem) {
-        setNothing(true);
-        setTotalCount(0);
-        setLoading(false);
-      } else {
-        setNothing(false);
-        if (!Array.isArray(searchItem)) {
-          setCallHospital([searchItem]);
-          setTotalCount(response.data.response.body.totalCount);
-          setLoading(false);
+        //페이지네이션을 위한 그룹화
+        let originArr: any = [];
+        if (Array.isArray(searchItem)) {
+          for (let i = 0; i < searchItem.length; i += 10) {
+            originArr.push(searchItem.slice(i, i + 10));
+          }
+        }
+        console.log(originArr);
+
+        if (!searchItem) {
+          setNothing(true);
+          setTotalCount(0);
         } else {
-          setCallHospital(searchItem);
-          setTotalCount(response.data.response.body.totalCount);
+          setNothing(false);
+          if (originArr.length === 0) {
+            setNothing(true);
+            setCallHospital(originArr);
+          } else {
+            setCallHospital(originArr);
+          }
           setLoading(false);
         }
+      } else {
+        setNothing(true);
       }
     } catch (err) {
+      setCallHospital([]);
+      setNothing(true);
       console.log(err);
     }
   };
 
   //이전, 다음 버튼
-  let [chNum, setChNum] = useState<number>(1);
+  let [indexNo, setIndexNo] = useState<number>(0); //버튼 렌더링에 사용될 num
+  let [pageNo, setPageNo] = useState<number>(1); //api call에 사용될 page number
   let [totalCount, setTotalCount] = useState(0);
-  //마지막에서 안넘어가게 하기
-  useEffect(() => {
-    if (chNum === 0) {
-      setChNum(1);
-    }
-    if (chNum === Math.ceil(totalCount / 10)) {
-      setChNum(Math.ceil(totalCount / 10) - 1);
-    }
-  }, [chNum]);
 
   useEffect(() => {
-    fetchData();
-  }, [chNum]);
+    setValue('');
+  }, [selected]);
 
   useEffect(() => {
-    setSelectCity(institution[selected].city);
     setCidoCode(institution[selected].code);
-    fetchData();
     setTotalCount(0);
-    setChNum(1);
+    setPageNo(1);
+    setIndexNo(0);
+    fetchData();
   }, [value]);
 
   //정보 클릭하면 저장해서 목록에 보여줌
   let { setSelectName } = useContext(HospitalNameContext);
   let { setSelectAdd } = useContext(HospitalAddContext);
 
-  //페이지네이션을 설정하면 그에 맞는 페이지를 보여준다
-  // const handleBtn = (e) => {
-  //   const thisNum = e.target.value;
-  //   setChNum(Number(thisNum));
-  // };
+  //병원정보를 클릭하면 firestore에 등록한다
+  const context = useContext(AuthContext);
+
+  const onClick = async (data) => {
+    try {
+      await addDoc(collection(db, 'myHospital'), {
+        name: data.hmcNm,
+        address: data.locAddr,
+        time: new Date()?.toLocaleDateString('ko', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+        }),
+        userId: context.user!.uid,
+      });
+      upDateHospitalData();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //병원정보
+  const upDateHospitalData = async () => {
+    if (context.user) {
+      try {
+        const q = query(
+          collection(db, 'myHospital'),
+          where('userId', '==', context.user!.uid),
+          orderBy('time', 'asc'),
+        );
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+          setHospitalData([]);
+          querySnapshot.forEach((doc) => {
+            console.log(doc.data());
+            setHospitalData((prev) => {
+              if (prev.some((item) => item.id === doc.id)) {
+                return prev;
+              } else {
+                return [...prev, { ...doc.data(), id: doc.id }];
+              }
+            });
+          });
+        } else {
+          setHospitalData([]);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
 
   return (
     <div className='search-pop'>
@@ -108,7 +161,8 @@ const SearchPop = (props) => {
         id='popup_select'
         onChange={(e) => {
           handleValue(e);
-        }}>
+        }}
+        value={value as string}>
         {institution[selected].district.map((v, i) => {
           return (
             <option key={i} value={v}>
@@ -130,15 +184,17 @@ const SearchPop = (props) => {
                 <Loading />
               </div>
             ) : (
-              callHospital.map((v: any, i: number) => {
+              (callHospital[indexNo] as object[]).map((v: any, i: number) => {
                 return (
                   <div
                     className='hospital'
                     key={i}
                     onClick={() => {
-                      setSelectAdd!(v.locAddr);
+                      if (context.user) {
+                        onClick(v);
+                      }
                       setSelectName!(v.hmcNm);
-                      setAdd(true);
+                      setSelectAdd!(v.locAddr);
                     }}>
                     <div className='icon'>
                       <FaPlus className='fontawesome' />
@@ -159,26 +215,35 @@ const SearchPop = (props) => {
       <div className='button-box'>
         <button
           className='prev button'
-          disabled={chNum === 1}
-          onClick={() => {
-            setChNum(--chNum);
+          disabled={pageNo === 1}
+          onClick={async () => {
+            setIndexNo(4);
+            setPageNo(--pageNo);
+            await fetchData();
           }}>
           <IoIosArrowBack className='arrow' />
         </button>
-        <input type='button' value={0 + chNum} />
-        <input type='button' value={1 + chNum} />
-        <input type='button' value={2 + chNum} />
-        <input type='button' value={3 + chNum} />
-        <input type='button' value={4 + chNum} />
+        {new Array(5).fill(0).map((_, index) => {
+          return (
+            <input
+              key={index}
+              className={cn('pagination', { active: indexNo === index })}
+              type='button'
+              value={(pageNo - 1) * 5 + index + 1}
+              onClick={(e) => {
+                setIndexNo(index);
+              }}
+              disabled={callHospital.length < index + 1}
+            />
+          );
+        })}
         <button
           className='next button'
-          disabled={
-            chNum === Math.ceil(totalCount / 10) - 1 ||
-            totalCount < 6 ||
-            callHospital.length < 10
-          }
-          onClick={() => {
-            setChNum(++chNum);
+          disabled={pageNo === Math.ceil(totalCount / 50) || callHospital.length < 5}
+          onClick={async () => {
+            setIndexNo(0);
+            setPageNo(++pageNo);
+            await fetchData();
           }}>
           <IoIosArrowForward className='arrow' />
         </button>
