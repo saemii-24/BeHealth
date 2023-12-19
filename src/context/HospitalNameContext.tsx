@@ -11,8 +11,11 @@ const HospitalNameContextProvider = ({ children }) => {
 
   const updateData = (newData: string) => {
     let copy: string[] = [...selectName];
-    copy.push(newData);
-    setSelectName(copy);
+    let mySet = new Set(copy);
+    if (!mySet.has(newData)) {
+      copy.push(newData);
+      setSelectName(copy);
+    }
   };
 
   return (

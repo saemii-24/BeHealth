@@ -11,8 +11,13 @@ const HospitalAddContextProvider = ({ children }) => {
 
   const updateData = (newData: string) => {
     let copy: string[] = [...selectAdd];
-    copy.push(newData);
-    setSelectAdd(copy);
+    let mySet = new Set(copy);
+
+    if (!mySet.has(newData)) {
+      //중복되지 않을때만 넣는다.
+      copy.push(newData);
+      setSelectAdd(copy);
+    }
   };
 
   return (

@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouseChimneyMedical } from '@fortawesome/free-solid-svg-icons';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { TiPlus } from 'react-icons/ti';
+import { FiMinus } from 'react-icons/fi';
 import { FaRegHospital } from 'react-icons/fa';
 
 //옵션 데이터
@@ -23,6 +24,20 @@ import { TodayListType } from './todayList';
 //병원 정보 추가 변수
 import { HospitalAddContext } from '../../context/HospitalAddContext';
 import { HospitalNameContext } from '../../context/HospitalNameContext';
+
+//로그인과 사용자 정보 확인
+import { AuthContext } from '../../context/AuthContext';
+import {
+  collection,
+  query,
+  where,
+  orderBy,
+  getDocs,
+  deleteDoc,
+  doc,
+} from 'firebase/firestore';
+import { db } from '../../firebase/firebaseApp';
+import { RenderDataType } from '../mypage/MyStatus';
 
 const Main = () => {
   //mainContent 변수
@@ -54,12 +69,129 @@ const Main = () => {
   let [pharmacyPop, setPharmacyPop] = useState(false);
 
   //올해 홀수 짝수 구하기
-  let string = '';
-  if (theYear % 2 === 0) {
-    string = `${theYear}년은 짝수년도 출생자가\n 검진 대상자입니다.`;
-  } else if (theYear % 2 === 1) {
-    string = `${theYear}년은 홀수년도 출생자가\n 검진 대상자입니다.`;
+  const context = useContext(AuthContext); //로그인 실시간 확인
+  let [string, setString] = useState<string>('');
+  let [addInfo, setAddInfo] = useState<boolean>(false);
+  let [userData, setUserData] = useState<RenderDataType>({});
+  //저장되어 있는 사용자 정보 불러오기
+  const fetchUserData = async () => {
+    if (context.user) {
+      const q = query(
+        collection(db, 'myStatus'),
+        where('userId', '==', context.user!.uid),
+      );
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        setAddInfo(true);
+        querySnapshot.forEach((doc) => {
+          setUserData(doc.data());
+        });
+      } else {
+        setAddInfo(false);
+      }
+    }
+  };
+  useEffect(() => {
+    fetchUserData();
+    if (!context.user || !userData.birth) {
+      //1. 로그인 했는가?
+      if (theYear % 2 === 0) {
+        //2-1. 로그인 하지 않았다면, 기본 정보제공
+        setString(`${theYear}년은 짝수년도 출생자가\n 검진 대상자입니다.`);
+      } else if (theYear % 2 === 1) {
+        setString(`${theYear}년은 홀수년도 출생자가\n 검진 대상자입니다.`);
+      }
+    } else {
+      //2-2. 로그인 완료시 사용자 맞춤 정보 제공
+      if (userData.birth) {
+        let userBirthYear = new Date(userData.birth).getFullYear();
+        if (theYear % 2 === userBirthYear % 2) {
+          //3-1. 사용자 생년과 올해 년도의 짝홀이 같을 때
+          if (userData.name) {
+            setString(`${userData.name}님은 ${theYear}년 \n 검진 대상자입니다.`);
+          } else {
+            setString(`사용자님은 ${theYear}년 \n 검진 대상자입니다.`);
+          }
+        } else {
+          //3-1. 사용자 생년과 올해 년도의 짝홀이 다를 때
+          if (userData.name) {
+            setString(`${userData.name}님은 ${theYear + 1}년 \n 검진 대상자입니다.`);
+          } else {
+            setString(`사용자님은 ${theYear + 1}년 \n 검진 대상자입니다.`);
+          }
+        }
+      }
+    }
+  }, [context, addInfo]);
+
+  //firestore에 저장된 병원 정보 받아오기
+  interface HospitalDataType {
+    name: string;
+    address: string;
+    time: Date;
+    userId: string;
+    id?: string;
   }
+  const [hospitalData, setHospitalData] = useState<(HospitalDataType | { id: string })[]>(
+    [],
+  );
+
+  const fetchData = async () => {
+    if (context.user) {
+      try {
+        const q = query(
+          collection(db, 'myHospital'),
+          where('userId', '==', context.user!.uid),
+          orderBy('time', 'asc'),
+        );
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+          // setAddInfo(true);
+          setHospitalData([]);
+          querySnapshot.forEach((doc) => {
+            //const dataObj = { ...doc.data(), id: doc.id };
+            console.log(doc.data());
+            setHospitalData((prev) => {
+              if (prev.some((item) => item.id === doc.id)) {
+                return prev;
+              } else {
+                return [...prev, { ...doc.data(), id: doc.id }];
+              }
+            });
+          });
+          console.log(hospitalData);
+        } else {
+          setHospitalData([]);
+          // setAddInfo(false);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+  //클릭하면 삭제
+  const [hoverBtn, setHoverBtn] = useState<string>('');
+  //
+  const onDelete = async (data) => {
+    try {
+      await deleteDoc(doc(db, 'myHospital', data.id));
+      fetchData();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [context]);
+
+  useEffect(() => {
+    fetchData();
+  }, [context]);
+
   //줄바꿈 하기
   let newStr = string.split('\n');
 
@@ -149,41 +281,85 @@ const Main = () => {
               </button>
               {searchPop ? (
                 <SearchPop
+                  setHospitalData={setHospitalData}
                   institution={institution}
                   selected={selected}
-                  searchPop={searchPop}
                   setSearchPop={setSearchPop}
-                  setAdd={setAdd}
                 />
               ) : null}
             </div>
           </div>
 
           <div className={`search--right`} ref={hospital}>
-            {add ? (
-              <div className={`add-search`}>
-                {selectName!.map((v, i) => {
-                  return (
-                    <div key={i} className='show-hospital'>
-                      <div className='icon'>
-                        <FaRegHospital className='fontawesome' />
-                      </div>
-
-                      <div className='show-hospital__txt'>
-                        <h4>{v}</h4>
-                        <p>{selectAdd![i]}</p>
-                      </div>
+            {context.user ? (
+              <>
+                {hospitalData.length > 0 ? ( //로그인 했을 때
+                  <div className={`add-search`}>
+                    {hospitalData.map((v: any, i) => {
+                      return (
+                        <div key={i} className='show-hospital'>
+                          <div
+                            className='icon'
+                            onMouseEnter={() => {
+                              setHoverBtn(v.id as string);
+                            }}
+                            onMouseLeave={() => {
+                              setHoverBtn('');
+                            }}
+                            onClick={() => {
+                              onDelete(v);
+                            }}>
+                            {hoverBtn === v.id ? (
+                              <FiMinus className='delete-icon' />
+                            ) : (
+                              <FaRegHospital className='fontawesome' />
+                            )}
+                          </div>
+                          <div className='show-hospital__txt'>
+                            <h4>{v.name}</h4>
+                            <p>{v.address}</p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className={`basic-search`}>
+                    <h5>원하시는 병원을 선택 해보세요!</h5>
+                    <div className='icon'>
+                      <TiPlus className='fontawesome' />
                     </div>
-                  );
-                })}
-              </div>
+                  </div>
+                )}
+              </>
             ) : (
-              <div className={`basic-search`}>
-                <h5>원하시는 병원을 선택 해보세요!</h5>
-                <div className='icon'>
-                  <TiPlus className='fontawesome' />
-                </div>
-              </div>
+              <>
+                {selectAdd!.length > 0 ? (
+                  <div className={`add-search`}>
+                    {selectName!.map((v, i) => {
+                      return (
+                        <div key={i} className='show-hospital'>
+                          <div className='icon'>
+                            <FaRegHospital className='fontawesome' />
+                          </div>
+
+                          <div className='show-hospital__txt'>
+                            <h4>{v}</h4>
+                            <p>{selectAdd![i]}</p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className={`basic-search`}>
+                    <h5>원하시는 병원을 선택 해보세요!</h5>
+                    <div className='icon'>
+                      <TiPlus className='fontawesome' />
+                    </div>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>
