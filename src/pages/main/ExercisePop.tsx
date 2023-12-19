@@ -35,8 +35,8 @@ const ExercisePop = (props) => {
   let categoryList = useRef<any[]>([]); //배열로 ref 담기
   let [clickButton, setClickButton] = useState<string>(''); //svg 위한 변수
   const handleCategory = (e) => {
-    // categoryList.current[0].classList.add('reset-svg');    
- 
+    // categoryList.current[0].classList.add('reset-svg');
+
     for (let i = 0; i < categoryList.current.length; i++) {
       categoryList.current[i].style.background = 'transparent';
       categoryList.current[i].style.color = '#306de5';
@@ -76,7 +76,9 @@ const ExercisePop = (props) => {
             return (
               <button
                 key={i}
-                ref={(el) => {ageList.current[i] = el}}
+                ref={(el) => {
+                  ageList.current[i] = el;
+                }}
                 onClick={(e) => {
                   handleSelect(e);
                   setAgeIdx(i);
@@ -88,30 +90,30 @@ const ExercisePop = (props) => {
         </div>
 
         <div className='age-content'>
-          <div className="age-info">
-            {
-              recommendExercise[ageIdx].explain.map((v,i)=>{
-                return(
-                  <p>▪ {v}</p>
-                )
-              })
-            }            
+          <div className='age-info'>
+            <div className='age-info__txt'>
+              {recommendExercise[ageIdx].explain.map((v, i) => {
+                return <p>▪ {v}</p>;
+              })}
+            </div>
           </div>
 
-          <div className="age-exercise">
-            {
-              recommendExercise[ageIdx].exercise.map((v,i)=>{
-                return(
-                  <div key={i} onClick={()=>{console.log(v)}}>
-                    <div className="icon">{React.createElement(v.icon)}</div>
-                    <div className="exercise-name">
-                      <h5>{v.name}</h5>
-                      <p>{v.minute}</p>
-                    </div>
+          <div className='age-exercise'>
+            {recommendExercise[ageIdx].exercise.map((v, i) => {
+              return (
+                <div
+                  key={i}
+                  onClick={() => {
+                    console.log(v);
+                  }}>
+                  <div className='icon'>{React.createElement(v.icon)}</div>
+                  <div className='exercise-name'>
+                    <h5>{v.name}</h5>
+                    <p>{v.minute}</p>
                   </div>
-                )
-              })
-            }
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
