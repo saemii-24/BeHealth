@@ -1,4 +1,5 @@
 import { SeasonType } from './spring';
+let month = new Date().getMonth();
 
 let winter: SeasonType[] = [
   {
@@ -52,6 +53,26 @@ let winter: SeasonType[] = [
           '눈, 코, 입을 만지는 것을 피한다.',
           '가금류 감염국과 가금류 농장 및 철새 도래지 방문을 자제한다.',
         ],
+      },
+    ],
+    common: [
+      {
+        title: `${month + 1}월 알아두면 좋은 겨울철 행동 요령`,
+        content: `추운 겨울 안전하고 건강하게`,
+        img: '/images/winter.jpg',
+        imgColor: 'dark',
+      },
+      {
+        title: `겨울철 건강 수칙`,
+        content: `건강한 겨울나기를 위한`,
+        img: '/images/snowman.jpg',
+        imgColor: 'dark',
+      },
+      {
+        title: '해가 빨리 지면 우울증이 생긴다?',
+        content: '겨울철 잘못된 건강상식 6가지',
+        img: '/images/winter-twilight.jpg',
+        imgColor: 'dark',
       },
     ],
   },

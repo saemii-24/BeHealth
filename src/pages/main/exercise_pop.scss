@@ -52,7 +52,7 @@
           height: 100%;
           @include var.center;
           align-items: flex-start;
-          row-gap: 20px;
+          row-gap: 19px;
           padding-right: 25px;
           overflow-y: scroll;
 
@@ -62,7 +62,7 @@
             @include var.r-m;
           }
           &::-webkit-scrollbar-thumb {
-            background: #dee9fe;
+            background: var.$blue;
             @include var.r-s;
           }
 
@@ -102,7 +102,7 @@
           @include var.center;
 
           .icon {
-            background: #234ca0;
+            background: var.$darkBlue;
             width: 40px;
             height: 40px;
 
@@ -177,9 +177,48 @@
     .category-content {
       width: 100%;
       height: calc(100% - 90px);
-      padding: 30px;
+      padding: 30px 0 30px 30px;
       background: var.$blueGray;
       @include var.r-m;
+      @include var.center;
+
+      .icon {
+        @include var.r-s;
+        width: 70px;
+        height: 70px;
+        background: #dee9fe;
+
+        svg {
+          color: var.$blue;
+          font-size: 2rem;
+        }
+      }
+
+      .category-content__txt {
+        width: calc(100% - 70px);
+        height: 100%;
+        padding-left: 30px;
+        padding-right: 30px;
+        @include var.center;
+        align-items: flex-start;
+        row-gap: 10px;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+          width: 7px;
+          background: #dee9fe;
+          @include var.r-s;
+          margin-top: 20px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: var.$blue;
+          @include var.r-s;
+        }
+
+        p {
+          @include var.content-m;
+        }
+      }
     }
   }
 }

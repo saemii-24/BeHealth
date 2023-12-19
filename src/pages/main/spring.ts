@@ -4,8 +4,15 @@ export interface SpreadType {
   route: string;
   precaution: string[];
 }
+export interface CommonType {
+  title: string;
+  content: string;
+  img: string;
+  imgColor: string;
+}
 export interface SeasonType {
   spread: SpreadType[];
+  common: CommonType[];
 }
 
 let spring: SeasonType[] = [
@@ -43,6 +50,26 @@ let spring: SeasonType[] = [
         symptom: '발진, 가려움, 수포 등',
         route: '수포액의 직접접촉이나 공기를 통한 전파',
         precaution: ['생후12 ~ 15개월에 예방 접종'],
+      },
+    ],
+    common: [
+      {
+        title: '눈물 콧물 쏙 빼는 알레르기 질환 예방 관리법',
+        content: '꽃 피는 봄이 무섭다?',
+        img: '/images/pollen.jpg',
+        imgColor: 'dark',
+      },
+      {
+        title: '꾸벅꾸벅 졸음이 몰려오는 춘곤증',
+        content: '봄철 건강의 적신호',
+        img: '/images/sleep.jpg',
+        imgColor: 'dark',
+      },
+      {
+        title: '잘 먹으면 약초 잘못 먹으면 독초',
+        content: '봄 산나물,',
+        img: '/images/hrebs.jpg',
+        imgColor: 'light',
       },
     ],
   },

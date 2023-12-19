@@ -9,7 +9,7 @@
   right: -40px;
   border-radius: 0 40px 40px 0;
   padding: 50px 40px;
-  transition: .7s;
+  transition: 0.7s;
 
   & > div {
     cursor: pointer;
@@ -52,7 +52,7 @@
 
   .exercise {
     .icon {
-      background: var.$green;
+      background: var.$blue;
     }
   }
 

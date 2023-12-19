@@ -453,11 +453,7 @@ const Main = () => {
         </div>
       </div>
 
-      <HealthNews
-        theMonth={theMonth}
-        clickHealthNews={clickHealthNews}
-        closeHealthNews={closeHealthNews}
-      />
+      <HealthNews clickHealthNews={clickHealthNews} closeHealthNews={closeHealthNews} />
     </div>
   );
 };
