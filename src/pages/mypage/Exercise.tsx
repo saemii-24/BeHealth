@@ -23,7 +23,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-interface ExerciseDataType {
+export interface ExerciseDataType {
   calorie: number;
   detailDate: string;
   date: string;
@@ -43,7 +43,7 @@ const Exercise = () => {
   const [popup, setPopup] = useState<boolean>(false);
 
   //ExerciseData를 가져온다.
-  const [myId, setMyId] = useState<string>(''); //생성된 사용자 객체 데이터
+
   const [renderData, setRenderData] = useState<(ExerciseDataType | { id: string })[]>([]);
 
   //운동 시간 업데이트

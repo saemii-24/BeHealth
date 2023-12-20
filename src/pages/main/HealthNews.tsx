@@ -7,7 +7,7 @@ import ExercisePop from './ExercisePop';
 import CommonPop from './CommonPop';
 
 const HealthNews = (props) => {
-  let { clickHealthNews, closeHealthNews, theMonth } = props;
+  let { clickHealthNews, closeHealthNews } = props;
 
   let chNewsBox = useRef<any>(null);
   let chDisease = useRef<any>(null);
@@ -73,7 +73,6 @@ const HealthNews = (props) => {
           setShowDisease={setShowDisease}
           closeDisease={closeDisease}
           closeHealthNews={closeHealthNews}
-          theMonth={theMonth}
         />
       ) : null}
       <div

@@ -10,20 +10,23 @@ import { AuthContextProvider } from './context/AuthContext';
 import { HospitalNameContextProvider } from './context/HospitalNameContext';
 import { HospitalAddContextProvider } from './context/HospitalAddContext';
 import { MyStatusContextProvider } from './context/MyStatusContext';
+import { SeasonContextProvider } from './context/SeasonContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <Provider store={store}>
     <BrowserRouter>
-      <HospitalAddContextProvider>
-        <HospitalNameContextProvider>
-          <MyStatusContextProvider>
-            <AuthContextProvider>
-              <App />
-            </AuthContextProvider>
-          </MyStatusContextProvider>
-        </HospitalNameContextProvider>
-      </HospitalAddContextProvider>
+      <SeasonContextProvider>
+        <HospitalAddContextProvider>
+          <HospitalNameContextProvider>
+            <MyStatusContextProvider>
+              <AuthContextProvider>
+                <App />
+              </AuthContextProvider>
+            </MyStatusContextProvider>
+          </HospitalNameContextProvider>
+        </HospitalAddContextProvider>
+      </SeasonContextProvider>
     </BrowserRouter>
   </Provider>,
 );

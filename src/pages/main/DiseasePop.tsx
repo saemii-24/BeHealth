@@ -1,36 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import { FaVirus } from 'react-icons/fa6';
 
-import spring from './spring.ts';
-import summer from './summer.ts';
-import autumn from './autumn.ts';
-import winter from './winter.ts';
-import { SeasonType } from './spring.ts';
+import { SeasonContext, SeasonDataContext } from '../../context/SeasonContext.tsx';
 
 const DiseasePop = (props) => {
-  let { closeDisease, closeHealthNews, theMonth } = props;
+  let { closeDisease, closeHealthNews } = props;
 
-  //계절별 받아오기
-  let [season, setSeason] = useState<string>('');
-  let [seasonData, setSeasonData] = useState<SeasonType[]>(spring);
-  console.log(seasonData);
-
-  useEffect(() => {
-    if (theMonth === 2 || theMonth === 3 || theMonth === 4) {
-      setSeason('봄');
-      setSeasonData(spring);
-    } else if (theMonth === 5 || theMonth === 6 || theMonth === 7) {
-      setSeason('여름');
-      setSeasonData(summer);
-    } else if (theMonth === 8 || theMonth === 9 || theMonth === 10) {
-      setSeason('가을');
-      setSeasonData(autumn);
-    } else if (theMonth === 11 || theMonth === 0 || theMonth === 1) {
-      setSeason('겨울');
-      setSeasonData(winter);
-    }
-  }, [theMonth]);
+  let { seasonData } = useContext(SeasonDataContext);
+  let { season } = useContext(SeasonContext);
 
   return (
     <div className='disease-pop'>
@@ -52,7 +30,7 @@ const DiseasePop = (props) => {
         </div>
 
         <div className='spread--content'>
-          {seasonData[0].spread.map((v, i) => {
+          {seasonData![0].spread.map((v, i) => {
             return (
               <div key={i}>
                 <h3>{v.name}</h3>

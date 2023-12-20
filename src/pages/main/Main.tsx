@@ -9,6 +9,8 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { TiPlus } from 'react-icons/ti';
 import { FiMinus } from 'react-icons/fi';
 import { FaRegHospital } from 'react-icons/fa';
+import TodayListBox from './TodayListBox';
+import WeekExercise from './WeekExercise';
 
 //옵션 데이터
 import institution from './institution';
@@ -378,7 +380,8 @@ const Main = () => {
             {pharmacyPop ? <PharmacyPop setPharmacyPop={setPharmacyPop} /> : null}
 
             <div className='momentum'>
-              <h3>
+              <WeekExercise />
+              {/* <h3>
                 이번주 운동량 <span>&#40; 평균 1시간 &#41;</span>
               </h3>
 
@@ -395,7 +398,7 @@ const Main = () => {
                     </div>
                   );
                 })}
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -418,38 +421,13 @@ const Main = () => {
             </div>
 
             <div className='today-list'>
-              {todayListData.map((v, i) => {
-                return (
-                  <div
-                    key={i}
-                    style={{
-                      background: `${v.today === true ? '#306DE5' : '#fff'}`,
-                    }}>
-                    <p
-                      style={{
-                        color: `${v.today === true ? '#fff' : '#333333'}`,
-                      }}>
-                      {v.time}
-                    </p>
-                    <p
-                      style={{
-                        color: `${v.today === true ? '#fff' : '#333333'}`,
-                      }}>
-                      {v.todo}
-                    </p>
-                  </div>
-                );
-              })}
+              <TodayListBox />
             </div>
           </div>
         </div>
       </div>
 
-      <HealthNews
-        theMonth={theMonth}
-        clickHealthNews={clickHealthNews}
-        closeHealthNews={closeHealthNews}
-      />
+      <HealthNews clickHealthNews={clickHealthNews} closeHealthNews={closeHealthNews} />
     </div>
   );
 };

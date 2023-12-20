@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,12 +10,11 @@ import exerciseCategory from './exerciseCategory';
 const ExercisePop = (props) => {
   let { closeExercise, closeHealthNews } = props;
   let [ageIdx, setAgeIdx] = useState<number>(0);
+  let [categoryIdx, setCategoryIdx] = useState<number>(0);
 
   //나이별 버튼 클릭 css
   let ageList = useRef<any[]>([]); //배열로 ref 담기
-  let [clickAge, setClickAge] = useState(false); //useEffect 위한 변수
   const handleSelect = (e) => {
-    setClickAge(e.target);
     //전체 스타일 기본으로 적용
     for (let i = 0; i < ageList.current.length; i++) {
       ageList.current[i].style.background = 'transparent';
@@ -27,16 +26,10 @@ const ExercisePop = (props) => {
     e.target.style.background = '#306de5';
     e.target.style.color = '#fff';
   };
-  useEffect(() => {
-    console.log(clickAge);
-  }, [clickAge]);
 
   //카테고리별 버튼 클릭 css
   let categoryList = useRef<any[]>([]); //배열로 ref 담기
-  let [clickButton, setClickButton] = useState<string>(''); //svg 위한 변수
   const handleCategory = (e) => {
-    // categoryList.current[0].classList.add('reset-svg');
-
     for (let i = 0; i < categoryList.current.length; i++) {
       categoryList.current[i].style.background = 'transparent';
       categoryList.current[i].style.color = '#306de5';
@@ -46,9 +39,6 @@ const ExercisePop = (props) => {
     e.target.style.background = '#306de5';
     e.target.style.color = '#fff';
   };
-  useEffect(() => {
-    console.log(clickButton);
-  }, [clickButton]);
 
   return (
     <div className='exercise-pop'>
@@ -129,17 +119,25 @@ const ExercisePop = (props) => {
                 ref={(el) => (categoryList.current[i] = el)}
                 onClick={(e) => {
                   handleCategory(e);
-                  setClickButton(v.category);
-                }}
-                // className={`${clickButton === v.category? 'click-svg' : 'reset-svg'}`}
-              >
+                  setCategoryIdx(i);
+                }}>
                 {v.category}
               </button>
             );
           })}
         </div>
 
-        <div className='category-content'></div>
+        <div className='category-content'>
+          <div className='icon'>
+            {React.createElement(exerciseCategory[categoryIdx].icon)}
+          </div>
+
+          <div className='category-content__txt'>
+            {exerciseCategory[categoryIdx].explain.map((v, i) => {
+              return <p>✔ {v}</p>;
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
