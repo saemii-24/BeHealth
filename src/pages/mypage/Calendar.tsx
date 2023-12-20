@@ -1,7 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import './MyPage.scss';
 import AddSchedule from './AddSchedule';
+//로그인과 사용자 정보 확인
+import { AuthContext } from '../../context/AuthContext';
+import {
+  collection,
+  query,
+  where,
+  orderBy,
+  getDocs,
+  deleteDoc,
+  doc,
+} from 'firebase/firestore';
+import { db } from '../../firebase/firebaseApp';
+import cn from 'classnames';
 
 const Calendar = () => {
   //초기 날짜
@@ -13,6 +26,12 @@ const Calendar = () => {
   //버튼 클릭에 따라 조정될 날짜 (Month가 변경되며 새 날짜를 찾는다.)
   let [MonthYear, setMonthYear] = useState<number>(-1); //Month는 0부터 시작한다.
   const [updateDate, setUpdateDate] = useState<Date>(today);
+
+  //firestore에서 받아올 데이터가 담긴 변수
+  const context = useContext(AuthContext);
+  const [scheduleData, setScheduleData] = useState<(ScheduleDataType | { id: string })[]>(
+    [],
+  );
 
   const onClickNext = () => {
     setMonthYear(++MonthYear);
@@ -54,48 +73,118 @@ const Calendar = () => {
   //이번 달 1일부터 마지막 날자까지 div 만들기
   const thisDateArr: React.ReactElement[] = []; //렌더링 될 날짜 값
 
-  //지난 달 날짜
-  for (let i = thisMonthFirstDay - 1; i >= 0; i--) {
-    thisDateArr.push(
-      <div
-        className='calendar__seven-day--date calendar__seven-day--date--last'
-        key={'lastMonthLastDate' + i}>
-        {lastMonthLastDate - i}
-      </div>,
-    );
-  }
-  //이번 달 날짜
-  for (let i = 1; i <= thisMonthLastDate; i++) {
-    if (
-      day === i &&
-      today.getMonth() === updateDate.getMonth() &&
-      today.getFullYear() === updateDate.getFullYear()
-    ) {
+  const makeCalendar = () => {
+    //지난 달 날짜
+    for (let i = thisMonthFirstDay - 1; i >= 0; i--) {
       thisDateArr.push(
         <div
-          className='calendar__seven-day--date calendar__seven-day--date--today'
-          key={i}>
-          {i}
+          className='calendar__seven-day--date calendar__seven-day--date--last'
+          key={'lastMonthLastDate' + i}>
+          {lastMonthLastDate - i}
         </div>,
       );
-    } else {
+    }
+    //이번 달 날짜
+    for (let i = 1; i <= thisMonthLastDate; i++) {
+      let isToday = false;
+      if (
+        day === i &&
+        today.getMonth() === updateDate.getMonth() &&
+        today.getFullYear() === updateDate.getFullYear()
+      ) {
+        isToday = true;
+      }
+      const thisMonthDate = (
+        <div
+          className={cn('calendar__seven-day--date', {
+            'calendar__seven-day--date--today': isToday,
+          })}
+          key={i}>
+          {i}
+          <div className='calendar__schedule__box'>
+            {scheduleData.map((data: any, index: number) => {
+              let { date, type, color } = data;
+              let scheduleDate = new Date(date);
+              if (
+                scheduleDate.getDate() === i &&
+                scheduleDate.getMonth() === updateDate.getMonth() &&
+                scheduleDate.getFullYear() === updateDate.getFullYear()
+              ) {
+                return (
+                  <div
+                    key={index}
+                    style={{ backgroundColor: color }}
+                    className={'calendar__schedule calendar__schedule__' + type}></div>
+                );
+              }
+            })}
+          </div>
+        </div>
+      );
+      thisDateArr.push(thisMonthDate);
+      console.log('업뎃');
+    }
+
+    //다음 달 날짜
+    for (let i = 1; i <= 6 - thisMonthLastDay; i++) {
       thisDateArr.push(
-        <div className='calendar__seven-day--date' key={i}>
+        <div
+          className='calendar__seven-day--date calendar__seven-day--date--next'
+          key={'NextMonthDate' + i}>
           {i}
         </div>,
       );
     }
+  };
+  makeCalendar();
+  useEffect(() => {
+    makeCalendar();
+  }, [scheduleData]);
+
+  //firestore schedule 정보 받아오기
+  interface ScheduleDataType {
+    date: string;
+    time: string;
+    title: string;
+    userId: string;
+    id?: string;
   }
-  //다음 달 날짜
-  for (let i = 1; i <= 6 - thisMonthLastDay; i++) {
-    thisDateArr.push(
-      <div
-        className='calendar__seven-day--date calendar__seven-day--date--next'
-        key={'NextMonthDate' + i}>
-        {i}
-      </div>,
-    );
-  }
+
+  const dateArr = [<div>오늘날짜</div>];
+
+  const fetchData = async () => {
+    if (context.user) {
+      try {
+        const q = query(
+          collection(db, 'mySchedule'),
+          where('userId', '==', context.user!.uid),
+        );
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+          setScheduleData([]);
+          querySnapshot.forEach((doc) => {
+            // console.log(doc.data());
+            setScheduleData((prev) => {
+              if (prev.some((item) => item.id === doc.id)) {
+                return prev;
+              } else {
+                return [...prev, { ...doc.data(), id: doc.id }];
+              }
+            });
+          });
+        } else {
+          setScheduleData([]);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [context]);
 
   return (
     <div className='calendar-box'>
@@ -130,7 +219,7 @@ const Calendar = () => {
           {thisDateArr}
         </div>
       </div>
-      <AddSchedule />
+      <AddSchedule makeCalendar={makeCalendar} fetchData={fetchData} />
     </div>
   );
 };
