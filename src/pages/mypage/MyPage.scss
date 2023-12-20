@@ -101,7 +101,19 @@
     .calendar__seven-day--date {
       color: #8f8f8f;
       @include var.center;
+      position: relative;
+      font-size: 0.9rem;
 
+      .calendar__schedule__box {
+        position: absolute;
+        display: flex;
+        bottom: 0;
+        .calendar__schedule {
+          width: 8px;
+          height: 3px;
+          background-color: red;
+        }
+      }
       &.calendar__seven-day--date--today {
         position: relative;
         z-index: 1;
@@ -109,8 +121,8 @@
 
         &::before {
           content: '';
-          width: 30px;
-          height: 30px;
+          width: 26px;
+          height: 26px;
           border-radius: 50%;
           z-index: -1;
           background-color: var.$blue;
@@ -212,6 +224,106 @@
         @include var.content-l;
         font-weight: 700;
         margin-top: 4px;
+      }
+    }
+  }
+}
+
+/**/
+.schedule-popup {
+  position: absolute;
+  width: 340px;
+  height: 360px;
+  background-color: #306de5;
+  border-radius: 8px;
+  box-shadow:
+    0 0 17px #dee6f5,
+    0 0 30px #eef2f4;
+  padding: 40px 40px;
+  left: -350px;
+  z-index: 1000;
+  h3 {
+    color: #fff;
+    margin-top: -2px;
+  }
+  .schedule-popup__close {
+    font-size: 1.5rem;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    right: 30px;
+    svg {
+      color: #fff;
+      margin-top: 3.5px;
+    }
+  }
+  .schedule-popup__title {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-left: -10px;
+    div {
+      border: 1px solid #fff;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      @include var.center;
+    }
+    svg {
+      color: #fff;
+    }
+  }
+  form {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .schedule-popup__title {
+      width: 100%;
+      height: 50px;
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px #fff solid;
+      color: #fff;
+      @include var.content-l;
+      font-weight: 500;
+      outline: none;
+      margin-left: 0;
+      &::placeholder {
+        color: var.$lightGray;
+        @include var.content-l;
+        font-weight: 500;
+      }
+    }
+    .schedule-popup__date__label,
+    .schedule-popup__time__label {
+      color: #fff;
+      margin-right: 20px;
+      @include var.content-l;
+      font-weight: 500;
+    }
+    .schedule-popup__date,
+    .schedule-popup__time {
+      margin-top: 20px;
+      height: 40px;
+      width: 213px;
+      padding: 0 10px;
+      border: none;
+      border-radius: 4px;
+      background-color: #f2f6f9;
+    }
+    button {
+      background-color: #f2f6f9;
+      color: #306de5;
+      height: 40px;
+      width: 100%;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: all 200ms;
+      margin-top: 30px;
+      &:hover {
+        opacity: 0.8;
       }
     }
   }

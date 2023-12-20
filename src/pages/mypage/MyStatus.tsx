@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { FaWeight } from 'react-icons/fa';
 import { FaPerson } from 'react-icons/fa6';
 import { MdBloodtype } from 'react-icons/md';
@@ -6,9 +6,8 @@ import { MdMale, MdFemale } from 'react-icons/md';
 import { MoodType, moodArr } from './MyPageData.ts';
 import { IoClose } from 'react-icons/io5';
 import cn from 'classnames';
-import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext.tsx';
-import { MyStatusContext } from '../../context/MyStatusContext.tsx';
+import { MyStatusContext, MyStatusContextType } from '../../context/MyStatusContext.tsx';
 import {
   collection,
   addDoc,
@@ -48,7 +47,7 @@ const MyStatus = () => {
   const { setData } = useContext(MyStatusContext);
 
   //input value값이 담길 변수
-  const [myName, setName] = useState<string>('');
+  const [myName, setMyName] = useState<string>('');
   const [birth, setBirth] = useState<string>('');
   const [gender, setGender] = useState<string>('male');
   const [height, setHeight] = useState<number>(0);
@@ -106,7 +105,37 @@ const MyStatus = () => {
     fetchData();
   }, [context]);
 
+  const { data }: MyStatusContextType = useContext(MyStatusContext);
+
+  useEffect(() => {
+    onCheckValue();
+  }, [popup]);
+
+  const onCheckValue = () => {
+    if (data) {
+      if (!myName) {
+        setMyName(data.name!);
+      }
+      if (!birth) {
+        setBirth(data.birth!);
+      }
+      if (!gender) {
+        setGender(data.gender!);
+      }
+      if (!height) {
+        setHeight(data.height!);
+      }
+      if (!weight) {
+        setWeight(data.weight!);
+      }
+      if (!bloodType) {
+        setBloodType(data.bloodType!);
+      }
+    }
+  };
+
   const onSubmit = async (e) => {
+    onCheckValue();
     e.preventDefault();
     //userData를 조회한다.
     await fetchData();
@@ -160,7 +189,7 @@ const MyStatus = () => {
       target: { name, value },
     } = e;
     if (name === 'name') {
-      setName(value);
+      setMyName(value);
     }
     if (name === 'birth') {
       setBirth(value);
@@ -316,6 +345,7 @@ const MyStatus = () => {
               name='gender'
               value='male'
               onChange={onChange}
+              checked={gender === 'male'}
             />
             <label htmlFor='gender--female' className='gender--female'>
               여성
@@ -326,6 +356,7 @@ const MyStatus = () => {
               name='gender'
               value='female'
               onChange={onChange}
+              checked={gender === 'female'}
             />
           </div>
           <div>
@@ -357,7 +388,12 @@ const MyStatus = () => {
           <div>
             <label htmlFor='blood-type'>혈액형</label>
 
-            <select name='blood-type' id='blood-type' onChange={onChange}>
+            <select
+              name='blood-type'
+              id='blood-type'
+              onChange={onChange}
+              value={bloodType}>
+              <option value='-'>혈액형 선택</option>
               <option value='A'>A</option>
               <option value='B'>B</option>
               <option value='AB'>AB</option>

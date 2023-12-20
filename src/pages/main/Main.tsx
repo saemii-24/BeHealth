@@ -151,11 +151,8 @@ const Main = () => {
         const querySnapshot = await getDocs(q);
 
         if (!querySnapshot.empty) {
-          // setAddInfo(true);
           setHospitalData([]);
           querySnapshot.forEach((doc) => {
-            //const dataObj = { ...doc.data(), id: doc.id };
-            console.log(doc.data());
             setHospitalData((prev) => {
               if (prev.some((item) => item.id === doc.id)) {
                 return prev;
@@ -167,7 +164,6 @@ const Main = () => {
           console.log(hospitalData);
         } else {
           setHospitalData([]);
-          // setAddInfo(false);
         }
       } catch (err) {
         console.log(err);
@@ -186,10 +182,6 @@ const Main = () => {
       console.log(err);
     }
   };
-
-  useEffect(() => {
-    fetchData();
-  }, [context]);
 
   useEffect(() => {
     fetchData();

@@ -3,10 +3,19 @@ import { AddScheduleType, addScheduleData } from './AddScheduleData';
 import { MdBloodtype } from 'react-icons/md';
 import { FaRegHospital, FaWalking, FaRegCalendarPlus } from 'react-icons/fa';
 import { RiMedicineBottleLine } from 'react-icons/ri';
+import AddSchedulePopup from './AddSchedulePopup';
 
-const AddSchedule = () => {
+const AddSchedule = ({ makeCalendar, fetchData }) => {
+  const [popup, setPopup] = useState<boolean>(false);
+  const [scheduleData, setScheduleData] = useState<AddScheduleType>(addScheduleData[1]);
+
+  useEffect(() => {
+    fetchData();
+    makeCalendar();
+  }, [popup]);
+
   const handleScheduleIcon = (iconText: string) => {
-    var icon = iconText;
+    let icon = iconText;
     switch (icon) {
       case 'menstruation':
         return <MdBloodtype />;
@@ -37,11 +46,19 @@ const AddSchedule = () => {
                 <h1 className='add-schedule__title'>{data.scheduleTitle}</h1>
                 <h3 className='add-schedule__summay'>{data.scheduleSummary}</h3>
               </div>
-              <div className='add-schedule__icon--add'>+</div>
+              <div
+                className='add-schedule__icon--add'
+                onClick={() => {
+                  setPopup(true);
+                  setScheduleData(data);
+                }}>
+                +
+              </div>
             </div>
           );
         })}
       </div>
+      {popup && <AddSchedulePopup setPopup={setPopup} scheduleData={scheduleData} />}
     </div>
   );
 };
