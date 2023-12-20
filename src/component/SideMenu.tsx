@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './Component.scss';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaHome, FaLaugh, FaSignal, FaEnvelope } from 'react-icons/fa';
 import cn from 'classnames';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { getAuth, signOut, deleteUser } from 'firebase/auth';
 import { app } from '../firebase/firebaseApp'; //firebase 초기화 해둔값
-import { useLocation } from 'react-router-dom';
+
 type SelectTabType = 'home' | 'myPage' | 'analyzes' | 'memo';
 
 const Menu = () => {
-  const [selectTab, setSelectTab] = useState<SelectTabType|null>('home');
+  const [selectTab, setSelectTab] = useState<SelectTabType | null>('home');
   const [isAuth, setIsAuth] = useState<boolean>(false);
 
   const navigate = useNavigate();
@@ -54,7 +54,10 @@ const Menu = () => {
 
       await deleteUser(user!);
     } catch (err) {
-      console.log(err);
+      if (err.code === 'auth/requires-recent-login') {
+        navigate('/loginconfirm');
+      }
+      console.log(err.code);
     }
   };
 

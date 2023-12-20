@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react';
 import { RenderDataType } from '../pages/mypage/MyStatus';
 
 // 새로운 컨텍스트 생성
-interface MyStatusContextType {
+export interface MyStatusContextType {
   data?: RenderDataType;
   setData?: (data: RenderDataType) => void;
 }
