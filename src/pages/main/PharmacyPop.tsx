@@ -39,7 +39,8 @@ const PharmacyPop = (props) => {
 
     try {
       if (selectCity) {
-        const URL = `https://apis.data.go.kr/B551182/pharmacyInfoService/getParmacyBasisList?serviceKey=${apiKey}&sidoCd=${institution[selectIdx].code2}&pageNo=${pageNo}&numOfRows=50`;
+        // const URL = `https://apis.data.go.kr/B551182/pharmacyInfoService/getParmacyBasisList?serviceKey=${apiKey}&sidoCd=${institution[selectIdx].code2}&pageNo=${pageNo}&numOfRows=50`;
+        const URL = `https://apis.data.go.kr/B552657/ErmctInsttInfoInqireService/getParmacyListInfoInqire?serviceKey=${apiKey}&Q0=${institution[selectIdx].city}&Q1=${selectCity}&pageNo=${pageNo}&numOfRows=50`;
         const response: any = await axios.get(URL);
         const searchItem = response.data.response.body.items.item;
         setTotalCount(response.data.response.body.totalCount);
@@ -51,7 +52,7 @@ const PharmacyPop = (props) => {
             originArr.push(searchItem.slice(i, i + 10));
           }
         }
-        console.log(searchItem);
+        console.log(response);
 
         if (!searchItem) {
           setNothing(true);
@@ -139,8 +140,8 @@ const PharmacyPop = (props) => {
               (callPharmacy[indexNo] as object[]).map((v: any, i: number) => {
                 return (
                   <div className='pharmacy-info' key={i}>
-                    <h5>{v.yadmNm}</h5>
-                    <p>{v.addr}</p>
+                    <h5>{v.dutyName}</h5>
+                    <p>{v.dutyAddr}</p>
                   </div>
                 );
               })

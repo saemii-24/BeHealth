@@ -19,7 +19,7 @@
     height: 50%;
 
     .classify {
-      width: 80%;
+      width: 90%;
 
       button {
         &:first-of-type {
@@ -45,7 +45,7 @@
         background: var.$blueGray;
         @include var.r-m;
         // padding: 25px 25px 45px;
-        padding: 25px 0 25px 25px;
+        padding: 25px 25px 25px 25px;
 
         .age-info__txt {
           width: 100%;
@@ -53,16 +53,27 @@
           @include var.center;
           align-items: flex-start;
           row-gap: 19px;
-          padding-right: 25px;
+          padding-right: 15px;
           overflow-y: scroll;
 
+          // &::-webkit-scrollbar {
+          //   width: 7px;
+          //   background: var.$blueGray;
+          //   box-shadow: inset 0 0 10px rgba(197, 206, 221, 0.5);
+          //   @include var.r-m;
+          // }
+          // &::-webkit-scrollbar-thumb {
+          //   background: hsl(219, 94%, 93%);
+          //   @include var.r-s;
+          // }
           &::-webkit-scrollbar {
             width: 7px;
-            background: var.$blueGray;
-            @include var.r-m;
+            background: #dee9fe;
+            @include var.r-s;
+            margin-top: 20px;
           }
           &::-webkit-scrollbar-thumb {
-            background: var.$blue;
+            background: #a6c7f3;
             @include var.r-s;
           }
 
@@ -136,48 +147,12 @@
 
     .classify {
       width: 60%;
-
-      // button {
-      // width: 60px;
-      // height: 60px;
-      // border-radius: 50%;
-      // overflow: hidden;
-
-      // svg {
-      //   width: 100%;
-      //   font-size: 1.2rem;
-      //   color: var.$green;
-      //   pointer-events: none;
-      //   transition: .5s;
-      // }
-
-      // &:first-of-type{
-      //   background: var.$green;
-      //   color: #fff;
-
-      //   svg{
-      //     color: #fff;
-      //   }
-      // }
-      // }
-
-      // .click-svg{
-      //   svg{
-      //     color: #fff !important;
-      //   }
-      // }
-
-      // .reset-svg{
-      //   svg{
-      //     color: var.$green !important;
-      //   }
-      // }
     }
 
     .category-content {
       width: 100%;
       height: calc(100% - 90px);
-      padding: 30px 0 30px 30px;
+      padding: 30px 30px 30px 30px;
       background: var.$blueGray;
       @include var.r-m;
       @include var.center;
@@ -211,7 +186,7 @@
           margin-top: 20px;
         }
         &::-webkit-scrollbar-thumb {
-          background: var.$blue;
+          background: #a6c7f3;
           @include var.r-s;
         }
 
