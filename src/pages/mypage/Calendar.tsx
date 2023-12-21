@@ -122,7 +122,6 @@ const Calendar = () => {
         </div>
       );
       thisDateArr.push(thisMonthDate);
-      console.log('업뎃');
     }
 
     //다음 달 날짜
