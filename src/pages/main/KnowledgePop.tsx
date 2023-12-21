@@ -10,6 +10,13 @@ const KnowledgePop = (props) => {
   let newStr = explain.split('\n');
   //   console.log(newStr);
 
+  let [content, setContent] = useState<string[]>([]);
+  for (let i in seasonData[0].commonPop[idx].info) {
+    content.push(seasonData[0].commonPop[idx].info[i]);
+    // let string = content[i].split('\n');
+    console.log(content[i]);
+  }
+
   return (
     <div className='knowledge-pop'>
       <IoClose
