@@ -40,6 +40,7 @@
       .main--bottom--left {
         width: 290px;
         height: 100%;
+        transition: 0.5s;
 
         .momentum {
           width: 100%;
@@ -48,7 +49,6 @@
           @include var.r-m;
           @include var.shadow;
           padding: 30px;
-          transition: 1s;
 
           h3 {
             padding-bottom: 20px;

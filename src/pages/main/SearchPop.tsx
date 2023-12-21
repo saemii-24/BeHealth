@@ -4,8 +4,7 @@ import Loading from '../../component/Loading';
 
 import { IoClose } from 'react-icons/io5';
 import { FaPlus } from 'react-icons/fa';
-import { IoIosArrowForward } from 'react-icons/io';
-import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import { HospitalNameContext } from '../../context/HospitalNameContext';
 import { HospitalAddContext } from '../../context/HospitalAddContext';
 import cn from 'classnames';
