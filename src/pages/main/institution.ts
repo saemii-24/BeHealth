@@ -1,6 +1,7 @@
 export interface InstitutionType {
   id: number;
-  code?:number;
+  code?: number;
+  code2?: number;
   city: string;
   district: string[];
 }
@@ -12,7 +13,8 @@ let institution: InstitutionType[] = [
   },
   {
     id: 1,
-    code:11,
+    code: 11,
+    code2: 110000,
     city: '서울특별시',
     district: [
       '시 군 구',
@@ -45,7 +47,8 @@ let institution: InstitutionType[] = [
   },
   {
     id: 2,
-    code:41,
+    code: 41,
+    code2: 310000,
     city: '경기도',
     district: [
       '시 군 구',
@@ -95,7 +98,8 @@ let institution: InstitutionType[] = [
   },
   {
     id: 3,
-    code:28,
+    code: 28,
+    code2: 230000,
     city: '인천광역시',
     district: [
       '시 군 구',
@@ -113,7 +117,8 @@ let institution: InstitutionType[] = [
   },
   {
     id: 4,
-    code:51,
+    code: 51,
+    code2: 320000,
     city: '강원특별자치도',
     district: [
       '시 군 구',
@@ -139,7 +144,8 @@ let institution: InstitutionType[] = [
   },
   {
     id: 5,
-    code:43,
+    code: 43,
+    code2: 330000,
     city: '충청북도',
     district: [
       '시 군 구',
@@ -161,7 +167,8 @@ let institution: InstitutionType[] = [
   },
   {
     id: 6,
-    code:44,
+    code: 44,
+    code2: 340000,
     city: '충청남도',
     district: [
       '시 군 구',
@@ -189,6 +196,7 @@ let institution: InstitutionType[] = [
   {
     id: 7,
     code: 36,
+    code2: 290000,
     city: '세종특별자치시',
     district: [
       '시 군 구',
@@ -219,12 +227,14 @@ let institution: InstitutionType[] = [
   {
     id: 8,
     code: 30,
+    code2: 250000,
     city: '대전광역시',
     district: ['시 군 구', '대덕구', '동구', '서구', '유성구', '중구'],
   },
   {
     id: 9,
     code: 47,
+    code2: 370000,
     city: '경상북도',
     district: [
       '시 군 구',
@@ -259,6 +269,7 @@ let institution: InstitutionType[] = [
   {
     id: 10,
     code: 48,
+    code2: 380000,
     city: '경상남도',
     district: [
       '시 군 구',
@@ -295,12 +306,14 @@ let institution: InstitutionType[] = [
   {
     id: 11,
     code: 31,
+    code2: 260000,
     city: '울산광역시',
     district: ['시 군 구', '남구', '동구', '북구', '울주군', '중구'],
   },
   {
     id: 12,
     code: 27,
+    code2: 220000,
     city: '대구광역시',
     district: [
       '시 군 구',
@@ -318,6 +331,7 @@ let institution: InstitutionType[] = [
   {
     id: 13,
     code: 26,
+    code2: 210000,
     city: '부산광역시',
     district: [
       '시 군 구',
@@ -342,6 +356,7 @@ let institution: InstitutionType[] = [
   {
     id: 14,
     code: 45,
+    code2: 350000,
     city: '전라북도',
     district: [
       '시 군 구',
@@ -365,7 +380,7 @@ let institution: InstitutionType[] = [
   },
   {
     id: 15,
-    
+    code2: 360000,
     code: 46,
     city: '전라남도',
     district: [
@@ -397,12 +412,14 @@ let institution: InstitutionType[] = [
   {
     id: 16,
     code: 29,
+    code2: 240000,
     city: '광주광역시',
     district: ['시 군 구', '광산구', '남구', '동구', '북구', '서구'],
   },
   {
     id: 17,
     code: 50,
+    code2: 390000,
     city: '제주특별자치도',
     district: ['시 군 구', '제주시', '서귀포시'],
   },
