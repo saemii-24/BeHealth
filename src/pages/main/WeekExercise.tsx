@@ -184,7 +184,9 @@ const WeekExercise = () => {
             </div>
           </div>
           <div className='week-exercise__icon__notice'>
-            로그인 하시고 운동 기록을 시작해보세요.
+            로그인 하시고 운동 기록을
+            <br />
+            시작해보세요.
           </div>
         </>
       )}
