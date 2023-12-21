@@ -89,6 +89,48 @@
               }
             }
           }
+          .week-exercise__icon--empty {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var.$blue;
+            @include var.center;
+            svg {
+              color: #fff;
+              font-size: 1.2rem;
+            }
+          }
+
+          .week-exercise__icon__box {
+            display: flex;
+            gap: 20px;
+            @include var.center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            .week-exercise__icon {
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              background-color: var.$blue;
+              @include var.center;
+              svg {
+                color: #fff;
+                font-size: 1.2rem;
+              }
+              &.week-exercise__icon--calendar {
+                background-color: var.$red;
+              }
+              &.week-exercise__icon--exercise {
+                background-color: var.$yellow;
+              }
+            }
+          }
+          .week-exercise__icon__notice {
+            @include var.content-m;
+            text-align: center;
+            line-height: 160%;
+          }
         }
       }
 
@@ -189,7 +231,7 @@
             }
             & > div {
               width: 100%;
-              padding: 20px 15px;
+              padding: 20px 25px;
               background: #fff;
               @include var.r-m;
               @include var.shadow;

@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './Component.scss';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaHome, FaLaugh, FaSignal, FaEnvelope } from 'react-icons/fa';
 import cn from 'classnames';
-import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { getAuth, signOut, deleteUser } from 'firebase/auth';
 import { app } from '../firebase/firebaseApp'; //firebase 초기화 해둔값
-
 type SelectTabType = 'home' | 'myPage' | 'analyzes' | 'memo';
 
 const Menu = () => {
@@ -19,6 +17,7 @@ const Menu = () => {
 
   //location에 따라 탭 변동
   const location = useLocation();
+
   useEffect(() => {
     if (location.pathname === '/') {
       setSelectTab('home');

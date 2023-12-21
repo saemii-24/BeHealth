@@ -83,7 +83,7 @@ const ExercisePop = (props) => {
           <div className='age-info'>
             <div className='age-info__txt'>
               {recommendExercise[ageIdx].explain.map((v, i) => {
-                return <p>▪ {v}</p>;
+                return <p key={i}>▪ {v}</p>;
               })}
             </div>
           </div>
@@ -134,7 +134,7 @@ const ExercisePop = (props) => {
 
           <div className='category-content__txt'>
             {exerciseCategory[categoryIdx].explain.map((v, i) => {
-              return <p>✔ {v}</p>;
+              return <p key={i}>✔ {v}</p>;
             })}
           </div>
         </div>

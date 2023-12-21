@@ -164,7 +164,6 @@ const Calendar = () => {
         if (!querySnapshot.empty) {
           setScheduleData([]);
           querySnapshot.forEach((doc) => {
-            // console.log(doc.data());
             setScheduleData((prev) => {
               if (prev.some((item) => item.id === doc.id)) {
                 return prev;
