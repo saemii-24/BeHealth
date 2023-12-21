@@ -318,41 +318,24 @@ const Main = () => {
                     })}
                   </div>
                 ) : (
-                  <div className={`basic-search`}>
-                    <h5>원하시는 병원을 선택 해보세요!</h5>
-                    <div className='icon'>
-                      <TiPlus className='fontawesome' />
-                    </div>
-                  </div>
+                  <div
+                    className={`basic-search`}
+                    style={{
+                      backgroundImage: `url${
+                        process.env.PUBLIC_URL + '/images/doctor.svg'
+                      }`,
+                    }}></div>
                 )}
               </>
             ) : (
               <>
-                {selectAdd!.length > 0 ? (
-                  <div className={`add-search`}>
-                    {selectName!.map((v, i) => {
-                      return (
-                        <div key={i} className='show-hospital'>
-                          <div className='icon'>
-                            <FaRegHospital className='fontawesome' />
-                          </div>
-
-                          <div className='show-hospital__txt'>
-                            <h4>{v}</h4>
-                            <p>{selectAdd![i]}</p>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <div className={`basic-search`}>
-                    <h5>원하시는 병원을 선택 해보세요!</h5>
-                    <div className='icon'>
-                      <TiPlus className='fontawesome' />
-                    </div>
-                  </div>
-                )}
+                <div
+                  className={`basic-search`}
+                  style={{
+                    backgroundImage: `url(${
+                      process.env.PUBLIC_URL + '/images/doctor.svg'
+                    })`,
+                  }}></div>
               </>
             )}
           </div>
@@ -366,7 +349,6 @@ const Main = () => {
                 setPharmacyPop(true);
               }}>
               <div className='icon'>
-                {/* <FontAwesomeIcon icon={faSyringe} className='fontawesome'/> faPrescriptionBottleMedical */}
                 <FontAwesomeIcon icon={faHouseChimneyMedical} className='fontawesome' />
               </div>
 
@@ -381,24 +363,6 @@ const Main = () => {
 
             <div className='momentum'>
               <WeekExercise />
-              {/* <h3>
-                이번주 운동량 <span>&#40; 평균 1시간 &#41;</span>
-              </h3>
-
-              <div className='graph-box'>
-                {momentumData.map((v, i) => {
-                  return (
-                    <div key={i} className='graph'>
-                      <div
-                        style={{
-                          height: `${v.graph}%`,
-                          background: `${v.graph > 50 ? '#FFD749' : '#fde9a0'}`,
-                        }}></div>
-                      <p>{v.day}</p>
-                    </div>
-                  );
-                })}
-              </div> */}
             </div>
           </div>
 

@@ -130,6 +130,7 @@
             @include var.content-m;
             text-align: center;
             line-height: 160%;
+            word-break: keep-all;
           }
         }
       }
