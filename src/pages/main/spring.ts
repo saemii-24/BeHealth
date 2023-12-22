@@ -4,7 +4,7 @@ interface SpreadType {
   route: string;
   precaution: string[];
 }
-interface CommonType {
+export interface CommonType {
   title: string;
   content: string;
   img: string;
@@ -17,7 +17,7 @@ interface InfoType {
   content2?: string;
   content3?: string;
 }
-interface CommonPopType {
+export interface CommonPopType {
   explain: string;
   info: InfoType[];
   source: string;
