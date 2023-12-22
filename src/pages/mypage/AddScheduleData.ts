@@ -41,7 +41,7 @@ export const addScheduleData: AddScheduleType[] = [
     scheduleTitle: '기타 일정 등록하기',
     scheduleSummary: '원하는 일정을 등록하세요.',
     scheduleIcon: 'etc',
-    scheduleIconColor: '#A07EFF',
+    scheduleIconColor: '#fd4e53',
     notAvailable: '원하는 일정을 등록하세요.',
     type: 'etc',
   },

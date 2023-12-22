@@ -10,10 +10,12 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext.tsx';
 import { AiOutlineFileSearch } from 'react-icons/ai';
 import { MyStatusContext } from '../../context/MyStatusContext.tsx';
+import { MyPagePopupContext } from '../../context/MyPagePopupContext.tsx';
 
 const Medicine = () => {
   let context = useContext(AuthContext);
   const { data } = useContext(MyStatusContext);
+  const { myPagePopup, setMyPagePopup } = useContext(MyPagePopupContext);
 
   //input으로 searchItem 받아오기
   const [name, setName] = useState<string>(''); //약 명칭
@@ -74,11 +76,14 @@ const Medicine = () => {
             <div
               className='medicine__caution--more'
               onClick={() => {
-                setPopup(true);
-                setSideEffect('');
-                setCaution('');
-                setName('');
-                setNothing(true);
+                if (myPagePopup === false) {
+                  setPopup(true);
+                  setMyPagePopup!(true);
+                  setSideEffect('');
+                  setCaution('');
+                  setName('');
+                  setNothing(true);
+                }
               }}>
               <AiOutlineFileSearch className='medicine__caution__search' />
             </div>
@@ -100,9 +105,12 @@ const Medicine = () => {
         <div
           className='medicine__popup__close'
           onClick={() => {
-            setPopup(false);
-            setLoading(false);
-            setNothing(false);
+            if (myPagePopup) {
+              setPopup(false);
+              setMyPagePopup!(false);
+              setLoading(false);
+              setNothing(false);
+            }
           }}>
           <IoClose />
         </div>

@@ -23,6 +23,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { MyPagePopupContext } from '../../context/MyPagePopupContext.tsx';
 export interface ExerciseDataType {
   calorie: number;
   detailDate: string;
@@ -35,6 +36,7 @@ export interface ExerciseDataType {
 
 const Exercise = () => {
   let context = useContext(AuthContext);
+  const { myPagePopup, setMyPagePopup } = useContext(MyPagePopupContext);
 
   //구조를 위해 exerciseData에서 데이터를 가져왔다고 가정한다.
   const [selectExercise, setSelectExercise] = useState<ExerciseType>(exerciseData[0]);
@@ -70,7 +72,6 @@ const Exercise = () => {
         ((Number(exerciseHour * 60) + Number(exerciseMin)) / 60) * exerciseCalorie;
 
       resultCalorie = Number(resultCalorie.toFixed(0));
-      console.log(resultCalorie);
 
       setCalorie(Number(resultCalorie.toFixed(0)));
     }
@@ -93,7 +94,6 @@ const Exercise = () => {
         if (!querySnapshot.empty) {
           setRenderData([]);
           querySnapshot.forEach((doc) => {
-            console.log(doc.data());
             setRenderData((prev) => {
               if (prev.some((item) => item.id === doc.id)) {
                 return prev;
@@ -102,7 +102,6 @@ const Exercise = () => {
               }
             });
           });
-          console.log(renderData);
         } else {
           setRenderData([]);
         }
@@ -130,7 +129,10 @@ const Exercise = () => {
         calorie: calorie,
         userId: context.user!.uid,
       });
-      setPopup(false);
+      if (myPagePopup) {
+        setPopup(false);
+        setMyPagePopup!(false);
+      }
       fetchData();
     } catch (err) {
       console.log(err);
@@ -164,8 +166,10 @@ const Exercise = () => {
                     <div
                       className='exercise__modify modify'
                       onClick={() => {
-                        setPopup(true);
-                        console.log(popup);
+                        if (myPagePopup === false) {
+                          setPopup(true);
+                          setMyPagePopup!(true);
+                        }
                       }}>
                       +
                     </div>
@@ -220,8 +224,10 @@ const Exercise = () => {
               <div
                 className='exercise__modify modify'
                 onClick={() => {
-                  setPopup(true);
-                  console.log(popup);
+                  if (myPagePopup === false) {
+                    setPopup(true);
+                    setMyPagePopup!(true);
+                  }
                 }}>
                 +
               </div>
@@ -252,8 +258,10 @@ const Exercise = () => {
         <div
           className='exercise__popup__close'
           onClick={() => {
-            setPopup(false);
-            console.log(popup);
+            if (myPagePopup) {
+              setPopup(false);
+              setMyPagePopup!(false);
+            }
           }}>
           <IoClose />
         </div>

@@ -1,27 +1,18 @@
 import React, { useState, useContext } from 'react';
 import { IoClose } from 'react-icons/io5';
-import { MdBloodtype } from 'react-icons/md';
 import { FaRegHospital, FaWalking, FaRegCalendarPlus } from 'react-icons/fa';
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import { AuthContext } from '../../context/AuthContext.tsx';
-import {
-  collection,
-  addDoc,
-  updateDoc,
-  query,
-  where,
-  getDocs,
-  doc,
-} from 'firebase/firestore';
-import { db, app } from '../../firebase/firebaseApp';
-import { getAuth, updateProfile } from 'firebase/auth';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../../firebase/firebaseApp';
+import { MyPagePopupContext } from '../../context/MyPagePopupContext.tsx';
 
 const AddSchedulePopup = ({ setPopup, scheduleData }) => {
+  const { myPagePopup, setMyPagePopup } = useContext(MyPagePopupContext);
+
   const handleScheduleIcon = (iconText: string) => {
     let icon = iconText;
     switch (icon) {
-      case 'menstruation':
-        return <MdBloodtype />;
       case 'hospital':
         return <FaRegHospital />;
       case 'medicine':
@@ -41,7 +32,6 @@ const AddSchedulePopup = ({ setPopup, scheduleData }) => {
 
   //최초 정보 등록
   const context = useContext(AuthContext);
-  const auth = getAuth(app);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -66,15 +56,12 @@ const AddSchedulePopup = ({ setPopup, scheduleData }) => {
     } = e;
     if (name === 'title') {
       setTitle(value);
-      console.log(title);
     }
     if (name === 'date') {
       setDate(value);
-      console.log(date);
     }
     if (name === 'time') {
       setTime(value);
-      console.log(time);
     }
   };
 
@@ -83,7 +70,10 @@ const AddSchedulePopup = ({ setPopup, scheduleData }) => {
       <div
         className='schedule-popup__close'
         onClick={() => {
-          setPopup(false);
+          if (myPagePopup) {
+            setPopup(false);
+            setMyPagePopup!(false);
+          }
         }}>
         <IoClose />
       </div>
