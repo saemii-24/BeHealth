@@ -41,10 +41,13 @@ const SearchPop = (props) => {
         console.log(response);
 
         //페이지네이션을 위한 그룹화
+
         let originArr: any = [];
-        if (Array.isArray(searchItem)) {
-          for (let i = 0; i < searchItem.length; i += 10) {
-            originArr.push(searchItem.slice(i, i + 10));
+        if (searchItem.length) {
+          if (Array.isArray(searchItem)) {
+            for (let i = 0; i < searchItem.length; i += 10) {
+              originArr.push(searchItem.slice(i, i + 10));
+            }
           }
         }
         console.log(originArr);
@@ -232,7 +235,7 @@ const SearchPop = (props) => {
               onClick={(e) => {
                 setIndexNo(index);
               }}
-              disabled={callHospital.length < index + 1}
+              disabled={callHospital.length < index + 1 || value === ''}
             />
           );
         })}

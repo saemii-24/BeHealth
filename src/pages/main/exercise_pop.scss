@@ -56,16 +56,6 @@
           padding-right: 15px;
           overflow-y: scroll;
 
-          // &::-webkit-scrollbar {
-          //   width: 7px;
-          //   background: var.$blueGray;
-          //   box-shadow: inset 0 0 10px rgba(197, 206, 221, 0.5);
-          //   @include var.r-m;
-          // }
-          // &::-webkit-scrollbar-thumb {
-          //   background: hsl(219, 94%, 93%);
-          //   @include var.r-s;
-          // }
           &::-webkit-scrollbar {
             width: 7px;
             background: #dee9fe;
@@ -116,6 +106,7 @@
             background: var.$darkBlue;
             width: 40px;
             height: 40px;
+            animation: popupAnimation 700ms;
 
             svg {
               color: #fff;
@@ -130,6 +121,8 @@
             h5,
             p {
               color: #fff;
+              line-height: 1.4;
+              animation: popupAnimation 700ms;
             }
 
             p {
@@ -138,6 +131,21 @@
           }
         }
       }
+    }
+  }
+
+  @keyframes popupAnimation {
+    0% {
+      visibility: hidden;
+      opacity: 0;
+    }
+    25% {
+      visibility: hidden;
+      opacity: 0;
+    }
+    100% {
+      visibility: visible;
+      opacity: 1;
     }
   }
 
@@ -204,6 +212,7 @@
   justify-content: space-between;
 
   button {
+    animation: popupAnimation 700ms;
     @include var.center;
     color: var.$blue;
     outline: none;

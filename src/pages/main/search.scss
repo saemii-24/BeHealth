@@ -10,7 +10,8 @@
   margin-bottom: 40px;
   display: flex;
   flex-wrap: wrap;
-  transition: 0.5s;
+  transition: width 0.5s;
+  overflow: hidden;
 
   .search--left {
     width: 260px;
@@ -29,10 +30,10 @@
     }
 
     .select-institution {
-      width: 100%;
+      width: 260px;
+      gap: 20px;
       margin-top: auto;
       display: flex;
-      justify-content: space-between;
 
       .search-icon {
         width: 40px;
@@ -55,6 +56,7 @@
   #institution,
   #popup_select {
     padding: 12px 40px 12px 20px;
+    transition: all 0.5s;
     @include var.r-s;
     border: none;
     outline: none;
@@ -62,7 +64,7 @@
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
-    width: 200px;
+    // width: 200px;
 
     // 출처 <a href="https://www.flaticon.com/free-icons/down-arrow" title="down arrow icons">Down arrow icons created by Freepik - Flaticon</a>
     background: {
@@ -326,48 +328,46 @@
   }
 
   .hospital-css {
-    transform: scale(0);
-    overflow: hidden;
-    opacity: 0;
+    visibility: visible;
+    opacity: 1;
+    transition: all 200ms;
   }
 
   .hospital-css-hide {
-    animation: hide 0.5s linear forwards;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0ms;
   }
+
+  .hospital-css-show {
+    visibility: visible;
+    opacity: 1;
+    transition: all 700ms;
+    transition-delay: 200ms;
+  }
+
   @keyframes hide {
     0% {
-      // overflow-y: scroll;
       transform: scale(1);
     }
     1% {
       transform: scale(0.3);
-      // overflow: hidden;
     }
-    // 10% {
-    //   transform: scale(0);
-    //   overflow: hidden;
-    // }
+
     100% {
       transform: scale(0);
-      // overflow: hidden;
     }
   }
 
-  .hospital-css-show {
-    animation: show 0.5s linear;
-  }
   @keyframes show {
     0% {
-      // overflow-y: hidden;
       transform: scale(0);
     }
     50% {
-      // overflow-y: hidden;
       transform: scale(0.5);
       opacity: 0.5;
     }
     100% {
-      // overflow-y: scroll;
       transform: scale(1);
       opacity: 1;
     }

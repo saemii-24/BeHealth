@@ -13,7 +13,6 @@ const KnowledgePop = (props) => {
   let [content, setContent] = useState<string[]>([]);
   for (let i in seasonData[0].commonPop[idx].info) {
     content.push(seasonData[0].commonPop[idx].info[i]);
-    // let string = content[i].split('\n');
     console.log(content[i]);
   }
 
@@ -31,9 +30,6 @@ const KnowledgePop = (props) => {
         <h2>{seasonData[0].common[idx].title}</h2>
       </div>
 
-      {/* {newStr.map((v, i) => {
-        return <h4 key={i}>{v}</h4>;
-      })} */}
       <h4>{seasonData[0].commonPop[idx].explain}</h4>
 
       <div className='pop-content'>
