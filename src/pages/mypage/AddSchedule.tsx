@@ -4,6 +4,7 @@ import { FaRegHospital, FaWalking, FaRegCalendarPlus } from 'react-icons/fa';
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import AddSchedulePopup from './AddSchedulePopup';
 import { AuthContext } from '../../context/AuthContext';
+import { MyPagePopupContext } from '../../context/MyPagePopupContext';
 
 const AddSchedule = ({ makeCalendar, fetchData }) => {
   const [popup, setPopup] = useState<boolean>(false);
@@ -31,6 +32,7 @@ const AddSchedule = ({ makeCalendar, fetchData }) => {
   };
 
   const context = useContext(AuthContext);
+  const { myPagePopup, setMyPagePopup } = useContext(MyPagePopupContext);
 
   return (
     <>
@@ -53,7 +55,10 @@ const AddSchedule = ({ makeCalendar, fetchData }) => {
                     <div
                       className='add-schedule__icon--add'
                       onClick={() => {
-                        setPopup(true);
+                        if (myPagePopup === false) {
+                          setPopup(true);
+                          setMyPagePopup!(true);
+                        }
                         setScheduleData(data);
                       }}>
                       +

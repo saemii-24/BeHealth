@@ -19,7 +19,6 @@ const Login = ({ title }: { title?: ReactElement }) => {
       const auth = getAuth(app);
       await signInWithEmailAndPassword(auth, email, password);
       navigate('/');
-      console.log('click');
       setError('');
     } catch (err) {
       setError('일치하는 계정이 없습니다.');
@@ -32,11 +31,9 @@ const Login = ({ title }: { title?: ReactElement }) => {
     } = e;
     if (name === 'email') {
       setEmail(value);
-      console.log(email);
     }
     if (name === 'password') {
       setPassword(value);
-      console.log(password);
     }
   };
 
