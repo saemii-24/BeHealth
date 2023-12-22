@@ -31,7 +31,6 @@ const Bmi = () => {
 
   useEffect(() => {
     if (data) {
-      console.log(data);
       calculateBmi(data.height, data.weight);
     }
   }, [data]);

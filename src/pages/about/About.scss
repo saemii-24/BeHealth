@@ -1,0 +1,43 @@
+@use '../../common.scss' as var;
+.about {
+  width: 100%;
+  height: 100%;
+  @include var.r-s;
+  @include var.shadow;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 100px;
+  h2 {
+    color: var.$blue;
+    @include var.title-l;
+    font-weight: 800;
+    &.title-source {
+      margin-top: 60px;
+    }
+  }
+  .about__profile-box {
+    display: flex;
+    gap: 40px;
+    margin-top: 30px;
+    .about__profile {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 30px;
+      width: 250px;
+      @include var.r-m;
+      @include var.shadow;
+      background-color: var.$blue;
+      h3 {
+        color: #fff;
+      }
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 3px solid #fff;
+      }
+    }
+  }
+}

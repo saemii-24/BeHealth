@@ -2,21 +2,20 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { IoSearch, IoClose } from 'react-icons/io5';
 import Loading from '../../component/Loading';
-import { FaRegStar, FaStar } from 'react-icons/fa';
 import { GiMedicines } from 'react-icons/gi';
-import { FiPlus } from 'react-icons/fi';
 import cn from 'classnames';
-import { app, db } from '../../firebase/firebaseApp';
-import { doc, setDoc } from 'firebase/firestore';
+import { app } from '../../firebase/firebaseApp';
 import { getAuth } from 'firebase/auth';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext.tsx';
 import { AiOutlineFileSearch } from 'react-icons/ai';
 import { MyStatusContext } from '../../context/MyStatusContext.tsx';
+import { MyPagePopupContext } from '../../context/MyPagePopupContext.tsx';
 
 const Medicine = () => {
   let context = useContext(AuthContext);
   const { data } = useContext(MyStatusContext);
+  const { myPagePopup, setMyPagePopup } = useContext(MyPagePopupContext);
 
   //input으로 searchItem 받아오기
   const [name, setName] = useState<string>(''); //약 명칭
@@ -77,11 +76,14 @@ const Medicine = () => {
             <div
               className='medicine__caution--more'
               onClick={() => {
-                setPopup(true);
-                setSideEffect('');
-                setCaution('');
-                setName('');
-                setNothing(true);
+                if (myPagePopup === false) {
+                  setPopup(true);
+                  setMyPagePopup!(true);
+                  setSideEffect('');
+                  setCaution('');
+                  setName('');
+                  setNothing(true);
+                }
               }}>
               <AiOutlineFileSearch className='medicine__caution__search' />
             </div>
@@ -103,9 +105,12 @@ const Medicine = () => {
         <div
           className='medicine__popup__close'
           onClick={() => {
-            setPopup(false);
-            setLoading(false);
-            setNothing(false);
+            if (myPagePopup) {
+              setPopup(false);
+              setMyPagePopup!(false);
+              setLoading(false);
+              setNothing(false);
+            }
           }}>
           <IoClose />
         </div>

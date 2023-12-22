@@ -20,6 +20,8 @@ import {
 import { db, app } from '../../firebase/firebaseApp';
 import { getAuth, updateProfile } from 'firebase/auth';
 import { Link } from 'react-router-dom';
+import { MyPagePopupContext } from '../../context/MyPagePopupContext.tsx';
+import Loading from '../../component/Loading.tsx';
 
 //실제 렌더링 될 값이 담길 변수
 export interface RenderDataType {
@@ -42,6 +44,7 @@ const MyStatus = () => {
   //최초 정보 등록
   const context = useContext(AuthContext);
   const auth = getAuth(app);
+  const { myPagePopup, setMyPagePopup } = useContext(MyPagePopupContext);
 
   //setState
   const { setData } = useContext(MyStatusContext);
@@ -79,6 +82,8 @@ const MyStatus = () => {
       }
     }
   }, [renderData]);
+
+  const [loading, setLoading] = useState<boolean>(true);
 
   const fetchData = async () => {
     if (context.user) {
@@ -158,7 +163,10 @@ const MyStatus = () => {
           displayName: myName,
         });
         await fetchData();
-        setPopup(false);
+        if (myPagePopup) {
+          setPopup(false);
+          setMyPagePopup!(false);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -178,7 +186,10 @@ const MyStatus = () => {
           displayName: myName,
         });
         await fetchData();
-        setPopup(false);
+        if (myPagePopup) {
+          setPopup(false);
+          setMyPagePopup!(false);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -215,7 +226,10 @@ const MyStatus = () => {
             <p
               className='my-status__modify modify'
               onClick={() => {
-                setPopup(true);
+                if (myPagePopup === false) {
+                  setPopup(true);
+                  setMyPagePopup!(true);
+                }
               }}>
               수정
             </p>
@@ -311,7 +325,10 @@ const MyStatus = () => {
         <div
           className='my-status__popup__close'
           onClick={() => {
-            setPopup(false);
+            if (myPagePopup) {
+              setPopup(false);
+              setMyPagePopup!(false);
+            }
           }}>
           <IoClose />
         </div>

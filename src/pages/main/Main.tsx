@@ -27,8 +27,11 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseApp';
 import { RenderDataType } from '../mypage/MyStatus';
+import { MainPopupContext } from '../../context/MainPopupContext';
 
 const Main = () => {
+  const { mainPopup, setMainPopup } = useContext(MainPopupContext);
+
   //날짜 구하기
   let currentDay = new Date();
   let theYear = currentDay.getFullYear();
@@ -240,7 +243,10 @@ const Main = () => {
               <button
                 className='search-icon'
                 onClick={() => {
-                  setSearchPop(true);
+                  if (mainPopup === false) {
+                    setSearchPop(true);
+                    setMainPopup!(true);
+                  }
                 }}>
                 <FontAwesomeIcon icon={faMagnifyingGlass} className='fontawesome' />
               </button>
@@ -317,7 +323,10 @@ const Main = () => {
             <div
               className='pharmacy'
               onClick={() => {
-                setPharmacyPop(true);
+                if (mainPopup === false) {
+                  setPharmacyPop(true);
+                  setMainPopup!(true);
+                }
               }}>
               <div className='icon'>
                 <FontAwesomeIcon icon={faHouseChimneyMedical} className='fontawesome' />
