@@ -95,6 +95,7 @@
             background: var.$darkBlue;
             width: 40px;
             height: 40px;
+            animation: popupAnimation 700ms;
 
             svg {
               color: #fff;
@@ -109,6 +110,8 @@
             h5,
             p {
               color: #fff;
+              line-height: 1.4;
+              animation: popupAnimation 700ms;
             }
 
             p {
@@ -117,6 +120,21 @@
           }
         }
       }
+    }
+  }
+
+  @keyframes popupAnimation {
+    0% {
+      visibility: hidden;
+      opacity: 0;
+    }
+    25% {
+      visibility: hidden;
+      opacity: 0;
+    }
+    100% {
+      visibility: visible;
+      opacity: 1;
     }
   }
 
@@ -184,6 +202,7 @@
   justify-content: space-between;
 
   button {
+    animation: popupAnimation 700ms;
     @include var.center;
     color: var.$blue;
     outline: none;

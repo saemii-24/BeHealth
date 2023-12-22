@@ -58,6 +58,7 @@
 
   .health-common {
     background: #467be6;
+    background-size: cover;
     width: 100%;
     height: calc(100% - 280px);
     @include var.r-m;
@@ -73,11 +74,11 @@
 
     h3 {
       position: absolute;
-      bottom: 30px;
-      left: 30px;
       color: #fff;
-      @include var.title-l;
+      font-size: 1.6rem;
+      font-weight: 800;
       font-size: 1.4rem;
+      top: 45px;
     }
   }
 }
