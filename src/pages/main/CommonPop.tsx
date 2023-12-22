@@ -5,6 +5,7 @@ import { SeasonContext, SeasonDataContext } from '../../context/SeasonContext';
 
 import healthCommon from './healthCommon.ts';
 import KnowledgePop from './KnowledgePop.tsx';
+import GoodCommon from './GoodCommon.tsx';
 
 const CommonPop = (props) => {
   let { closeCommon, closeHealthNews } = props;
@@ -14,6 +15,9 @@ const CommonPop = (props) => {
 
   let [click, setClick] = useState<boolean>(false);
   let [idx, setIdx] = useState<number>(0);
+
+  let [clickBottom, setClickBottom] = useState<boolean>(false);
+  let [idxBottom, setIdxBottom] = useState<number>(0);
 
   return (
     <div className='common-pop'>
@@ -68,15 +72,24 @@ const CommonPop = (props) => {
         </div>
 
         <div className='basic-txt'>
-          {healthCommon.map((v, i) => {
+          {healthCommon[0].common.map((v, i) => {
             return (
-              <div style={{ backgroundImage: `url(${v.img})` }} key={i}>
+              <div
+                style={{ backgroundImage: `url(${v.img})` }}
+                key={i}
+                onClick={() => {
+                  setClickBottom(true);
+                  setIdxBottom(i);
+                }}>
                 <p>{v.content}</p>
                 <h4>{v.title}</h4>
               </div>
             );
           })}
         </div>
+        {clickBottom ? (
+          <GoodCommon setClickBottom={setClickBottom} idxBottom={idxBottom} />
+        ) : null}
       </div>
     </div>
   );

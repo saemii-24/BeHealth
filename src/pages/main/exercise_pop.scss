@@ -20,18 +20,6 @@
 
     .classify {
       width: 90%;
-
-      button {
-        &:first-of-type {
-          background: var.$blue;
-          color: #fff;
-        }
-      }
-
-      .click-age {
-        background: var.$blue;
-        color: #fff;
-      }
     }
 
     .age-content {
@@ -70,6 +58,7 @@
           p {
             @include var.content-s;
             line-height: 180%;
+            word-break: keep-all;
           }
         }
       }
@@ -200,6 +189,7 @@
 
         p {
           @include var.content-m;
+          word-break: keep-all;
         }
       }
     }
@@ -224,5 +214,10 @@
     width: 70px;
     height: 30px;
     @include var.r-s;
+
+    &:first-of-type {
+      background: var.$blue;
+      color: #fff;
+    }
   }
 }

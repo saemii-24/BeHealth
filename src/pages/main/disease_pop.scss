@@ -58,6 +58,7 @@
         p {
           @include var.content-s;
           line-height: 170%;
+          word-break: keep-all;
 
           &:first-of-type,
           &:nth-of-type(2) {

@@ -6,7 +6,7 @@ import cn from 'classnames';
 import { AuthContext } from '../context/AuthContext';
 import { getAuth, signOut, deleteUser } from 'firebase/auth';
 import { app } from '../firebase/firebaseApp'; //firebase 초기화 해둔값
-type SelectTabType = 'home' | 'myPage' | 'analyzes' | 'memo';
+type SelectTabType = 'home' | 'myPage' | 'about' | 'memo';
 
 const Menu = () => {
   const [selectTab, setSelectTab] = useState<SelectTabType | null>('home');
@@ -23,6 +23,8 @@ const Menu = () => {
       setSelectTab('home');
     } else if (location.pathname === '/mypage') {
       setSelectTab('myPage');
+    } else if (location.pathname === '/about') {
+      setSelectTab('about');
     } else if (location.pathname === '/login') {
       setSelectTab(null);
     } else if (location.pathname === '/signup') {
@@ -116,9 +118,16 @@ const Menu = () => {
           <FaLaugh />
           <span>My Page</span>
         </li>
-        <li className='side-menu__authentication-tab'>
+        <li
+          className={cn('side-menu__authentication-tab', {
+            select: selectTab === 'about',
+          })}
+          onClick={() => {
+            setSelectTab('about');
+            navigate('/about');
+          }}>
           <FaSignal />
-          <span>Analyzes</span>
+          <span>About</span>
         </li>
         <li className='side-menu__authentication-tab'>
           <FaEnvelope />

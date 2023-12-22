@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
-
+import React from 'react';
 import { IoClose } from 'react-icons/io5';
 
 const KnowledgePop = (props) => {
   let { seasonData, setClick, idx } = props;
-  console.log(seasonData);
 
-  let [explain, setExplain] = useState<string>(seasonData[0].commonPop[idx].explain);
-  let newStr = explain.split('\n');
-  //   console.log(newStr);
-
-  let [content, setContent] = useState<string[]>([]);
-  for (let i in seasonData[0].commonPop[idx].info) {
-    content.push(seasonData[0].commonPop[idx].info[i]);
-    console.log(content[i]);
+  function lineChange(content) {
+    let propContent = content.split('\n');
+    let contentMap = propContent.map((v, i) => {
+      return <p key={i}>{v}</p>;
+    });
+    return <div>{contentMap}</div>;
   }
 
   return (
-    <div className='knowledge-pop'>
+    <div
+      className='knowledge-pop'
+      style={{ backgroundImage: `URL(${seasonData[0].common[idx].img})` }}>
       <IoClose
         onClick={() => {
           setClick(false);
@@ -35,16 +33,18 @@ const KnowledgePop = (props) => {
       <div className='pop-content'>
         {seasonData[0].commonPop[idx].info.map((v, i) => {
           return (
-            <div key={i}>
+            <div key={i} className='pop-txt'>
               <h5>{v.name}</h5>
-              <p>{v.content}</p>
-              <p>{v.content2 ? v.content2 : null}</p>
-              <p>{v.content3 ? v.content3 : null}</p>
+              {lineChange(v.content)}
+              {v.content2 ? lineChange(v.content2) : null}
+              {v.content3 ? lineChange(v.content3) : null}
             </div>
           );
         })}
 
-        <a href={seasonData[0].commonPop[idx].source}>출처</a>
+        <a href={seasonData[0].commonPop[idx].source}>
+          출처 보기 <sub>( 이 사이트는 상업적 목적으로 제작된 콘텐츠가 아닙니다. )</sub>
+        </a>
       </div>
     </div>
   );

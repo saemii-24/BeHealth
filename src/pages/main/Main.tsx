@@ -6,7 +6,6 @@ import PharmacyPop from './PharmacyPop';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouseChimneyMedical } from '@fortawesome/free-solid-svg-icons';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { TiPlus } from 'react-icons/ti';
 import { FiMinus } from 'react-icons/fi';
 import { FaRegHospital } from 'react-icons/fa';
 import TodayListBox from './TodayListBox';
@@ -23,10 +22,6 @@ import { MomentumType } from './momentum';
 import todayList from './todayList';
 import { TodayListType } from './todayList';
 
-//병원 정보 추가 변수
-import { HospitalAddContext } from '../../context/HospitalAddContext';
-import { HospitalNameContext } from '../../context/HospitalNameContext';
-
 //로그인과 사용자 정보 확인
 import { AuthContext } from '../../context/AuthContext';
 import {
@@ -40,11 +35,10 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseApp';
 import { RenderDataType } from '../mypage/MyStatus';
+import { MainPopupContext } from '../../context/MainPopupContext';
 
 const Main = () => {
-  //mainContent 변수
-  const [momentumData, setMomentumData] = useState<MomentumType[]>(momentum);
-  const [todayListData, setTodayListData] = useState<TodayListType[]>(todayList);
+  const { mainPopup, setMainPopup } = useContext(MainPopupContext);
 
   //날짜 구하기
   let currentDay = new Date();
@@ -208,8 +202,6 @@ const Main = () => {
   let chNotice = useRef<any>(null);
   let hospital = useRef<any>(null);
 
-  let [add, setAdd] = useState(false);
-
   function clickHealthNews() {
     chSearch.current.style.width = '270px';
     // chSearch.current.style.overflow = 'hidden';
@@ -266,7 +258,10 @@ const Main = () => {
               <button
                 className='search-icon'
                 onClick={() => {
-                  setSearchPop(true);
+                  if (mainPopup === false) {
+                    setSearchPop(true);
+                    setMainPopup!(true);
+                  }
                 }}>
                 <FontAwesomeIcon icon={faMagnifyingGlass} className='fontawesome' />
               </button>
@@ -343,7 +338,10 @@ const Main = () => {
             <div
               className='pharmacy'
               onClick={() => {
-                setPharmacyPop(true);
+                if (mainPopup === false) {
+                  setPharmacyPop(true);
+                  setMainPopup!(true);
+                }
               }}>
               <div className='icon'>
                 <FontAwesomeIcon icon={faHouseChimneyMedical} className='fontawesome' />
