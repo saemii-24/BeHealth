@@ -11,8 +11,11 @@ import cn from 'classnames';
 import { addDoc, collection, query, where, orderBy, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseApp';
 import { AuthContext } from '../../context/AuthContext';
+import { MainPopupContext } from '../../context/MainPopupContext';
 
 const SearchPop = (props) => {
+  const { mainPopup, setMainPopup } = useContext(MainPopupContext);
+
   let { institution, selected, setSearchPop, setHospitalData } = props;
 
   //팝업 옵션 값 받아오기
@@ -153,7 +156,10 @@ const SearchPop = (props) => {
     <div className='search-pop'>
       <IoClose
         onClick={() => {
-          setSearchPop(false);
+          if (mainPopup) {
+            setSearchPop(false);
+            setMainPopup!(false);
+          }
         }}
         className='xmark'
       />

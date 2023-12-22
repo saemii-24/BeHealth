@@ -6,9 +6,11 @@ import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 
 import institution from './institution';
 import Loading from '../../component/Loading';
+import { MainPopupContext } from '../../context/MainPopupContext';
 
 const PharmacyPop = (props) => {
   let { setPharmacyPop } = props;
+  const { mainPopup, setMainPopup } = useContext(MainPopupContext);
 
   //행정구역 선택
   let [selectIdx, setSelectIdx] = useState<number>(0);
@@ -89,7 +91,10 @@ const PharmacyPop = (props) => {
     <div className='pharmacy-pop'>
       <IoClose
         onClick={() => {
-          setPharmacyPop(false);
+          if (mainPopup) {
+            setPharmacyPop(false);
+            setMainPopup!(false);
+          }
         }}
         className='xmark'
       />

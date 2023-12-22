@@ -9,6 +9,7 @@ import './API.js';
 import { Routes, Route } from 'react-router-dom';
 import Main from './pages/main/Main';
 import MyPage from './pages/mypage/MyPage';
+import About from './pages/about/About';
 import { AuthContext } from './context/AuthContext';
 
 function App() {
@@ -26,7 +27,8 @@ function App() {
                 <Route path='/' element={<Main />} />
                 <Route path='/mypage' element={<MyPage />} />
                 <Route path='/loginconfirm' element={<ConfirmLogin />} />
-                <Route path='/*' element={<Main />} />{' '}
+                <Route path='/about' element={<About />} />
+                <Route path='/*' element={<Main />} />
               </Routes>
             ) : (
               <Routes>
@@ -35,6 +37,7 @@ function App() {
                 <Route path='/login' element={<Login />} />
                 <Route path='/loginconfirm' element={<ConfirmLogin />} />
                 <Route path='/signup' element={<Signup />} />
+                <Route path='/about' element={<About />} />
                 <Route path='/*' element={<Main />} />{' '}
               </Routes>
             )}
