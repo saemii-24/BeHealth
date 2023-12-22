@@ -15,12 +15,12 @@
     width: 100%;
     height: 50%;
 
-    & > div:not(.title) {
+    & > div:not(.title, .knowledge-pop) {
       width: 100%;
       height: calc(100% - 70px);
       display: flex;
       flex-wrap: wrap;
-      row-gap: 20px;
+      align-content: space-between;
       justify-content: space-between;
 
       & > div {
@@ -49,16 +49,14 @@
   }
 
   .season-common {
-    & > div:not(.title) {
+    & > div:not(.title, .knowledge-pop) {
       & > div {
         &:first-of-type {
           width: 100%;
-          height: 47%;
         }
 
         &:not(:first-of-type) {
           width: 47%;
-          height: 47%;
         }
       }
     }
@@ -70,6 +68,81 @@
     p,
     h4 {
       color: #fff;
+    }
+  }
+}
+
+.knowledge-pop {
+  width: 580px;
+  height: 90%;
+  background: var.$blue;
+  @include var.r-m;
+  position: absolute;
+  top: 70px;
+  left: 70px;
+  z-index: 10;
+  padding: 50px;
+
+  h2,
+  h4,
+  h5,
+  p,
+  a {
+    color: #fff;
+  }
+
+  .pop-title {
+    margin-bottom: 20px;
+  }
+
+  & > h4 {
+    @include var.content-m;
+  }
+
+  .pop-content {
+    width: 100%;
+    height: calc(100% - 145px - 50px);
+    margin-top: 50px;
+    @include var.center;
+    align-content: flex-start;
+    row-gap: 20px;
+    overflow-y: scroll;
+    padding-right: 20px;
+
+    &::-webkit-scrollbar {
+      width: 7px;
+      background: #dee9fe;
+      @include var.r-s;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #a6c7f3;
+      @include var.r-s;
+    }
+
+    & > div {
+      background: #fff;
+      width: 100%;
+      height: auto;
+      padding: 30px;
+      @include var.r-m;
+
+      h5 {
+        color: var.$blue;
+        @include var.title-l;
+        margin-bottom: 20px;
+      }
+      p {
+        color: var.$black;
+        line-height: 160%;
+        margin-top: 20px;
+      }
+    }
+
+    a {
+      display: block;
+      width: 100%;
+      text-decoration: underline;
+      @include var.content-s;
     }
   }
 }

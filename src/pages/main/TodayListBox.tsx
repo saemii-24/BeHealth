@@ -152,12 +152,12 @@ const TodayListBox = () => {
         </>
       ) : (
         <>
-          <div className='today-list-box--login'>
-            <div
-              className='today-list-box--login__icon'
-              onClick={() => {
-                navigate('/login');
-              }}>
+          <div
+            className='today-list-box--login'
+            onClick={() => {
+              navigate('/login');
+            }}>
+            <div className='today-list-box--login__icon'>
               <img
                 alt='BeHealth-logo'
                 className='logo'

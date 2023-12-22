@@ -4,12 +4,16 @@ import { RiMentalHealthLine } from 'react-icons/ri';
 import { SeasonContext, SeasonDataContext } from '../../context/SeasonContext';
 
 import healthCommon from './healthCommon.ts';
+import KnowledgePop from './KnowledgePop.tsx';
 
 const CommonPop = (props) => {
   let { closeCommon, closeHealthNews } = props;
 
   let { season } = useContext(SeasonContext);
   let { seasonData } = useContext(SeasonDataContext);
+
+  let [click, setClick] = useState<boolean>(false);
+  let [idx, setIdx] = useState<number>(0);
 
   return (
     <div className='common-pop'>
@@ -33,7 +37,13 @@ const CommonPop = (props) => {
         <div className='season-txt'>
           {seasonData![0].common.map((v, i) => {
             return (
-              <div style={{ backgroundImage: `url(${v.img})` }} key={i}>
+              <div
+                style={{ backgroundImage: `url(${v.img})` }}
+                key={i}
+                onClick={() => {
+                  setClick(true);
+                  setIdx(i);
+                }}>
                 <p style={{ color: `${v.imgColor === 'dark' ? '#fff' : '#306de5'}` }}>
                   {v.content}
                 </p>
@@ -44,6 +54,9 @@ const CommonPop = (props) => {
             );
           })}
         </div>
+        {click ? (
+          <KnowledgePop seasonData={seasonData} setClick={setClick} idx={idx} />
+        ) : null}
       </div>
 
       <div className='basic-common'>

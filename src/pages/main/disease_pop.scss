@@ -13,16 +13,15 @@
   .spread {
     width: 100%;
     height: 100%;
-    margin-bottom: 90px;
 
     .spread--content {
       width: 100%;
-      height: calc(100% - 50px);
+      height: calc(100% - 70px);
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-content: space-between;
-      row-gap: 20px;
+      row-gap: 40px;
       overflow-y: scroll;
       padding-right: 20px;
 

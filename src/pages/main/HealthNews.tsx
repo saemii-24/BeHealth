@@ -70,7 +70,7 @@ const HealthNews = (props) => {
     <div className='health-news' ref={chNewsBox}>
       {showDisease ? (
         <DiseasePop
-          setShowDisease={setShowDisease}
+          // setShowDisease={setShowDisease}
           closeDisease={closeDisease}
           closeHealthNews={closeHealthNews}
         />
@@ -96,7 +96,7 @@ const HealthNews = (props) => {
 
       {showExercise ? (
         <ExercisePop
-          setShowExercise={setShowExercise}
+          // setShowExercise={setShowExercise}
           closeExercise={closeExercise}
           closeHealthNews={closeHealthNews}
         />
@@ -122,7 +122,7 @@ const HealthNews = (props) => {
 
       {showCommon ? (
         <CommonPop
-          setShowCommon={setShowCommon}
+          // setShowCommon={setShowCommon}
           closeHealthNews={closeHealthNews}
           closeCommon={closeCommon}
         />
@@ -133,9 +133,10 @@ const HealthNews = (props) => {
         onClick={() => {
           clickHealthNews();
           clickCommon();
+        }}
+        style={{
+          backgroundImage: `url(${process.env.PUBLIC_URL + '/images/healthSense.svg'})`,
         }}>
-        {/* 출처 <a href="https://www.flaticon.com/free-icons/exercise" title="exercise icons">Exercise icons created by mangsaabguru - Flaticon</a> */}
-        <img src='/images/exercise.png' alt='건강 상식' />
         <h3>
           알아두면 좋은 <br></br> 건강 상식
         </h3>

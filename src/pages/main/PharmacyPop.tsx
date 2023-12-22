@@ -11,11 +11,9 @@ const PharmacyPop = (props) => {
   let { setPharmacyPop } = props;
 
   //행정구역 선택
-  let [value, setValue] = useState<string>('');
   let [selectIdx, setSelectIdx] = useState<number>(0);
   const handleValue = (e) => {
     setSelectIdx(e.target.value);
-    setValue(institution[selectIdx].city);
   };
 
   //시군구 선택
@@ -36,22 +34,24 @@ const PharmacyPop = (props) => {
 
   const fetchData = async () => {
     setLoading(true);
-
     try {
       if (selectCity) {
-        const URL = `https://apis.data.go.kr/B551182/pharmacyInfoService/getParmacyBasisList?serviceKey=${apiKey}&sidoCd=${institution[selectIdx].code2}&pageNo=${pageNo}&numOfRows=50`;
+        // const URL = `https://apis.data.go.kr/B551182/pharmacyInfoService/getParmacyBasisList?serviceKey=${apiKey}&sidoCd=${institution[selectIdx].code2}&pageNo=${pageNo}&numOfRows=50`;
+        const URL = `https://apis.data.go.kr/B552657/ErmctInsttInfoInqireService/getParmacyListInfoInqire?serviceKey=${apiKey}&Q0=${institution[selectIdx].city}&Q1=${selectCity}&pageNo=${pageNo}&numOfRows=50`;
         const response: any = await axios.get(URL);
+        console.log(response);
         const searchItem = response.data.response.body.items.item;
         setTotalCount(response.data.response.body.totalCount);
         setCallPharmacy(searchItem);
 
         let originArr: any = [];
-        if (Array.isArray(searchItem)) {
-          for (let i = 0; i < searchItem.length; i += 10) {
-            originArr.push(searchItem.slice(i, i + 10));
+        if (searchItem.length) {
+          if (Array.isArray(searchItem)) {
+            for (let i = 0; i < searchItem.length; i += 10) {
+              originArr.push(searchItem.slice(i, i + 10));
+            }
           }
         }
-        console.log(searchItem);
 
         if (!searchItem) {
           setNothing(true);
@@ -70,8 +70,8 @@ const PharmacyPop = (props) => {
         setNothing(true);
       }
     } catch (err) {
-      setCallPharmacy([]);
       setNothing(true);
+      setCallPharmacy([]);
       console.log(err);
     }
   };
@@ -81,8 +81,8 @@ const PharmacyPop = (props) => {
   }, [selectIdx]);
 
   useEffect(() => {
+    setPageNo(1);
     fetchData();
-    console.log(selectCity);
   }, [selectCity]);
 
   return (
@@ -99,6 +99,8 @@ const PharmacyPop = (props) => {
           name='pharmacy_select'
           id='pharmacy_select'
           onChange={(e) => {
+            setIndexNo(0);
+            setPageNo(1);
             handleValue(e);
           }}>
           {institution.map((v, i) => {
@@ -113,6 +115,8 @@ const PharmacyPop = (props) => {
           name='pharmacy_select_city'
           id='pharmacy_select_city'
           onChange={(e) => {
+            setIndexNo(0);
+            setPageNo(1);
             handleSelectCity(e);
           }}
           value={selectCity}>
@@ -139,8 +143,8 @@ const PharmacyPop = (props) => {
               (callPharmacy[indexNo] as object[]).map((v: any, i: number) => {
                 return (
                   <div className='pharmacy-info' key={i}>
-                    <h5>{v.yadmNm}</h5>
-                    <p>{v.addr}</p>
+                    <h5>{v.dutyName}</h5>
+                    <p>{v.dutyAddr}</p>
                   </div>
                 );
               })
@@ -170,7 +174,7 @@ const PharmacyPop = (props) => {
               onClick={(e) => {
                 setIndexNo(index);
               }}
-              disabled={callPharmacy.length < index + 1}
+              disabled={callPharmacy.length < index + 1 || selectCity === ''}
             />
           );
         })}
