@@ -5,8 +5,6 @@ import Loading from '../../component/Loading';
 import { IoClose } from 'react-icons/io5';
 import { FaPlus } from 'react-icons/fa';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
-import { HospitalNameContext } from '../../context/HospitalNameContext';
-import { HospitalAddContext } from '../../context/HospitalAddContext';
 import cn from 'classnames';
 import { addDoc, collection, query, where, orderBy, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseApp';
@@ -94,10 +92,6 @@ const SearchPop = (props) => {
     setIndexNo(0);
     fetchData();
   }, [value]);
-
-  //정보 클릭하면 저장해서 목록에 보여줌
-  let { setSelectName } = useContext(HospitalNameContext);
-  let { setSelectAdd } = useContext(HospitalAddContext);
 
   //병원정보를 클릭하면 firestore에 등록한다
   const context = useContext(AuthContext);
@@ -201,8 +195,6 @@ const SearchPop = (props) => {
                       if (context.user) {
                         onClick(v);
                       }
-                      setSelectName!(v.hmcNm);
-                      setSelectAdd!(v.locAddr);
                     }}>
                     <div className='icon'>
                       <FaPlus className='fontawesome' />

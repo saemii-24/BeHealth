@@ -1,12 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { IoClose } from 'react-icons/io5';
 import healthCommon from './healthCommon';
 
 const GoodCommon = (props) => {
   let { setClickBottom, idxBottom } = props;
 
-  console.log(healthCommon);
   function lineChange(content) {
     let propContent = content.split('\n');
     let contentMap = propContent.map((v, i) => {
@@ -44,10 +42,6 @@ const GoodCommon = (props) => {
             </div>
           );
         })}
-
-        <Link to={healthCommon[0].commonPop[idxBottom].source}>
-          출처 보기<sub>( 이 사이트는 상업적 목적으로 제작된 콘텐츠가 아닙니다. )</sub>
-        </Link>
       </div>
     </div>
   );
