@@ -74,60 +74,6 @@ let winter: SeasonType[] = [
         img: '/images/winter-twilight.jpg',
         imgColor: 'dark',
       },
-      // {
-      //   title: '눈물 콧물 쏙 빼는 알레르기 질환 예방 관리법',
-      //   content: '꽃 피는 봄이 무섭다?',
-      //   img: '/images/pollen.jpg',
-      //   imgColor: 'dark',
-      // },
-      // {
-      //   title: '꾸벅꾸벅 졸음이 몰려오는 춘곤증',
-      //   content: '봄철 건강의 적신호',
-      //   img: '/images/sleep.jpg',
-      //   imgColor: 'dark',
-      // },
-      // {
-      //   title: '잘 먹으면 약초 잘못 먹으면 독초',
-      //   content: '봄 산나물,',
-      //   img: '/images/hrebs.jpg',
-      //   imgColor: 'light',
-      // },
-      // {
-      //   title: '쨍쨍한 햇빛과 높은 기온 조심!',
-      //   content: '덥고 따가운 여름 질병',
-      //   img: '/images/summer.jpg',
-      //   imgColor: 'dark',
-      // },
-      // {
-      //   title: '여름이 불편한 하지정맥류',
-      //   content: '자꾸 붓고 아픈 다리, 방치하지 마세요!',
-      //   img: '/images/legs.jpg',
-      //   imgColor: 'dark',
-      // },
-      // {
-      //   title: '여름철 늘어나는 이명',
-      //   content: '내 귀에 도청 장치가 있다?,',
-      //   img: '/images/ear.jpg',
-      //   imgColor: 'light',
-      // },
-      // {
-      //   title: '가을철 건강 수칙',
-      //   content: '알고 있지만 지키기 쉽지 않은',
-      //   img: '/images/autumn.jpg',
-      //   imgColor: 'dark',
-      // },
-      // {
-      //   title: '건강하고 안전하게 산행하는 법',
-      //   content: '오색으로 물든 가을',
-      //   img: '/images/autumn_mountain.jpg',
-      //   imgColor: 'dark',
-      // },
-      // {
-      //   title: '노릇노릇 맛있구마, 고구마',
-      //   content: '제철 맞아 맛과 영양을 듬뿍 머금은',
-      //   img: '/images/sweet_potato.jpg',
-      //   imgColor: 'dark',
-      // },
     ],
     commonPop: [
       {
@@ -192,7 +138,6 @@ let winter: SeasonType[] = [
             ✔ 춥거나 눈이 온다면 실내에서 운동. 특히 고혈압 등 만성병 환자는 실내에서 운동`,
           },
         ],
-        source: 'https://www.ydp.go.kr/story/2021/12/1.htm',
       },
       {
         explain: `겨울은 다양한 건강 문제가 발생하는 계절이다. 기습 한파나 폭설 등으로 일상생활이나 야외 활동에 큰 제약도 받는다.\n
@@ -236,8 +181,6 @@ let winter: SeasonType[] = [
             content3: `CHECK POINT : 수시로 기상예보 확인, 가족이나 지인 등에게 목적지와 귀가 일시 등을 알림, 예정보다 귀가가 늦어지면 경찰에 신고해달라고 요청, 스노타이어 체인 탑재, 긴급 상황 대비 휴대폰 소지 및추가 배터리 준비, 여분의 따뜻한 의복 준비`,
           },
         ],
-        source:
-          'https://www.nhis.or.kr/static/alim/paper/oldpaper/202001/sub/s02_03.html',
       },
       {
         explain: `겨울철이 되면 면역력이 떨어진다. 낮은 기온과 쌀쌀한 바람 때문에 병이 잘 낫지 않을 것이라는 근심이 노시보 효과를 일으키기도 한다.\n
@@ -278,8 +221,6 @@ let winter: SeasonType[] = [
             또 술을 마시면 추울 때 몸이 떨리거나 열이 발생하도록 만드는 신체 능력이 떨어지므로 술을 마신다고 몸을 따뜻하게 덥힐 수 있는 것은 아니다.`,
           },
         ],
-        source:
-          'https://kormedi.com/1544418/%EA%B2%A8%EC%9A%B8%EC%B2%A0-%EC%9E%98%EB%AA%BB%EB%90%9C-%EA%B1%B4%EA%B0%95-%EC%83%81%EC%8B%9D-6%EA%B0%80%EC%A7%80/',
       },
     ],
   },

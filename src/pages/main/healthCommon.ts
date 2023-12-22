@@ -57,8 +57,6 @@ let healthCommon: HealthType[] = [
             기립성 저혈압은 흔한 질환이지만 일상생활에 많은 지장을 줄 수 있습니다. 생활 습관 교정만으로도 상당 부분의 증상이 호전될 수 있으므로, 증상이 있는 경우 의료진의 상담을 받아보시길 권유드립니다.`,
           },
         ],
-        source:
-          'https://www.snubh.org/service/info/com/view.do?cPage=5&BNO=458&Board_ID=B004&RNUM=40',
       },
       {
         explain: `여름철 빨간 맛은 뭐니 뭐니 해도 수박이지만, 채소인 듯 과일인 듯 전천후의 매력을 자랑하는 빨간 토마토 역시 빼놓을 수 없는 별미다.\n
@@ -101,8 +99,6 @@ let healthCommon: HealthType[] = [
             5. 3.에 소스를 뿌리고 먹기 좋게 새싹채소와 바질을 올려 완성한다.`,
           },
         ],
-        source:
-          'https://www.snubh.org/service/info/com/view.do?cPage=6&BNO=207&Board_ID=B003&RNUM=46',
       },
       {
         explain: `탄산음료 소화설부터 단 음식은 당뇨에 어떤 영향을 끼치는가까지 건강정보 펙트체크`,
@@ -170,7 +166,6 @@ let healthCommon: HealthType[] = [
             그렇기에 단 음식을 섭취할 땐 적당한 양을 먹는 것이 중요하며, 식습관에도 과도한 과자, 사탕, 탄산음료 등 과다한 당 음식은 자제하는 편이 좋다.`,
           },
         ],
-        source: 'http://www.ikbn.news/news/article.html?no=128988',
       },
       {
         explain: `비타민! 종류별로 이렇게 먹어보세요.`,
@@ -195,7 +190,6 @@ let healthCommon: HealthType[] = [
             ● 딸기, 버섯, 파프리카, 우유, 브로콜리, 레몬 등`,
           },
         ],
-        source: 'https://m.blog.naver.com/seoulbarunsesang/221986301138',
       },
     ],
   },

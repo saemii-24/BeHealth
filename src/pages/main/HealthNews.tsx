@@ -69,11 +69,7 @@ const HealthNews = (props) => {
   return (
     <div className='health-news' ref={chNewsBox}>
       {showDisease ? (
-        <DiseasePop
-          // setShowDisease={setShowDisease}
-          closeDisease={closeDisease}
-          closeHealthNews={closeHealthNews}
-        />
+        <DiseasePop closeDisease={closeDisease} closeHealthNews={closeHealthNews} />
       ) : null}
       <div
         ref={chDisease}
@@ -95,11 +91,7 @@ const HealthNews = (props) => {
       </div>
 
       {showExercise ? (
-        <ExercisePop
-          // setShowExercise={setShowExercise}
-          closeExercise={closeExercise}
-          closeHealthNews={closeHealthNews}
-        />
+        <ExercisePop closeExercise={closeExercise} closeHealthNews={closeHealthNews} />
       ) : null}
       <div
         className='exercise'
@@ -121,11 +113,7 @@ const HealthNews = (props) => {
       </div>
 
       {showCommon ? (
-        <CommonPop
-          // setShowCommon={setShowCommon}
-          closeHealthNews={closeHealthNews}
-          closeCommon={closeCommon}
-        />
+        <CommonPop closeHealthNews={closeHealthNews} closeCommon={closeCommon} />
       ) : null}
       <div
         className='health-common'

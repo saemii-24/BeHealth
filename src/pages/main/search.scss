@@ -64,9 +64,7 @@
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
-    // width: 200px;
 
-    // 출처 <a href="https://www.flaticon.com/free-icons/down-arrow" title="down arrow icons">Down arrow icons created by Freepik - Flaticon</a>
     background: {
       color: var.$bgColor;
       image: url('../../../public/images/arrow.png');
@@ -292,10 +290,6 @@
 
         .icon {
           background: #ff676c;
-
-          // .fontawesome{
-          //   color: var.$red;
-          // }
         }
 
         .show-hospital__txt {
@@ -311,7 +305,6 @@
             word-break: break-all;
           }
           p {
-            // @include var.content-s;
             font-size: 0.7rem;
             font-weight: 700;
             width: 100%;

@@ -6,7 +6,6 @@ import PharmacyPop from './PharmacyPop';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouseChimneyMedical } from '@fortawesome/free-solid-svg-icons';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { TiPlus } from 'react-icons/ti';
 import { FiMinus } from 'react-icons/fi';
 import { FaRegHospital } from 'react-icons/fa';
 import TodayListBox from './TodayListBox';
@@ -14,18 +13,6 @@ import WeekExercise from './WeekExercise';
 
 //옵션 데이터
 import institution from './institution';
-
-//운동량 데이터
-import momentum from './momentum';
-import { MomentumType } from './momentum';
-
-//오늘 할 일 데이터
-import todayList from './todayList';
-import { TodayListType } from './todayList';
-
-//병원 정보 추가 변수
-import { HospitalAddContext } from '../../context/HospitalAddContext';
-import { HospitalNameContext } from '../../context/HospitalNameContext';
 
 //로그인과 사용자 정보 확인
 import { AuthContext } from '../../context/AuthContext';
@@ -42,10 +29,6 @@ import { db } from '../../firebase/firebaseApp';
 import { RenderDataType } from '../mypage/MyStatus';
 
 const Main = () => {
-  //mainContent 변수
-  const [momentumData, setMomentumData] = useState<MomentumType[]>(momentum);
-  const [todayListData, setTodayListData] = useState<TodayListType[]>(todayList);
-
   //날짜 구하기
   let currentDay = new Date();
   let theYear = currentDay.getFullYear();
@@ -194,9 +177,6 @@ const Main = () => {
   const handleSelect = (e) => {
     setSelected(e.target.value);
   };
-  useEffect(() => {
-    console.log(selected);
-  }, [selected]);
 
   let [searchPop, setSearchPop] = useState(false);
 
@@ -208,14 +188,10 @@ const Main = () => {
   let chNotice = useRef<any>(null);
   let hospital = useRef<any>(null);
 
-  let [add, setAdd] = useState(false);
-
   function clickHealthNews() {
     chSearch.current.style.width = '270px';
-    // chSearch.current.style.overflow = 'hidden';
     searchLeft.current.style.width = '100%';
     chInstitution.current.style.width = '150px';
-    // setAdd(false);
     hospital.current.classList.add('hospital-css-hide');
     hospital.current.classList.remove('hospital-css-show');
 
@@ -225,10 +201,8 @@ const Main = () => {
 
   function closeHealthNews() {
     chSearch.current.style.width = '100%';
-    // chSearch.current.style.overflow = 'visible';
     searchLeft.current.style.width = '260px';
     chInstitution.current.style.width = '200px';
-    // setAdd(true);
     hospital.current.classList.remove('hospital-css-hide');
     hospital.current.classList.add('hospital-css-show');
 
