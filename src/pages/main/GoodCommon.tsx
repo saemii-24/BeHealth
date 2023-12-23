@@ -1,6 +1,6 @@
 import React from 'react';
 import { IoClose } from 'react-icons/io5';
-import healthCommon from './healthCommon';
+import healthCommon from '../../data/healthCommon';
 
 const GoodCommon = (props) => {
   let { setClickBottom, idxBottom } = props;

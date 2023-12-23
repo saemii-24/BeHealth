@@ -12,7 +12,7 @@ import TodayListBox from './TodayListBox';
 import WeekExercise from './WeekExercise';
 
 //옵션 데이터
-import institution from './institution';
+import institution from '../../data/institution';
 
 //로그인과 사용자 정보 확인
 import { AuthContext } from '../../context/AuthContext';

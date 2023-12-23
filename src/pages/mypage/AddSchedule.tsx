@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { AddScheduleType, addScheduleData } from './AddScheduleData';
+import { AddScheduleType, addScheduleData } from '../../data/AddScheduleData';
 import { FaRegHospital, FaWalking, FaRegCalendarPlus } from 'react-icons/fa';
 import { RiMedicineBottleLine } from 'react-icons/ri';
 import AddSchedulePopup from './AddSchedulePopup';

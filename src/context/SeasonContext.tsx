@@ -1,10 +1,10 @@
 import React, { createContext, useEffect, useState } from 'react';
 
-import spring from '../pages/main/spring';
-import summer from '../pages/main/summer';
-import autumn from '../pages/main/autumn';
-import winter from '../pages/main/winter';
-import { SeasonType } from '../pages/main/spring';
+import spring from '../data/spring';
+import summer from '../data/summer';
+import autumn from '../data/autumn';
+import winter from '../data/winter';
+import { SeasonType } from '../data/spring';
 
 interface SeasonContextType {
   season?: string;

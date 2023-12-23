@@ -3,7 +3,7 @@ import { IoIosArrowBack } from 'react-icons/io';
 import { RiMentalHealthLine } from 'react-icons/ri';
 import { SeasonContext, SeasonDataContext } from '../../context/SeasonContext';
 
-import healthCommon from './healthCommon.ts';
+import healthCommon from '../../data/healthCommon.ts';
 import KnowledgePop from './KnowledgePop.tsx';
 import GoodCommon from './GoodCommon.tsx';
 

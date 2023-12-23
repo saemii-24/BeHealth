@@ -7,8 +7,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import { AuthContextProvider } from './context/AuthContext';
-import { HospitalNameContextProvider } from './context/HospitalNameContext';
-import { HospitalAddContextProvider } from './context/HospitalAddContext';
 import { MyStatusContextProvider } from './context/MyStatusContext';
 import { SeasonContextProvider } from './context/SeasonContext';
 import { MyPagePopupContextProvider } from './context/MyPagePopupContext';
@@ -21,15 +19,11 @@ root.render(
       <MainPopupContextProvider>
         <MyPagePopupContextProvider>
           <SeasonContextProvider>
-            <HospitalAddContextProvider>
-              <HospitalNameContextProvider>
-                <MyStatusContextProvider>
-                  <AuthContextProvider>
-                    <App />
-                  </AuthContextProvider>
-                </MyStatusContextProvider>
-              </HospitalNameContextProvider>
-            </HospitalAddContextProvider>
+            <MyStatusContextProvider>
+              <AuthContextProvider>
+                <App />
+              </AuthContextProvider>
+            </MyStatusContextProvider>
           </SeasonContextProvider>
         </MyPagePopupContextProvider>
       </MainPopupContextProvider>

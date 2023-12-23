@@ -16,7 +16,7 @@ import { FaCalendarDays } from 'react-icons/fa6';
 import { MdBloodtype } from 'react-icons/md';
 import { FaRegHospital, FaWalking, FaRegCalendarPlus } from 'react-icons/fa';
 import { RiMedicineBottleLine } from 'react-icons/ri';
-import { addScheduleData } from '../mypage/AddScheduleData';
+import { addScheduleData } from '../../data/AddScheduleData';
 import { useNavigate } from 'react-router-dom';
 
 const TodayListBox = () => {

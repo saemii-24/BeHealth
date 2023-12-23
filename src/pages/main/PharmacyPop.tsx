@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { IoClose } from 'react-icons/io5';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 
-import institution from './institution';
+import institution from '../../data/institution';
 import Loading from '../../component/Loading';
 import { MainPopupContext } from '../../context/MainPopupContext';
 
