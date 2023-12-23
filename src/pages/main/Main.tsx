@@ -80,33 +80,64 @@ const Main = () => {
       }
     }
   };
+
+  const [age, setAge] = useState<number>(0);
+
   useEffect(() => {
     fetchUserData();
     if (!context.user || !userData.birth) {
       //1. 로그인 했는가?
       if (theYear % 2 === 0) {
-        //2-1. 로그인 하지 않았다면, 기본 정보제공
-        setString(`${theYear}년은 짝수년도 출생자가\n 검진 대상자입니다.`);
+        setString(`${theYear}년은 만20세 이상 짝수년도\n 출생자가 검진 대상자입니다.`);
       } else if (theYear % 2 === 1) {
-        setString(`${theYear}년은 홀수년도 출생자가\n 검진 대상자입니다.`);
+        setString(`${theYear}년은 만20세 이상 홀수년도\n 출생자가 검진 대상자입니다.`);
       }
     } else {
       //2-2. 로그인 완료시 사용자 맞춤 정보 제공
       if (userData.birth) {
-        let userBirthYear = new Date(userData.birth).getFullYear();
-        if (theYear % 2 === userBirthYear % 2) {
-          //3-1. 사용자 생년과 올해 년도의 짝홀이 같을 때
-          if (userData.name) {
-            setString(`${userData.name}님은 ${theYear}년 검진 대상자입니다.`);
+        const userBirthYear = new Date(userData.birth).getFullYear();
+        const userBirthMonth = new Date(userData.birth).getMonth() + 1;
+        const userBirthDate = new Date(userData.birth).getDate() + 1;
+        const thisYear = new Date().getFullYear();
+        const thisMonth = new Date().getMonth() + 1;
+        const thisDate = new Date().getDate();
+
+        if (
+          Number(userBirthMonth + '' + userBirthDate) > Number(thisMonth + '' + thisDate)
+        ) {
+          if (thisYear - userBirthYear - 1 < 0) {
+            setAge(0);
           } else {
-            setString(`사용자님은 ${theYear}년 검진 대상자입니다.`);
+            setAge(thisYear - userBirthYear - 1);
           }
         } else {
-          //3-1. 사용자 생년과 올해 년도의 짝홀이 다를 때
-          if (userData.name) {
-            setString(`${userData.name}님은 ${theYear + 1}년 검진 대상자입니다.`);
+          setAge(thisYear - userBirthYear);
+        }
+        if (age >= 20) {
+          if (theYear % 2 === userBirthYear % 2) {
+            //3-1. 사용자 생년과 올해 년도의 짝홀이 같을 때
+            if (userData.name) {
+              setString(`${userData.name}님은 ${theYear}년 검진 대상자입니다.`);
+            } else {
+              setString(`사용자님은 ${theYear}년 검진 대상자입니다.`);
+            }
           } else {
-            setString(`사용자님은 ${theYear + 1}년 검진 대상자입니다.`);
+            //3-1. 사용자 생년과 올해 년도의 짝홀이 다를 때
+            if (userData.name) {
+              setString(`${userData.name}님은 ${theYear + 1}년 검진 대상자입니다.`);
+            } else {
+              setString(`사용자님은 ${theYear + 1}년 검진 대상자입니다.`);
+            }
+          }
+        } else {
+          if (theYear % 2 === 0) {
+            setString(
+              `${theYear}년은 만20세 이상 짝수년도\n 출생자가 검진 대상자입니다.`,
+            );
+          } else if (theYear % 2 === 1) {
+            setString(
+              `${theYear}년은 만20세 이상 홀수년도\n 출생자가 검진 대상자입니다.`,
+            );
           }
         }
       }
@@ -149,7 +180,6 @@ const Main = () => {
               }
             });
           });
-          console.log(hospitalData);
         } else {
           setHospitalData([]);
         }
@@ -298,9 +328,9 @@ const Main = () => {
                   <div
                     className={`basic-search`}
                     style={{
-                      backgroundImage: `url${
+                      backgroundImage: `url(${
                         process.env.PUBLIC_URL + '/images/doctor.svg'
-                      }`,
+                      })`,
                     }}></div>
                 )}
               </>
