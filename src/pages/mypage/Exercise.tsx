@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ExerciseType, exerciseData } from './ExerciseData';
+import { ExerciseType, exerciseData } from '../../data/ExerciseData.ts';
 import { IoIosBicycle } from 'react-icons/io';
 import { IoClose } from 'react-icons/io5';
 import { BiDumbbell } from 'react-icons/bi';

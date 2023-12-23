@@ -3,7 +3,7 @@ import { FaWeight } from 'react-icons/fa';
 import { FaPerson } from 'react-icons/fa6';
 import { MdBloodtype } from 'react-icons/md';
 import { MdMale, MdFemale } from 'react-icons/md';
-import { MoodType, moodArr } from './MyPageData.ts';
+import { MoodType, moodArr } from '../../data/MyPageData.ts';
 import { IoClose } from 'react-icons/io5';
 import cn from 'classnames';
 import { AuthContext } from '../../context/AuthContext.tsx';

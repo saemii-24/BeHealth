@@ -4,8 +4,8 @@ import { IoIosArrowBack } from 'react-icons/io';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDumbbell } from '@fortawesome/free-solid-svg-icons';
 
-import recommendExercise from './recommendExercise';
-import exerciseCategory from './exerciseCategory';
+import recommendExercise from '../../data/recommendExercise';
+import exerciseCategory from '../../data/exerciseCategory';
 
 const ExercisePop = (props) => {
   let { closeExercise, closeHealthNews } = props;

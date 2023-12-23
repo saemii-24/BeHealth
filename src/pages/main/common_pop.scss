@@ -76,8 +76,9 @@
 .good-common {
   width: 580px;
   height: 90%;
-  // background: var.$blue;
-  // backdrop-filter: blur(5px);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   @include var.r-m;
   position: absolute;
   top: 70px;
