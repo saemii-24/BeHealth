@@ -1,4 +1,3 @@
-// import { SpreadType } from "./spring";
 import { SeasonType } from './spring';
 
 let summer: SeasonType[] = [
@@ -132,8 +131,6 @@ let summer: SeasonType[] = [
             수분 보충이나 안정에도 회복되지 않으면 병원을 방문해야 한다. 일사병은 적절한 조치를 취하지 않으면 열사병으로 발전할 수 있으므로 주의해야 한다.`,
           },
         ],
-        source:
-          'https://www.nhis.or.kr/static/alim/paper/oldpaper/202307/sub/section2_2.html',
       },
       {
         explain: `살랑살랑 불어오는 바람 한 조각이 아쉬운 여름. 기온이 올라갈수록 사람들의 옷차림은 점점 얇아지기 마련이다. \n
@@ -166,7 +163,6 @@ let summer: SeasonType[] = [
             ● 자신의 다리 크기에 맞는 의료용 압박스타킹 착용은 정맥 순환을 돕는다.`,
           },
         ],
-        source: 'https://www.nhis.or.kr/static/alim/paper/oldpaper/202208/sub/08.html',
       },
       {
         explain: `시원한 파도 소리에 가슴이 설레고 어딘가로 향하는 기차 소리에 심장이 두근거린다. 본격적인 여름이 시작됐음을 알리는 기분 좋은 신호다.\n
@@ -195,7 +191,6 @@ let summer: SeasonType[] = [
             ● 여름철 더위로 인한 체온 상승이 일시적인 이명 증상으로 이어질 수 있으니 장시간 땡볕에 노출되는 것을 피한다.`,
           },
         ],
-        source: 'https://www.nhis.or.kr/static/alim/paper/oldpaper/202206/sub/08.html',
       },
     ],
   },

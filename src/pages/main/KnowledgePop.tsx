@@ -41,10 +41,6 @@ const KnowledgePop = (props) => {
             </div>
           );
         })}
-
-        <a href={seasonData[0].commonPop[idx].source}>
-          출처 보기 <sub>( 이 사이트는 상업적 목적으로 제작된 콘텐츠가 아닙니다. )</sub>
-        </a>
       </div>
     </div>
   );

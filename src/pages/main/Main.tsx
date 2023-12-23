@@ -223,10 +223,8 @@ const Main = () => {
 
   function clickHealthNews() {
     chSearch.current.style.width = '270px';
-    // chSearch.current.style.overflow = 'hidden';
     searchLeft.current.style.width = '100%';
     chInstitution.current.style.width = '150px';
-    // setAdd(false);
     hospital.current.classList.add('hospital-css-hide');
     hospital.current.classList.remove('hospital-css-show');
 
@@ -236,10 +234,8 @@ const Main = () => {
 
   function closeHealthNews() {
     chSearch.current.style.width = '100%';
-    // chSearch.current.style.overflow = 'visible';
     searchLeft.current.style.width = '260px';
     chInstitution.current.style.width = '200px';
-    // setAdd(true);
     hospital.current.classList.remove('hospital-css-hide');
     hospital.current.classList.add('hospital-css-show');
 

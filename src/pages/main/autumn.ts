@@ -109,8 +109,6 @@ let autumn: SeasonType[] = [
             또 긴 옷으로 피부노출을 최소화하며, 고여 있는 물에 장시간 발을 담그는 것도 좋지 않다. 일할 때 장갑이나 장화 등을 착용하는 것이 원칙이고, 야외활동이 많아 걱정된다면 예방접종으로 미리 대비한다.`,
           },
         ],
-        source:
-          'https://www.nhis.or.kr/static/alim/paper/oldpaper/202310/sub/section2_2.html',
       },
       {
         explain: `소방청 통계자료에 따르면 2019년부터 2021년까지 최근 3년간 산악구조 활동은 3만 2,210건에 달하며, 가을철인 10월에 가장 많은 사고가 생긴 것으로 나타났다.\n
@@ -147,7 +145,6 @@ let autumn: SeasonType[] = [
             ● 그린포인트: 등산 시 쓰레기를 줍거나 회수해 그린포인트 적립 가능`,
           },
         ],
-        source: 'https://www.nhis.or.kr/static/alim/paper/oldpaper/202210/sub/08.html',
       },
       {
         explain: `뜨거운 껍질을 조심조심 벗겨 호호 불어먹는 고구마는 겨울철 대표 간식으로 꼽히지만, 진짜 제철은 가을이다.\n
@@ -183,7 +180,6 @@ let autumn: SeasonType[] = [
             ③ 물을 자작하게 붓고 카레를 넣은 후 재료가 모두 익을 때까지 끓인다.`,
           },
         ],
-        source: 'https://www.nhis.or.kr/static/alim/paper/oldpaper/202210/sub/09.html',
       },
     ],
   },

@@ -20,7 +20,6 @@ export interface InfoType {
 export interface CommonPopType {
   explain: string;
   info: InfoType[];
-  source: string;
 }
 
 export interface SeasonType {
@@ -132,8 +131,6 @@ let spring: SeasonType[] = [
             ● 안대를 착용해야 한다면 수시로 교체한다.`,
           },
         ],
-        source:
-          'https://www.nhis.or.kr/static/alim/paper/oldpaper/202003/sub/s02_03.html',
       },
       {
         explain: `따사로운 봄 햇살에 졸음이 쏟아지는 춘곤증(春困症)은 우리에게 익숙한 증상입니다. 바뀐 기온에 몸이 적응하는 과정에서 생기는 일시적 환경 부적응 현상이죠.\n
@@ -150,8 +147,6 @@ let spring: SeasonType[] = [
             봄에 하루 이틀 느끼는 춘곤증은 우리 몸의 놀라운 증상이기도 합니다. 새로운 계절을 준비하는 자연스러운 현상입니다.`,
           },
         ],
-        source:
-          'https://www.nhis.or.kr/static/alim/paper/oldpaper/202003/sub/s02_07.html',
       },
       {
         explain: `본격적인 산나물, 약초 채취시기를 맞아 독초를 산나물이나 약초로 잘못 알고 먹어 부작용이나 식중독 피해를 일으키는 사례가 매년 반복되면서 산림청이 ‘봄철 독초 식중독 피해주의’를 당부했다.\n
@@ -188,7 +183,6 @@ let spring: SeasonType[] = [
             산마늘은 식물 전체에서 강한 마늘냄새가 나며, 뿌리는 파뿌리와 비슷하고 길며(20～30cm) 넓은 잎(4～7cm)이 2～3장 달리는 반면, 박새의 잎은 여러 장이 촘촘히 어긋나며 잎의 아랫부분은 줄기를 감싸고 잎의 가장자리에 털이 있으며 큰 잎(길이 20cm, 넓이 12cm)은 맥이 많고 주름이 뚜렷하여 잘 구별된다.`,
           },
         ],
-        source: 'http://www.lec.co.kr/news/articleView.html?idxno=18210',
       },
     ],
   },
