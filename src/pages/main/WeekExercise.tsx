@@ -55,12 +55,10 @@ const WeekExercise = () => {
         if (!querySnapshot.empty) {
           // setWeekData([]);
           querySnapshot.forEach((doc) => {
-            console.log(doc.data());
             setWeekData((prev) => {
               if (prev.some((item) => item.id === doc.id)) {
                 return prev;
               } else {
-                console.log([...prev, { ...doc.data(), id: doc.id }]);
                 return [...prev, { ...doc.data(), id: doc.id }];
               }
             });

@@ -74,7 +74,6 @@ const TodayListBox = () => {
         if (!querySnapshot.empty) {
           setScheduleData([]);
           querySnapshot.forEach((doc) => {
-            // console.log(doc.data());
             setScheduleData((prev) => {
               if (prev.some((item) => item.id === doc.id)) {
                 return prev;
@@ -86,8 +85,6 @@ const TodayListBox = () => {
         } else {
           setScheduleData([]);
         }
-        console.log(scheduleData);
-        console.log('하이');
       } catch (err) {
         console.log(err);
       }
