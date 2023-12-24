@@ -94,7 +94,7 @@ const HealthNews = (props) => {
         <ExercisePop closeExercise={closeExercise} closeHealthNews={closeHealthNews} />
       ) : null}
       <div
-        className='exercise'
+        className='health-exercise'
         ref={chExercise}
         onClick={() => {
           clickHealthNews();
