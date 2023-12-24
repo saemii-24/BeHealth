@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import cn from 'classnames';
 import { IoClose } from 'react-icons/io5';
@@ -40,7 +40,6 @@ const PharmacyPop = (props) => {
       if (selectCity) {
         const URL = `https://apis.data.go.kr/B552657/ErmctInsttInfoInqireService/getParmacyListInfoInqire?serviceKey=${apiKey}&Q0=${institution[selectIdx].city}&Q1=${selectCity}&pageNo=${pageNo}&numOfRows=50`;
         const response: any = await axios.get(URL);
-        console.log(response);
         const searchItem = response.data.response.body.items.item;
         setTotalCount(response.data.response.body.totalCount);
         setCallPharmacy(searchItem);

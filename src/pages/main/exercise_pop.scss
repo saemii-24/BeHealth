@@ -19,7 +19,7 @@
     height: 50%;
 
     .classify {
-      width: 90%;
+      width: 62%;
     }
 
     .age-content {
@@ -142,7 +142,7 @@
     height: calc(100% - 440px);
 
     .classify {
-      width: 60%;
+      width: 83%;
     }
 
     .category-content {
@@ -170,7 +170,8 @@
         height: 100%;
         padding-left: 30px;
         padding-right: 30px;
-        @include var.center;
+        display: flex;
+        flex-direction: column;
         align-items: flex-start;
         row-gap: 10px;
         overflow-y: scroll;
@@ -210,7 +211,9 @@
     transition: 0.5s;
     @include var.solid(1px, var.$blue);
     @include var.content-s;
-    width: 70px;
+    min-width: 70px;
+    padding-left: 14px;
+    padding-right: 14px;
     height: 30px;
     @include var.r-s;
 
