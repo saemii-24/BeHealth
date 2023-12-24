@@ -3,6 +3,7 @@ import './About.scss';
 import cn from 'classnames';
 import { MdMemory } from 'react-icons/md';
 import { FaRegCircleCheck } from 'react-icons/fa6';
+import { AiOutlineGithub } from 'react-icons/ai';
 import source from '../../data/source';
 import { Link } from 'react-router-dom';
 
@@ -25,12 +26,16 @@ const About = () => {
               src={process.env.PUBLIC_URL + '/images/tiger.jpg'}
               alt='@saemii-24 profile img'
             />
-            <p>@saemii-24</p>
+            <p>
+              <AiOutlineGithub /> @saemii-24
+            </p>
           </div>
           <div className='profile'>
             <h4>프론트엔드</h4>
             <img src={process.env.PUBLIC_URL + '/images/bear.jpg'} alt='@ profile img' />
-            <p>@nuunnunn</p>
+            <p>
+              <AiOutlineGithub /> @nuunnunn
+            </p>
           </div>
         </div>
       </div>
