@@ -1,0 +1,140 @@
+@use '../../common.scss' as var;
+.about {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  .about__title {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  .about__icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var.$blue;
+    @include var.center;
+    svg {
+      color: #fff;
+      font-size: 1.7rem;
+    }
+  }
+  .about__right {
+    width: 350px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .profile-box {
+      display: flex;
+      flex-direction: column;
+      gap: 34px;
+      margin-top: auto;
+      .profile {
+        width: calc(100% - 40px);
+        position: relative;
+        h4 {
+          margin-bottom: 16px;
+        }
+        img {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+          @include var.r-s;
+          @include var.shadow;
+          height: 250px;
+          display: block;
+        }
+        p {
+          position: absolute;
+          bottom: 30px;
+          left: 30px;
+          color: #fff;
+          @include var.content-l;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          svg {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-top: -2px;
+          }
+        }
+      }
+    }
+  }
+  .about__left {
+    width: calc(100% - 310px);
+    height: 800px;
+    position: absolute;
+    background-color: #fff;
+    border-radius: 0 40px 40px 0;
+    top: -50px;
+    right: -40px;
+    padding: 50px 95px;
+    display: flex;
+    flex-direction: column;
+    h4 {
+      margin-top: 43px;
+    }
+    .button-box {
+      display: flex;
+      margin-top: 14px;
+      gap: 18px;
+      .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        color: #306de5;
+        outline: none;
+        background: transparent;
+        cursor: pointer;
+        transition: 0.5s;
+        border: 1px solid #306de5;
+        font-size: 0.75rem;
+        font-weight: 700;
+        min-width: 70px;
+        padding-left: 14px;
+        padding-right: 14px;
+        height: 30px;
+        border-radius: 8px;
+        &.active {
+          background: #306de5;
+          color: #fff;
+        }
+      }
+    }
+    .source-box {
+      width: 100%;
+      flex-grow: 1;
+      background-color: var.$blueGray;
+      @include var.r-m;
+      margin-top: 26px;
+      padding: 50px 60px;
+      ul {
+        width: 100%;
+        height: 100%;
+        li {
+          line-height: 190%;
+          @include var.content-m;
+          a {
+            line-height: 190%;
+            @include var.content-m;
+            &:hover {
+              color: var.$blue;
+              text-decoration: underline;
+              text-underline-offset: 4px;
+            }
+          }
+        }
+      }
+      p {
+        font-size: 0.5rem;
+        color: var.$middleGray;
+        text-align: right;
+        text-indent: 0;
+        transform: translate(30px, 10px);
+      }
+    }
+  }
+}

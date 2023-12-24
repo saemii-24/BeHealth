@@ -1,0 +1,277 @@
+@charset "utf-8";
+
+.main {
+  position: relative;
+
+  .icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    @include var.center;
+
+    .fontawesome {
+      color: #fff;
+      @include var.title-l;
+    }
+  }
+
+  .xmark {
+    color: #fff;
+    position: absolute;
+    font-size: 1.5rem;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+  }
+
+  .main-content {
+    width: calc(100% - 310px);
+    height: 100%;
+    padding-right: 40px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .main--bottom {
+      width: 100%;
+      height: calc(100% - 280px);
+      display: flex;
+      justify-content: space-between;
+
+      .main--bottom--left {
+        width: 290px;
+        height: 100%;
+        transition: 0.5s;
+
+        .momentum {
+          width: 100%;
+          height: calc(100% - 170px);
+          background: #fff;
+          @include var.r-m;
+          @include var.shadow;
+          padding: 30px;
+
+          h3 {
+            padding-bottom: 20px;
+            text-indent: 10px;
+
+            span {
+              @include var.content-s;
+            }
+          }
+
+          .graph-box {
+            width: 100%;
+            height: calc(100% - 45px);
+            display: flex;
+            justify-content: space-between;
+            padding-top: 30px;
+
+            .graph {
+              width: 14.3%;
+              height: 100%;
+              position: relative;
+
+              div {
+                width: 30%;
+                position: absolute;
+                bottom: 30px;
+                left: 10px;
+                @include var.r-s;
+              }
+
+              p {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                text-align: center;
+                width: 100%;
+                @include var.content-s;
+              }
+            }
+          }
+          .week-exercise__icon--empty {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var.$blue;
+            @include var.center;
+            svg {
+              color: #fff;
+              font-size: 1.2rem;
+            }
+          }
+
+          .week-exercise__icon__box {
+            display: flex;
+            gap: 20px;
+            @include var.center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            .week-exercise__icon {
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              background-color: var.$blue;
+              @include var.center;
+              svg {
+                color: #fff;
+                font-size: 1.2rem;
+              }
+              &.week-exercise__icon--calendar {
+                background-color: var.$red;
+              }
+              &.week-exercise__icon--exercise {
+                background-color: var.$yellow;
+              }
+            }
+          }
+          .week-exercise__icon__notice {
+            @include var.content-m;
+            text-align: center;
+            line-height: 160%;
+            word-break: keep-all;
+          }
+        }
+      }
+
+      .main--bottom--right {
+        width: 305px;
+        height: 100%;
+
+        h3 {
+          padding-bottom: 20px;
+          text-indent: 10px;
+        }
+
+        .main__date {
+          width: 100%;
+          height: 70px;
+          display: flex;
+          margin-bottom: 15px;
+
+          .main__calendar {
+            width: 14.3%;
+            height: 100%;
+            border-radius: 25px;
+            @include var.center;
+
+            p {
+              width: 100%;
+              text-align: center;
+
+              &:first-of-type {
+                @include var.content-s;
+                padding-top: 10px;
+              }
+
+              &:last-of-type {
+                @include var.content-m;
+                font-weight: 700;
+              }
+            }
+          }
+        }
+
+        .today-list {
+          width: 100%;
+          height: calc(100% - 130px);
+          padding: 20px 20px 0 10px;
+          display: flex;
+          flex-wrap: wrap;
+          flex-direction: column;
+          overflow-y: auto;
+          &::-webkit-scrollbar {
+            width: 7px;
+            background: #dee9fe;
+            @include var.r-s;
+            margin-top: 20px;
+          }
+          &::-webkit-scrollbar-thumb {
+            background: var.$blue;
+            @include var.r-s;
+          }
+          .today-list-box {
+            width: 100%;
+            height: max-content;
+            display: flex;
+            flex-direction: column;
+            .today-list-box__icon {
+              width: 30px;
+              height: 30px;
+              @include var.center;
+              border-radius: 50%;
+              svg {
+                color: #fff;
+              }
+            }
+
+            .today-list-box--empty,
+            .today-list-box--login {
+              height: 100px;
+              gap: 20px;
+              line-height: 150%;
+              cursor: pointer;
+              @include var.content-l;
+              .today-list-box--empty__icon,
+              .today-list-box--login__icon {
+                width: 50px;
+                height: 50px;
+                background-color: var.$blue;
+                border-radius: 50%;
+                @include var.center;
+                img {
+                  width: 24px;
+                  margin-top: 2px;
+                }
+                svg {
+                  color: #fff;
+                  font-size: 1.5rem;
+                }
+              }
+            }
+            & > div {
+              width: 100%;
+              padding: 20px 25px;
+              background: #fff;
+              @include var.r-m;
+              @include var.shadow;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+
+              p {
+                @include var.content-l;
+                line-height: 20px;
+                &.today-list__time {
+                  width: 50px;
+                  margin-left: 10px;
+                }
+                &.today-list__title {
+                  width: 120px;
+                  margin-right: 10px;
+                }
+              }
+              .today-list-box--delete {
+                width: 20px;
+                height: 20px;
+                cursor: pointer;
+                svg {
+                  color: #dee9fe;
+                  transition: all 200ms;
+                  font-size: 1.5rem;
+                  margin-top: -3px;
+                }
+                &:hover {
+                  svg {
+                    color: var.$red;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

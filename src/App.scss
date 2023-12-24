@@ -1,0 +1,49 @@
+@charset "utf-8";
+@use './common.scss' as var;
+@import './pages/main/main.scss', './pages/main/health_news.scss',
+  './pages/main/search.scss', './pages/main/pharmacy.scss',
+  './pages/main/disease_pop.scss', './pages/main/common_pop.scss',
+  './pages/main/exercise_pop.scss';
+
+#wrap {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(#cadafd, #d4e6fe);
+  position: relative;
+
+  .back-figure {
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(#fbfcff, #e5ecff);
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 0 0 0 200px;
+  }
+
+  .content-back {
+    width: 1300px;
+    height: 800px;
+    background: var.$blue;
+    @include var.transform-center();
+    border-radius: 40px;
+    box-shadow: 9px 0 68px rgba(157, 177, 219, 55%);
+    display: flex;
+    justify-content: space-between;
+
+    .content {
+      width: 1080px;
+      height: 100%;
+      background: #f2f6f9;
+      border-radius: 40px;
+      padding: 50px 40px;
+
+      .main,
+      .my-page {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,200 @@
+@charset "utf-8";
+
+.pharmacy {
+  width: 100%;
+  height: 130px;
+  background: #fff;
+  @include var.r-m;
+  @include var.shadow;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  cursor: pointer;
+  position: relative;
+
+  .icon {
+    background: var.$green;
+    padding-left: 1px;
+  }
+
+  .pharmacy-txt {
+    width: calc(100% - 50px);
+    padding-left: 40px;
+
+    h3 {
+      padding-bottom: 10px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      word-break: break-all;
+    }
+
+    p {
+      @include var.content-m;
+      line-height: 140%;
+    }
+  }
+}
+
+.pharmacy-pop {
+  position: absolute;
+  bottom: 0px;
+  left: 310px;
+  width: 340px;
+  height: 420px;
+  background: var.$blue;
+  color: #fff;
+  z-index: 10;
+  @include var.r-m;
+  padding: 50px 30px;
+  @include var.shadow;
+
+  .xmark {
+    right: 28px;
+  }
+
+  .option-box {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+
+    #pharmacy_select,
+    #pharmacy_select_city {
+      padding: 12px 40px 12px 20px;
+      @include var.r-s;
+      border: none;
+      outline: none;
+      font-weight: 700;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+      width: 48%;
+
+      background: {
+        color: var.$bgColor;
+        image: url('../../../public/images/arrow.png');
+        repeat: no-repeat;
+        size: 10px;
+        position: 90% 50%;
+      }
+    }
+  }
+
+  .pharmacy-info-wrap {
+    width: 100%;
+    height: calc(100% - 100px);
+    @include var.center;
+    align-content: flex-start;
+    row-gap: 20px;
+    overflow-y: scroll;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    margin-top: 20px;
+
+    &::-webkit-scrollbar {
+      width: 7px;
+      background: #dee9fe;
+      @include var.r-s;
+      margin-top: 20px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #a6c7f3;
+      @include var.r-s;
+    }
+
+    .search__null {
+      width: 100%;
+      height: 90%;
+      @include var.center;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .search--load {
+      height: 100%;
+      @include var.center;
+      margin-bottom: 20px;
+    }
+
+    .pharmacy-info {
+      width: 100%;
+      height: 80px;
+      padding: 15px;
+      background: #fff;
+      @include var.r-s;
+
+      h5 {
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-break: break-all;
+        color: var.$blue;
+        word-break: keep-all;
+      }
+      p {
+        @include var.content-s;
+        width: 100%;
+        height: 36px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-word;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        margin-top: 5px;
+        word-break: keep-all;
+      }
+    }
+  }
+
+  .button-box {
+    width: 100%;
+    height: 50px;
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .pagination:disabled {
+      opacity: 0.4;
+    }
+    .pagination.active {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    .button,
+    input[type='button'] {
+      max-width: 30px;
+      color: #fff;
+      background: transparent;
+      border: none;
+      @include var.r-s;
+      cursor: pointer;
+
+      .arrow {
+        color: var.$darkBlue;
+      }
+    }
+    .button {
+      background-color: #fff;
+      &:disabled {
+        opacity: 0.7;
+      }
+    }
+
+    .prev {
+      padding: 5px 6px 3px 4px;
+    }
+    .next {
+      padding: 5px 4px 3px 6px;
+    }
+    input[type='button'] {
+      padding: 7px 10px;
+    }
+  }
+}

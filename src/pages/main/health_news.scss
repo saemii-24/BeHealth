@@ -1,0 +1,114 @@
+@charset "utf-8";
+
+.health-news {
+  width: 350px;
+  background: #fff;
+  height: 800px;
+  position: absolute;
+  top: -50px;
+  right: -40px;
+  border-radius: 0 40px 40px 0;
+  padding: 50px 40px;
+  transition: 0.7s;
+
+  & > div {
+    cursor: pointer;
+
+    &.disease,
+    &.health-exercise {
+      width: 100%;
+      height: 100px;
+      background: var.$blueGray;
+      @include var.r-m;
+      display: flex;
+      align-items: center;
+      padding: 0 30px;
+      margin-bottom: 40px;
+
+      & > div:last-of-type {
+        width: calc(100% - 50px);
+        padding-left: 30px;
+
+        h3 {
+          padding-bottom: 10px;
+        }
+
+        p {
+          @include var.title-s;
+
+          .faAngleRight {
+            @include var.content-m;
+          }
+        }
+      }
+    }
+  }
+
+  .disease {
+    .icon {
+      background: var.$red;
+    }
+  }
+
+  .health-exercise {
+    .icon {
+      background: var.$blue;
+    }
+  }
+
+  .health-common {
+    background: #467be6;
+    background-size: cover;
+    width: 100%;
+    height: calc(100% - 280px);
+    @include var.r-m;
+    padding: 30px;
+    position: relative;
+
+    img {
+      width: 50%;
+      position: absolute;
+      top: 120px;
+      left: 65px;
+    }
+
+    h3 {
+      position: absolute;
+      color: #fff;
+      font-size: 1.6rem;
+      font-weight: 800;
+      font-size: 1.4rem;
+      top: 45px;
+    }
+  }
+}
+
+.title {
+  display: flex;
+  height: 50px;
+  margin-bottom: 20px;
+  width: 100%;
+
+  h3 {
+    align-self: center;
+    padding-left: 20px;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 45%;
+  left: 0px;
+  width: 30px !important;
+  height: 30px !important;
+  opacity: 0.7;
+  transition: 0.5s;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  .fontawesome {
+    font-size: 1rem !important;
+  }
+}

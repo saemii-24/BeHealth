@@ -1,0 +1,177 @@
+@charset "utf-8";
+
+.common-pop {
+  width: 100%;
+  height: 100%;
+  padding-left: 70px;
+  position: relative;
+
+  .icon {
+    background: var.$blue;
+  }
+
+  .season-common,
+  .basic-common {
+    width: 100%;
+    height: 50%;
+
+    & > div:not(.title, .knowledge-pop, .good-common) {
+      width: 100%;
+      height: calc(100% - 70px);
+      display: flex;
+      flex-wrap: wrap;
+      align-content: space-between;
+      justify-content: space-between;
+
+      & > div {
+        background: var.$blueGray;
+        background-size: cover;
+        background-position: center;
+        @include var.r-m;
+        position: relative;
+        width: 47%;
+        height: 47%;
+        
+        p,
+        h4 {
+          color: #fff;
+        }
+
+        p {
+          @include var.content-s;
+          position: absolute;
+          bottom: 50px;
+          left: 30px;
+        }
+        h4 {
+          @include var.title-s;
+          position: absolute;
+          bottom: 20px;
+          left: 30px;
+        }
+      }
+    }
+  }
+
+  .season-common {
+    & > div:not(.title, .knowledge-pop, .good-common) {
+      & > div {
+        &:first-of-type {
+          width: 100%;
+        }
+
+        &:not(:first-of-type) {
+          width: 47%;
+        }
+      }
+    }
+  }
+
+  .basic-common {
+    padding-top: 40px;
+  }
+}
+
+.knowledge-pop,
+.good-common {
+  width: 580px;
+  height: 90%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  @include var.r-m;
+  position: absolute;
+  top: 70px;
+  left: 70px;
+  z-index: 10;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  &::before {
+    width: 100%;
+    height: 100%;
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    z-index: -1;
+  }
+
+  h2,
+  h4,
+  h5,
+  p,
+  a {
+    color: #fff;
+  }
+
+  .pop-title {
+    margin-bottom: 20px;
+  }
+
+  & > h4 {
+    @include var.content-m;
+    word-break: keep-all;
+  }
+
+  .pop-content {
+    width: 100%;
+    flex-grow: 1;
+    margin-top: 50px;
+    @include var.center;
+    align-content: flex-start;
+    row-gap: 20px;
+    overflow-y: scroll;
+    padding-right: 20px;
+
+    &::-webkit-scrollbar {
+      width: 7px;
+      background: #dee9fe;
+      @include var.r-s;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #a6c7f3;
+      @include var.r-s;
+    }
+
+    .pop-txt {
+      background: #fff;
+      width: 100%;
+      height: auto;
+      padding: 30px;
+      @include var.r-m;
+
+      h5 {
+        color: var.$blue;
+        @include var.title-l;
+        margin-bottom: 20px;
+      }
+
+      & > div {
+        width: 100%;
+        height: auto;
+        margin-top: 20px;
+
+        p {
+          color: var.$black;
+          @include var.content-m;
+          word-break: keep-all;
+        }
+      }
+    }
+
+    a {
+      display: block;
+      width: 100%;
+      @include var.content-s;
+
+      sub {
+        color: #fff;
+      }
+    }
+  }
+}
