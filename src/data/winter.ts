@@ -60,19 +60,16 @@ let winter: SeasonType[] = [
         title: `${month + 1}월에 알아두면 좋은 겨울철 행동 요령`,
         content: `추운 겨울 안전하고 건강하게`,
         img: '/images/winter.jpg',
-        imgColor: 'dark',
       },
       {
         title: `겨울철 건강 수칙`,
         content: `건강한 겨울나기를 위한`,
         img: '/images/snowman.jpg',
-        imgColor: 'dark',
       },
       {
         title: '노로바이러스',
         content: '추워질수록 조심해야 하는',
         img: '/images/norovirus.jpg',
-        imgColor: 'dark',
       },
     ],
     commonPop: [

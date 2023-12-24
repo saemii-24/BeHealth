@@ -8,7 +8,6 @@ export interface CommonType {
   title: string;
   content: string;
   img: string;
-  imgColor: string;
 }
 
 export interface InfoType {
@@ -70,19 +69,16 @@ let spring: SeasonType[] = [
         title: '눈물 콧물 쏙 빼는 알레르기 질환 예방 관리법',
         content: '꽃 피는 봄이 무섭다?',
         img: '/images/pollen.jpg',
-        imgColor: 'dark',
       },
       {
         title: '꾸벅꾸벅 졸음이 몰려오는 춘곤증',
         content: '봄철 건강의 적신호',
         img: '/images/sleep.jpg',
-        imgColor: 'dark',
       },
       {
         title: '건강의 첫걸음, 면역력 높이는 방법',
         content: '환절기가 돌아왔다',
         img: '/images/season_change.jpg',
-        imgColor: 'dark',
       },
     ],
     commonPop: [

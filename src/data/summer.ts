@@ -76,19 +76,16 @@ let summer: SeasonType[] = [
         title: '쨍쨍한 햇빛과 높은 기온 조심!',
         content: '덥고 따가운 여름 질병',
         img: '/images/summer.jpg',
-        imgColor: 'dark',
       },
       {
         title: '여름이 불편한 하지정맥류',
         content: '자꾸 붓고 아픈 다리, 방치하지 마세요!',
         img: '/images/legs.jpg',
-        imgColor: 'dark',
       },
       {
         title: '여름철 늘어나는 이명',
         content: '내 귀에 도청 장치가 있다?,',
         img: '/images/ear.jpg',
-        imgColor: 'dark',
       },
     ],
     commonPop: [

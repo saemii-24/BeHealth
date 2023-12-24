@@ -12,25 +12,21 @@ let healthCommon: HealthType[] = [
         title: '다이어트 상식',
         content: '꼭 알아두어야 할',
         img: '/images/diet.jpg',
-        imgColor: 'dark',
       },
       {
         title: '10가지 방법',
         content: '과음·과식에 현명하게 대처하는',
         img: '/images/alcohol.jpg',
-        imgColor: 'dark',
       },
       {
         title: '족저근막염',
         content: '조금만 걸어도 발바닥이 찌릿찌릿,',
         img: '/images/foot.jpg',
-        imgColor: 'dark',
       },
       {
         title: '임신기, 주요 비타민의',
         content: '특징과 섭취방법',
         img: '/images/vitamin.jpg',
-        imgColor: 'dark',
       },
     ],
     commonPop: [

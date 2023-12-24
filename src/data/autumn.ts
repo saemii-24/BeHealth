@@ -49,19 +49,16 @@ let autumn: SeasonType[] = [
         title: '가을철 건강 수칙',
         content: '알고 있지만 지키기 쉽지 않은',
         img: '/images/autumn.jpg',
-        imgColor: 'dark',
       },
       {
         title: '건강하고 안전하게 산행하는 법',
         content: '오색으로 물든 가을',
         img: '/images/autumn_mountain.jpg',
-        imgColor: 'dark',
       },
       {
         title: '노릇노릇 맛있구마, 고구마',
         content: '제철 맞아 맛과 영양을 듬뿍 머금은',
         img: '/images/sweet_potato.jpg',
-        imgColor: 'dark',
       },
     ],
     commonPop: [
