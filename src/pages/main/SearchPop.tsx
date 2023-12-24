@@ -39,7 +39,7 @@ const SearchPop = (props) => {
         const searchItem = response.data.response.body.items.item;
         setTotalCount(response.data.response.body.totalCount);
 
-        console.log(response);
+    
 
         //페이지네이션을 위한 그룹화
 
@@ -51,7 +51,6 @@ const SearchPop = (props) => {
             }
           }
         }
-        console.log(originArr);
 
         if (!searchItem) {
           setNothing(true);
@@ -128,7 +127,6 @@ const SearchPop = (props) => {
         if (!querySnapshot.empty) {
           setHospitalData([]);
           querySnapshot.forEach((doc) => {
-            console.log(doc.data());
             setHospitalData((prev) => {
               if (prev.some((item) => item.id === doc.id)) {
                 return prev;
