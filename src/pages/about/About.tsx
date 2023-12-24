@@ -1,30 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './About.scss';
+import cn from 'classnames';
+import { MdMemory } from 'react-icons/md';
+import { FaRegCircleCheck } from 'react-icons/fa6';
 
 const About = () => {
+  const [dataIndex, setDataIndex] = useState<number>(0);
+
   return (
     <div className='about'>
-      <h2>Front-End Developer</h2>
-      <div className='about__profile-box'>
-        <div className='about__profile'>
-          <img src={process.env.PUBLIC_URL + '/images/polarbear.jpg'} alt='프로필 이미지' />
-          <h3>@nuunnunn</h3>
+      <div className='about__right'>
+        <div className='about__title'>
+          <div className='about__icon'>
+            <MdMemory />
+          </div>
+          <h3>제작 팀원</h3>
         </div>
-        <div className='about__profile'>
-          <img src={process.env.PUBLIC_URL + '/images/tiger.jpg'} alt='프로필 이미지' />
-          <h3>@saemii-24</h3>
+        <div className='profile-box'>
+          <div className='profile'>
+            <h4>프론트엔드</h4>
+            <img
+              src={process.env.PUBLIC_URL + '/images/tiger.jpg'}
+              alt='@saemii-24 profile img'
+            />
+            <p>@saemii-24</p>
+          </div>
+          <div className='profile'>
+            <h4>프론트엔드</h4>
+            <img src={process.env.PUBLIC_URL + '/images/bear.jpg'} alt='@ profile img' />
+            <p>@nuunnunn</p>
+          </div>
         </div>
       </div>
-      {/* <h2 className='title-source'>Source</h2>
-      <button>그래픽</button>
-      <button>그래픽</button>
-      <button>그래픽</button>
-      <ul>
-        <li>react-icons</li>
-        <li>fontawesome</li>
-        <li>Pixabay</li>
-        <li>Unsplash</li>
-      </ul> */}
+      <div className='about__left'>
+        <div className='about__title'>
+          <div className='about__icon'>
+            <FaRegCircleCheck />
+          </div>
+          <h3>자료 출처</h3>
+        </div>
+        <h4>사용된 카테고리</h4>
+        <div className='button-box'>
+          {['그래픽', '외부 API', '건강뉴스', '건강상식'].map((item, index) => {
+            return (
+              <button
+                className={cn('btn', { active: dataIndex === index })}
+                onClick={() => {
+                  setDataIndex(index);
+                }}
+                key={index}>
+                {item}
+              </button>
+            );
+          })}
+        </div>
+        <div className='source-box'></div>
+      </div>
     </div>
   );
 };
