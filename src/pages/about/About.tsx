@@ -3,6 +3,8 @@ import './About.scss';
 import cn from 'classnames';
 import { MdMemory } from 'react-icons/md';
 import { FaRegCircleCheck } from 'react-icons/fa6';
+import source from '../../data/source';
+import { Link } from 'react-router-dom';
 
 const About = () => {
   const [dataIndex, setDataIndex] = useState<number>(0);
@@ -54,7 +56,27 @@ const About = () => {
             );
           })}
         </div>
-        <div className='source-box'></div>
+        <div className='source-box'>
+          <ul>
+            {Object.values(source[0])[dataIndex].map((item, index) => {
+              if (item.address) {
+                return (
+                  <li>
+                    <Link
+                      key={'link' + dataIndex + index}
+                      to={item.address}
+                      target='_blank'>
+                      {item.name}
+                    </Link>
+                  </li>
+                );
+              } else {
+                return <li key={dataIndex + ' ' + index}>{item.name}</li>;
+              }
+            })}
+          </ul>
+          <p>클릭하시면 해당 출처의 사이트로 이동합니다.</p>
+        </div>
       </div>
     </div>
   );
