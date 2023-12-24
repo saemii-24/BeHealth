@@ -48,10 +48,10 @@ const CommonPop = (props) => {
                   setClick(true);
                   setIdx(i);
                 }}>
-                <p style={{ color: `${v.imgColor === 'dark' ? '#fff' : '#306de5'}` }}>
+                <p>
                   {v.content}
                 </p>
-                <h4 style={{ color: `${v.imgColor === 'dark' ? '#fff' : '#306de5'}` }}>
+                <h4>
                   {v.title}
                 </h4>
               </div>

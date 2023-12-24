@@ -7,7 +7,7 @@ const About = () => {
       <h2>Front-End Developer</h2>
       <div className='about__profile-box'>
         <div className='about__profile'>
-          <img src={process.env.PUBLIC_URL + '/images/tiger.jpg'} alt='프로필 이미지' />
+          <img src={process.env.PUBLIC_URL + '/images/polarbear.jpg'} alt='프로필 이미지' />
           <h3>@nuunnunn</h3>
         </div>
         <div className='about__profile'>

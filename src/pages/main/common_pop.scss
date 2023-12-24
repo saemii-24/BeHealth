@@ -31,6 +31,11 @@
         position: relative;
         width: 47%;
         height: 47%;
+        
+        p,
+        h4 {
+          color: #fff;
+        }
 
         p {
           @include var.content-s;
@@ -64,11 +69,6 @@
 
   .basic-common {
     padding-top: 40px;
-
-    p,
-    h4 {
-      color: #fff;
-    }
   }
 }
 
