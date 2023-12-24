@@ -27,13 +27,13 @@
     .profile-box {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 34px;
       margin-top: auto;
       .profile {
         width: calc(100% - 40px);
         position: relative;
         h4 {
-          margin-bottom: 18px;
+          margin-bottom: 16px;
         }
         img {
           object-fit: cover;
@@ -42,6 +42,7 @@
           @include var.r-s;
           @include var.shadow;
           height: 250px;
+          display: block;
         }
         p {
           position: absolute;
