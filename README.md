@@ -1,13 +1,13 @@
-###:runner: Be health
+### :runner: Be health
 
-####**<a href="https://behealth-bcab3.web.app/" target="_blank">:point_right:<u>배포페이지 바로가기</u></a>**
+#### **<a href="https://behealth-bcab3.web.app/" target="_blank">:point_right:<u>배포페이지 바로가기</u></a>**
 사람은 그 존재만으로도 거대한 데이터를 가지고 있는 존재입니다. 신체 데이터, 다양한 분야의 취향, 습관 등 각 개인의 행동에 따라 수많은 데이터가 쌓이게 됩니다.
 
 이번 프로젝트에서는 그 정보 들 중 <b>건강</b>이란 주제에 맞춰, 초점을 맞춰, 운동 시간 관리, 근처 병원·약국 정보, 복용 약의 부작용 등의 관련 정보를 전달하는 웹 사이트를 제작했습니다.
 
 Be health는 Firebase를 이용해 회원가입과 로그인 기능을 구현하여, 개인화 된 데이터를 관리합니다. 추가적으로, 일반적인 정보를 제공하기 위해 공공데이터 포털에서 제공하는 open API를 활용했습니다.
 
-##:link:목차
+## :link:목차
 
 - [개요](#개요)
 - [사용된 기술](#사용된-기술)
@@ -15,7 +15,7 @@ Be health는 Firebase를 이용해 회원가입과 로그인 기능을 구현하
 - [주요 기능](#주요-기능)
 - [후기](#후기)
 
-##📂개요
+## 📂개요
 
 - 프로젝트: Be health:running:
 - 제작기간: 23.11.28 - 23.12.24
@@ -29,16 +29,11 @@ Be health는 Firebase를 이용해 회원가입과 로그인 기능을 구현하
   </tbody>
 </table>
 
-##⚙️사용된 기술
+## ⚙️사용된 기술
 
----
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> <img src="https://img.shields.io/badge/AXIOS-5A29E4?style=for-the-badge&logo=AXIOS&logoColor=white" > <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"> <img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black">
 
-<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
-  <img src="https://img.shields.io/badge/AXIOS-5A29E4?style=for-the-badge&logo=AXIOS&logoColor=white">
-  <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
-  <img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black">
-
-####주요 기능
+## 💻주요 기능
 
 <table style="width:100%">
   <tr>
@@ -70,11 +65,11 @@ Be health는 Firebase를 이용해 회원가입과 로그인 기능을 구현하
   </tr>
 </table>
 
-##:card_index_dividers:프로젝트 규칙
+## :card_index_dividers:프로젝트 규칙
 
-#### Commit Convention
+### 📌Commit Convention
 
-#####📌Header
+#### ✅Header
 
 <table>
   <tr>
@@ -84,7 +79,7 @@ Be health는 Firebase를 이용해 회원가입과 로그인 기능을 구현하
   <tr>
     <td>Init</td>
     <td>프로젝트 초기 생성</td>
-  <tr>
+  </tr>
   <tr>
     <td>Feat</td>
     <td>새로운 기능 추가</td>
@@ -114,7 +109,7 @@ Be health는 Firebase를 이용해 회원가입과 로그인 기능을 구현하
   </tr>
 </table>
 
-#####📌Footer
+#### ✅Footer
 
 <table>
   <tr>
@@ -139,7 +134,7 @@ Be health는 Firebase를 이용해 회원가입과 로그인 기능을 구현하
   </tr>
 </table>
 
-### Git Flow
+### 📌Git Flow
 
 <table>
   <tr>
@@ -155,12 +150,12 @@ Be health는 Firebase를 이용해 회원가입과 로그인 기능을 구현하
     <td>버전 개발 브랜치</td>
   </tr>
   <tr>
-    <td>featur</td>
+    <td>feature</td>
     <td>기능별 브랜치</td>
   </tr>
 </table>
 
-##:memo:후기
+## :memo:후기
 이번 프로젝트는 크게, <u>**Firebase, openAPI활용, git Flow와 github의 협업 기능**</u>을 공부할 수 있는 프로젝트 였습니다.
 
 1. **Firebase**
