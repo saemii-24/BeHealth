@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import { FaVirus } from 'react-icons/fa6';
 
