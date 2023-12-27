@@ -1,4 +1,4 @@
-### :runner: Be health
+# :runner: Be health
 
 #### **<a href="https://behealth-bcab3.web.app/" target="_blank">:point_right:<u>배포페이지 바로가기</u></a>**
 사람은 그 존재만으로도 거대한 데이터를 가지고 있는 존재입니다. 신체 데이터, 다양한 분야의 취향, 습관 등 각 개인의 행동에 따라 수많은 데이터가 쌓이게 됩니다.
@@ -17,7 +17,7 @@ Be health는 Firebase를 이용해 회원가입과 로그인 기능을 구현하
 
 ## 📂개요
 
-- 프로젝트: Be health:running:
+- 프로젝트: Be health :running:
 - 제작기간: 23.11.28 - 23.12.24
 - 기여도: 팀작업 / 70%
 <table>
