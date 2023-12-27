@@ -21,7 +21,6 @@ import { db, app } from '../../firebase/firebaseApp';
 import { getAuth, updateProfile } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 import { MyPagePopupContext } from '../../context/MyPagePopupContext.tsx';
-import Loading from '../../component/Loading.tsx';
 
 //실제 렌더링 될 값이 담길 변수
 export interface RenderDataType {
@@ -82,8 +81,6 @@ const MyStatus = () => {
       }
     }
   }, [renderData]);
-
-  const [loading, setLoading] = useState<boolean>(true);
 
   const fetchData = async () => {
     if (context.user) {

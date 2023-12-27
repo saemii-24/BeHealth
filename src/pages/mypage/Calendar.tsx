@@ -4,15 +4,7 @@ import './MyPage.scss';
 import AddSchedule from './AddSchedule';
 //로그인과 사용자 정보 확인
 import { AuthContext } from '../../context/AuthContext';
-import {
-  collection,
-  query,
-  where,
-  orderBy,
-  getDocs,
-  deleteDoc,
-  doc,
-} from 'firebase/firestore';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase/firebaseApp';
 import cn from 'classnames';
 
