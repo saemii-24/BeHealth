@@ -199,6 +199,7 @@
             .today-list-box__icon {
               width: 30px;
               height: 30px;
+              flex-shrink: 0;
               @include var.center;
               border-radius: 50%;
               svg {

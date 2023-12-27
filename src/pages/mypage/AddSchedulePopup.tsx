@@ -44,7 +44,10 @@ const AddSchedulePopup = ({ setPopup, scheduleData }) => {
         color: scheduleData.scheduleIconColor,
         userId: context.user!.uid,
       });
-      setPopup(false);
+      if (myPagePopup) {
+        setPopup(false);
+        setMyPagePopup!(false);
+      }
     } catch (err) {
       console.log(err);
     }

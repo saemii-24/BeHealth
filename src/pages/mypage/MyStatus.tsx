@@ -82,8 +82,6 @@ const MyStatus = () => {
     }
   }, [renderData]);
 
-  const [loading, setLoading] = useState<boolean>(true);
-
   const fetchData = async () => {
     if (context.user) {
       const q = query(
