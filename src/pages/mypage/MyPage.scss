@@ -108,8 +108,11 @@
         position: absolute;
         display: flex;
         bottom: 0;
+        max-width: 56px;
+        overflow: hidden;
         .calendar__schedule {
           width: 8px;
+          flex-shrink: 0;
           height: 3px;
           background-color: red;
         }
