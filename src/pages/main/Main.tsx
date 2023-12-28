@@ -59,6 +59,20 @@ const Main = () => {
   //올해 홀수 짝수 구하기
   const context = useContext(AuthContext); //로그인 실시간 확인
   let [string, setString] = useState<string>('');
+
+  useEffect(() => {
+    const today = new Date();
+    if (today.getFullYear() % 2 === 0) {
+      setString(
+        `${today.getFullYear()}년은 만20세 이상 짝수년도\n 출생자가 검진 대상자입니다.`,
+      );
+    } else if (today.getFullYear() % 2 === 1) {
+      setString(
+        `${today.getFullYear()}년은 만20세 이상 홀수년도\n 출생자가 검진 대상자입니다.`,
+      );
+    }
+  }, []);
+
   let [addInfo, setAddInfo] = useState<boolean>(false);
   let [userData, setUserData] = useState<RenderDataType>({});
   //저장되어 있는 사용자 정보 불러오기
@@ -81,68 +95,54 @@ const Main = () => {
     }
   };
 
-  const [age, setAge] = useState<number>(0);
-
   useEffect(() => {
     fetchUserData();
-    if (!context.user || !userData.birth) {
-      //1. 로그인 했는가?
+    if (userData.birth) {
+      const userBirthYear = new Date(userData.birth).getFullYear();
+      const userBirthMonth = new Date(userData.birth).getMonth();
+      const userBirthDate = new Date(userData.birth).getDate();
+      const thisYear = new Date().getFullYear();
+      const thisMonth = new Date().getMonth();
+      const thisDate = new Date().getDate();
+
+      let age = 0;
+      if (
+        //올해 생일이 지났는가?
+        new Date(thisYear, thisMonth, thisDate) >=
+        new Date(thisYear, userBirthMonth, userBirthDate)
+      ) {
+        age = thisYear - userBirthYear;
+      } else {
+        age = thisYear - userBirthYear - 1;
+      }
+      mainStr(age, thisYear, userBirthYear);
+    }
+  }, [context, addInfo]);
+
+  function mainStr(userAge: number, thisYear: number, userYear: number) {
+    if (context.user && userAge >= 20) {
+      if (thisYear % 2 === userYear % 2) {
+        //3-1. 사용자 생년과 올해 년도의 짝홀이 같을 때
+        if (userData.name) {
+          setString(`${userData.name}님은 ${theYear}년 검진 대상자입니다.`);
+        } else {
+          setString(`사용자님은 ${theYear}년 검진 대상자입니다.`);
+        }
+      } else {
+        if (theYear % 2 === 0) {
+          setString(`${theYear}년은 만20세 이상 짝수년도\n 출생자가 검진 대상자입니다.`);
+        } else if (theYear % 2 === 1) {
+          setString(`${theYear}년은 만20세 이상 홀수년도\n 출생자가 검진 대상자입니다.`);
+        }
+      }
+    } else {
       if (theYear % 2 === 0) {
         setString(`${theYear}년은 만20세 이상 짝수년도\n 출생자가 검진 대상자입니다.`);
       } else if (theYear % 2 === 1) {
         setString(`${theYear}년은 만20세 이상 홀수년도\n 출생자가 검진 대상자입니다.`);
       }
-    } else {
-      //2-2. 로그인 완료시 사용자 맞춤 정보 제공
-      if (userData.birth) {
-        const userBirthYear = new Date(userData.birth).getFullYear();
-        const userBirthMonth = new Date(userData.birth).getMonth() + 1;
-        const userBirthDate = new Date(userData.birth).getDate() + 1;
-        const thisYear = new Date().getFullYear();
-        const thisMonth = new Date().getMonth() + 1;
-        const thisDate = new Date().getDate();
-
-        if (
-          Number(userBirthMonth + '' + userBirthDate) > Number(thisMonth + '' + thisDate)
-        ) {
-          if (thisYear - userBirthYear - 1 < 0) {
-            setAge(0);
-          } else {
-            setAge(thisYear - userBirthYear - 1);
-          }
-        } else {
-          setAge(thisYear - userBirthYear);
-        }
-        if (age >= 20) {
-          if (theYear % 2 === userBirthYear % 2) {
-            //3-1. 사용자 생년과 올해 년도의 짝홀이 같을 때
-            if (userData.name) {
-              setString(`${userData.name}님은 ${theYear}년 검진 대상자입니다.`);
-            } else {
-              setString(`사용자님은 ${theYear}년 검진 대상자입니다.`);
-            }
-          } else {
-            //3-1. 사용자 생년과 올해 년도의 짝홀이 다를 때
-            if (userData.name) {
-              setString(`${userData.name}님은 ${theYear + 1}년 검진 대상자입니다.`);
-            } else {
-              setString(`사용자님은 ${theYear + 1}년 검진 대상자입니다.`);
-            }
-          }
-        } else {
-          if (theYear % 2 === 0) {
-            setString(
-              `${theYear}년은 만20세 이상 짝수년도\n 출생자가 검진 대상자입니다.`,
-            );
-          } else if (theYear % 2 === 1) {
-            setString(
-              `${theYear}년은 만20세 이상 홀수년도\n 출생자가 검진 대상자입니다.`,
-            );
-          }
-        }
-      }
     }
-  }, [context, addInfo]);
+  }
 
   //줄바꿈 하기
   let newStr = string.split('\n');
