@@ -51,11 +51,11 @@ const About = () => {
           {['그래픽', '외부 API', '건강뉴스', '건강상식'].map((item, index) => {
             return (
               <button
+                key={index}
                 className={cn('btn', { active: dataIndex === index })}
                 onClick={() => {
                   setDataIndex(index);
-                }}
-                key={index}>
+                }}>
                 {item}
               </button>
             );
@@ -68,7 +68,7 @@ const About = () => {
                 return (
                   <li>
                     <Link
-                      key={'link' + dataIndex + index}
+                      key={dataIndex + ' ' + index + 'Link'}
                       to={item.address}
                       target='_blank'>
                       {item.name}
