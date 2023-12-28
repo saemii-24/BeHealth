@@ -831,7 +831,6 @@
   flex-wrap: wrap;
   padding: 20px 30px;
   position: relative;
-  @include var.shadow;
   &.exercise__one {
     @include var.shadow;
   }

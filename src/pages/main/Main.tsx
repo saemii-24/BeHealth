@@ -108,12 +108,12 @@ const Main = () => {
       let age = 0;
       if (
         //올해 생일이 지났는가?
-        new Date(thisYear, thisMonth, thisDate) >=
+        new Date(thisYear, thisMonth, thisDate) >
         new Date(thisYear, userBirthMonth, userBirthDate)
       ) {
-        age = thisYear - userBirthYear;
-      } else {
         age = thisYear - userBirthYear - 1;
+      } else {
+        age = thisYear - userBirthYear;
       }
       mainStr(age, thisYear, userBirthYear);
     }

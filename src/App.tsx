@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './App.scss';
 import './common.scss';
 import SideMenu from './component/SideMenu';
@@ -10,9 +10,20 @@ import Main from './pages/main/Main';
 import MyPage from './pages/mypage/MyPage';
 import About from './pages/about/About';
 import { AuthContext } from './context/AuthContext';
+import { MyPagePopupContext } from './context/MyPagePopupContext';
+import { MainPopupContext } from './context/MainPopupContext';
+import { useLocation } from 'react-router-dom';
 
 function App() {
   const context = useContext(AuthContext);
+  const { setMyPagePopup } = useContext(MyPagePopupContext);
+  const { setMainPopup } = useContext(MainPopupContext);
+  const location = useLocation();
+
+  useEffect(() => {
+    setMyPagePopup!(false);
+    setMainPopup!(false);
+  }, [location]);
 
   return (
     <div className='App'>
