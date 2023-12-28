@@ -64,13 +64,16 @@ const MyStatus = () => {
   useEffect(() => {
     if (renderData.birth) {
       const myBirthYear = new Date(renderData.birth).getFullYear();
-      const myBirthMonth = new Date(renderData.birth).getMonth() + 1;
-      const myBirthDate = new Date(renderData.birth).getDate() + 1;
+      const myBirthMonth = new Date(renderData.birth).getMonth();
+      const myBirthDate = new Date(renderData.birth).getDate();
       const thisYear = new Date().getFullYear();
-      const thisMonth = new Date().getMonth() + 1;
+      const thisMonth = new Date().getMonth();
       const thisDate = new Date().getDate();
 
-      if (Number(myBirthMonth + '' + myBirthDate) > Number(thisMonth + '' + thisDate)) {
+      if (
+        new Date(thisYear, thisMonth, thisDate) >
+        new Date(thisYear, myBirthMonth, myBirthDate)
+      ) {
         if (thisYear - myBirthYear - 1 < 0) {
           setAge(0);
         } else {
