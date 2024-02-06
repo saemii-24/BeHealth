@@ -336,7 +336,7 @@ let institution: InstitutionType[] = [
     id: 14,
     code: 45,
     code2: 350000,
-    city: '전라북도',
+    city: '전북특별자치도',
     district: [
       '시 군 구',
       '고창군',
